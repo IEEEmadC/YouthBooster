@@ -1,0 +1,184 @@
+ion-header{
+
+    .btn-txt ion-icon{
+        margin-right: 6px;
+    }
+    .btn-txt{
+        background-color: #08B47B;
+    }
+    #logo{
+        width: 25px;
+    }
+}
+
+.main-page {
+
+  .toolbar-background {
+    background: #fff;
+    border-color: transparent;
+  }
+
+  .slide-zoom {
+    height: 100%;
+  }
+
+  .slide-title {
+    margin-top: 2rem;
+  }
+
+  .slide-image {
+    max-height: 50%;
+    max-width: 60%;
+    margin: 18px 0;
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  p {
+    padding: 0 40px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #60646B;
+
+    b {
+      color: #000000;
+    }
+  }
+
+}
+
+.first-slide{
+  
+  ion-list-header {
+    position:relative;
+    font-size: 1.2em;
+    margin-bottom: 5%;
+    width: 100%;
+    font-weight: bold;
+    color: #09c1ce;
+  }
+
+
+  .example{
+    position:relative;
+    font-size: 1.5em;
+    width: 50%;
+    font-weight: bold;
+    color: #08B47B;
+    padding: 15px;
+  }
+
+  .example {
+    margin: 0 .25rem;
+    color: #08B47B;
+    min-width: 100%;
+    border: 1px solid #eee;
+    border-left: 3px solid;
+    border-radius: 5px;
+    transition: border-color .5s ease-out;
+  }
+  .example:optional {
+    border-left-color: #999;
+  }
+  .example:required {
+    border-left-color: palegreen;
+  }
+  .example:invalid {
+    border-left-color: salmon;
+  }
+  .example ion-option{
+    width: 100%;
+  }
+
+  .page-item {
+    min-width: 100%;
+    font-size: 1.1em;
+    width: 100%;
+    padding: 8px;
+    background: #eee;
+  }
+  
+  .page-select {
+    min-width: 100%;
+    font-size: 1.2em;
+    width: 100%;
+    font-weight: bold;
+    color: #08B47B;
+    
+  }
+
+  .page-badge {
+    min-width: 100%;
+    font-size: 1.2em;
+    width: 100%;
+    font-weight: bold;
+    color: rgb(91, 94, 93); 
+  }
+
+  ion-item ion-label{
+    text-overflow: ellipsis;
+    overflow: hidden; 
+  }
+  .page-badge>button {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .page-badge ion-badge {
+    padding: 6px 8px;
+  }
+  .ion-md-videocam {
+    color: rgb(73, 71, 71);
+  }
+  .ion-md-apps {
+    color: #508AE4;
+  }
+  .ion-md-clipboard {
+    color: #31D55F;
+  }
+  .ion-md-attach {
+    color: #508AE4;
+  }
+  .ion-md-globe {
+    color: #09c1ce
+  }
+  .ion-md-play {
+    color: #767676
+  }
+  
+}
+
+.action-sheets-basic-page {
+  .ion-md-share {
+    color: #ED4248;
+  }
+  .ion-md-arrow-dropright-circle {
+    color: #508AE4;
+  }
+  .ion-md-heart-outline {
+    color: #31D55F;
+  }
+  .action-sheet-cancel ion-icon,
+  .action-sheet-destructive ion-icon {
+    color: #757575;
+  }
+}
+
+.alertCustomCss{
+  background-color: rgba(42, 45, 45, 0.7);
+  color: #757575;
+  button{
+      color: #09c1ce!important;
+  }
+  .alert-message {
+      color: #757575;
+      margin: 8px;
+  }
+  .alert-title{
+      color: #08B47B;
+      text-align: center;
+      margin-bottom: 16px;
+  }
+}

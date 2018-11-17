@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-searchbar (ionInput)="searchForVideos($event.target.value)" placeholder="Search Videos"></ion-searchbar>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <span ion-text color="primary" showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <ion-list no-padding>
+        <button ion-item *ngFor="let list of Videos | async">
+            <ion-thumbnail item-start (click)="getVideoUrl(list.id.videoId)">
+                <img [src]="list.snippet.thumbnails.default.url">
+            </ion-thumbnail>
+            <h2>{{ list.snippet.title }}</h2>
+            <p>{{ list.snippet.publishedAt | date:'short' }}</p>
+        </button>
+    </ion-list>
+</ion-content>

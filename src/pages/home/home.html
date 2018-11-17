@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color=primary>
+    <ion-title>
+      <img src="assets/imgs/logoicon.png" id="logo"> YBooster
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="openFavorites()" class="btn-txt">
+        <ion-icon name="star"></ion-icon>
+        Favs
+      </button>
+      <button ion-button icon-start (click)="openGenres()" class="btn-txt">
+        <ion-icon name="funnel"></ion-icon>
+        Filter
+      </button>
+      <button ion-button icon-only (click)="openSearchBox()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+
+  <ion-searchbar (search)="$event.target.value" [ngClass]="{'show-search': showSearch}"></ion-searchbar>
+
+  <div>
+    <ion-card *ngFor="let category of categories; let i = index">
+      <div>
+        <div class="genre-cover" (click)="openPageSetup(category)">
+          <img src="assets/imgs/{{ category }}.png" class="tinted">
+
+        </div>
+      </div>
+      <div *ngIf="i==2; then remove else fav"></div> 
+      
+      <ng-template #fav>
+        <button ion-button outline medium color="primary" icon-only (click)="addFavorite(i)" id="btn-star">
+          <ion-icon name="star"></ion-icon>
+        </button>
+      </ng-template>
+      
+      <ng-template #remove>
+          <button ion-button medium color="primary" icon-only (click)="addFavorite(i)" id="btn-star">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ng-template>
+        
+      <div class="card-title"> {{ categoryNames[i] }}</div>
+      <div class="card-subtitle">{{ subCategoryNames[i] }}</div>
+    </ion-card>
+  </div>
+
+</ion-content>

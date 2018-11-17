@@ -1,0 +1,224 @@
+<ion-header>
+  <ion-navbar color=primary>
+    <ion-title>
+      <img src="assets/imgs/logoicon.png" id="logo"> Project Terms
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="openFavorites()" class="btn-txt">
+        <ion-icon name="star"></ion-icon>
+        Favs
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="main-page">
+  <ion-slides pager>
+    <ion-slide class="first-slide">
+      <ion-toolbar class="page-toolbar">
+        <ion-buttons end>
+          <button ion-button color="primary" (click)="nextStep(1)">Next</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list>
+        <ion-list-header class="top-header" no-lines>
+          PROJECT BUDGET
+        </ion-list-header>
+        <ion-item class="example">
+          <ion-input type="number" placeholder="100$ to start.."></ion-input>
+        </ion-item>
+        <ion-item class="page-item" no-lines>
+          <ion-icon name="apps" item-end></ion-icon>
+
+          <ion-label>
+            Project Category
+          </ion-label>
+        </ion-item>
+        <ion-item class="page-select">
+          <ion-select multiple="true" cancelText="Dismiss" okText="Okay!">
+            <ion-option value="Technology" selected="true">Technology</ion-option>
+            <ion-option value="RN Energy">Renewbale Energy</ion-option>
+            <ion-option value="Health" selected="true">Health</ion-option>
+            <ion-option value="Bio">Bio</ion-option>
+            <ion-option value="Robotics">Robotics</ion-option>
+            <ion-option value="Science">Science</ion-option>
+            <ion-option value="Education">Education</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="page-badge" no-lines>
+          <button ion-button outline round item-start (click)="showPrompt()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          <ion-label>Add Tags</ion-label>
+          <ion-badge item-end>ProjectTags</ion-badge>
+        </ion-item>
+        <div style="float: left;margin: 0px 8px;padding: 8px">
+          <span *ngFor="let att of tagsArray; let idx = index">
+            <ion-badge [(innerHTML)]="tagsArray[idx].value" (click)="openMenu('tagsArray',idx)">ProjectTags</ion-badge>
+          </span>
+        </div>
+        <ion-item class="page-item" no-lines>
+          <ion-label>
+            Project Summary
+          </ion-label>
+        </ion-item>
+        <ion-item (click)="openTextModal()">
+          <ion-label>Add Summary text..</ion-label>
+          <ion-icon name="clipboard" item-end></ion-icon>
+        </ion-item>
+        <ion-item></ion-item>
+      </ion-list>
+
+      <!--
+          <img [src]="slide.image" class="slide-image"/>
+          <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+          <p [innerHTML]="slide.description"></p>
+          -->
+
+    </ion-slide>
+
+
+    <ion-slide class="first-slide">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary" (click)="nextStep(2)">Next</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list>
+        <ion-list-header class="top-header" no-lines>
+          DUE DATE
+        </ion-list-header>
+        <ion-item class="example">
+          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+        </ion-item>
+        <ion-item class="page-item" no-lines>
+          <ion-icon name="attach" item-end></ion-icon>
+          <ion-label>
+            Attachments
+          </ion-label>
+        </ion-item>
+        <ion-item no-lines class="page-badge">
+          <button ion-button outline round item-start (click)="getFile('file_manager')">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          <ion-label>Attach Files</ion-label>
+          <ion-badge item-end >#localFile</ion-badge>
+        </ion-item>
+        <div style="float: left;margin: 0px 8px;padding: 8px">
+          <span *ngFor="let att of filesArray; let idx = index">
+            <ion-badge [(innerHTML)]="filesArray[idx].value" (click)="openMenu('filesArray',idx)">Project Summary.pdf</ion-badge>
+          </span>
+        </div>
+        <ion-item class="page-item" no-lines>
+          <ion-label>
+            Full description
+          </ion-label>
+        </ion-item>
+        <ion-item (click)="openTextModal()">
+          <ion-label >Write full description here..</ion-label>
+          <ion-icon name="clipboard" item-end></ion-icon>
+        </ion-item>
+      </ion-list>
+
+      <!--
+            <img [src]="slide.image" class="slide-image"/>
+            <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+            <p [innerHTML]="slide.description"></p>
+            -->
+    </ion-slide>
+
+    <ion-slide class="first-slide">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary" (click)="nextStep(0)">return</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list>
+        <ion-list-header class="top-header" no-lines no-lines>
+          SCREENSHOTS
+        </ion-list-header>
+        <ion-item class="page-badge">
+          <button ion-button outline round item-start (click)="getFile('image_manager')">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          <ion-label>Attach Photos</ion-label>
+          <ion-badge item-end (click)="openMenu('',0)">#LocalImage</ion-badge>
+
+        </ion-item>
+
+        <!-- to implement image preview-->
+        <!--
+                <ion-item>
+                  <img [src]="imageUri">
+                </ion-item>
+                -->
+
+        <div style="float: left;margin: 0px 8px;padding: 8px">
+          <span *ngFor="let att of imageSrcArray; let idx = index">
+            <ion-badge [(innerHTML)]="imageSrcArray[idx].value" (click)="openMenu('imageSrcArray',idx)">Project
+              Summary.pdf</ion-badge>
+          </span>
+        </div>
+        <ion-item class="page-item" no-lines>
+          <ion-icon name="videocam" item-end></ion-icon>
+          <ion-label>
+            Videos & Promotions
+          </ion-label>
+        </ion-item>
+        <ion-item class="page-badge">
+          <ion-icon item-start name="link"></ion-icon>
+          <button ion-button (click)="openModal()" full style="font-weight: bold;">
+            SEARCH VIDEO
+          </button>
+        </ion-item>
+
+        <div style="float: left;margin: 0px 8px;padding: 8px">
+          <span *ngFor="let att of urlsArray; let idx = index">
+            <ion-item (click)="openMenu('urlsArray',idx)">
+              <ion-icon item-start name="play"></ion-icon>
+              <ion-label [(innerHTML)]="urlsArray[idx].value">url</ion-label>
+            </ion-item>
+          </span>
+        </div>
+
+        <!--
+        <ion-item>
+          <ion-icon item-start name="link"></ion-icon>
+          <button ion-button primary (click)="openModal()" full *ngIf="!ifSelected_link_2">search Video</button>
+          <ion-badge *ngIf="ifSelected_link_2" [innerHTML]="selectedVideoUrl" (click)="openMenu()">#ImagePicker</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-icon item-start name="link"></ion-icon>
+          <button ion-button primary (click)="openModal()" full *ngIf="!ifSelected_link_3">search Video</button>
+          <ion-badge *ngIf="ifSelected_link_3" [innerHTML]="selectedVideoUrl" (click)="openMenu()">#ImagePicker</ion-badge>
+        </ion-item>
+        -->
+
+        <ion-item class="page-item" no-lines (click)="promptLink()">
+          <ion-icon name="globe" item-end></ion-icon>
+          <ion-label>
+            Visit Website
+          </ion-label>
+          <ion-label item-end style="font-size: 0.8em">
+            (optional)
+          </ion-label>
+        </ion-item>
+
+        <button (click)="pushDataToFirebase()" style="background: #09c1ce;height:35px;width:100px;margin-top:30px;font-weight: bold;"
+          item-end ion-button secondary> Okay
+          Go!</button>
+      </ion-list>
+      <button style="height:35px;" item-center ion-button outline primary (click)="openEmailProvider()">
+        Have somthing to ask?
+      </button>
+
+      <!--
+              <img [src]="slide.image" class="slide-image"/>
+              <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+              <p [innerHTML]="slide.description"></p>
+              -->
+
+    </ion-slide>
+  </ion-slides>
+</ion-content>
