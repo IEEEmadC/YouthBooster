@@ -1,0 +1,145 @@
+<!-- <ion-list>
+    <ion-item-sliding *ngFor="let country of countries">
+      <ion-item>
+        <ion-card>
+            <img [src]="urlImg" (click)="show()" />
+            <ion-fab right bottom>
+                <button ion-fab (click)="edit()">
+                <ion-icon name="brush"></ion-icon>
+              </button>
+              </ion-fab>
+              <div class="card-title">Amsterdam</div>
+
+        </ion-card>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+
+  <ion-searchbar
+   [(ngModel)]="projectProvider.searchTerm"
+   (ionInput)="projectProvider.setFilteredItems()"
+   [showCancelButton]="true"
+(ionClear)="projectProvider.onCancel($event)"
+(ionCancel)="projectProvider.onCancel($event)"
+>
+  </ion-searchbar>
+  <ion-row style="padding-right:20%;padding-left:4%;" >
+
+    </ion-row>
+
+
+      <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
+
+ -->
+<ion-header>
+  <ion-navbar color="navgreen"  >
+
+
+    <ion-title><ion-icon name='logo-vimeo' color="white" style="margin-right:8%"></ion-icon>Technology</ion-title>
+
+    <ion-buttons end style="margin-right: 15%;">
+    <button ion-button  large color="green" (click)="navigateFilter()" ><ion-icon name='funnel' color="white" ></ion-icon>FILTER</button>
+    <button ion-button icon-only (click)="openSearchBox()">
+      <ion-icon   name="search" *ngIf='!showSearch'></ion-icon>   <ion-icon   name="close-circle" *ngIf='showSearch'></ion-icon>
+    </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content class="cards-bg social-cards"  #kk  >
+  <ion-searchbar [(ngModel)]="terms"  *ngIf='showSearch'></ion-searchbar>
+
+
+
+<ion-list *ngIf='projectProvider.projects' >
+
+  <ion-card  *ngFor="let project of projectProvider.projects | search : terms : showSearch"  >
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ project.profilepic }}">
+      </ion-avatar>
+      <h2>{{ project.profilname }}</h2>
+      <p>{{ project.time }}</p>
+    </ion-item>
+
+    <img src="{{ project.projectpic }}">
+
+    <ion-card-content>
+      <strong>{{ project.projectname }}</strong>
+      <h4>{{ project.description }}</h4>
+    </ion-card-content>
+
+    <ion-row   >
+      <ion-col   >
+        <button ion-button  clear  outline small icon-start color="lightwhite"  (click)="projectProvider.likeProject(project)">
+
+          <ion-icon name='heart-outline' color="green"></ion-icon>
+          {{ project.likes }} Likes
+        </button>
+      </ion-col>
+
+      <ion-col   >
+        <button ion-button color="lightwhite" outline clear small icon-start>
+          <ion-icon name='eye' color="green"></ion-icon>
+          {{ project.views }} views
+        </button>
+      </ion-col>
+
+      <ion-col   >
+        <button ion-button  clear outline small icon-start color="lightwhite">
+          <ion-icon name='text' color="green"></ion-icon>
+          {{ project.comments }} Comments
+        </button>
+      </ion-col>
+    </ion-row>
+<ion-row>
+  <ion-col width-10>
+   <button *ngFor="let tag of project.tags" large style="margin :7px;padding :5px;border-radius :8px;"  >
+     {{ tag }}
+    </button>
+    </ion-col>
+</ion-row>
+  </ion-card>
+
+
+
+ </ion-list >
+
+ <ion-fab bottom right margin-right="10px;"  (click)="projectProvider.addProject()"  >
+    <button ion-fab color="green"><ion-icon name='add'  ></ion-icon></button>
+  </ion-fab>
+
+    <ion-list *ngIf='!projectProvider.projects' >
+     <ion-item *ngFor="let fake of fakeUsers" class="fakeItem">
+       <h2></h2>
+       <h3></h3>
+       <p></p>
+     </ion-item>
+   </ion-list>
+
+
+
+
+</ion-content>
+
+<style>
+  .social-cards ion-col {
+    padding: 0;
+  }
+
+  ion-card {
+    border-radius: 10px;
+
+  }
+
+
+
+
+
+</style>
