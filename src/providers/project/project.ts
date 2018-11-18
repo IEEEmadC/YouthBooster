@@ -2,9 +2,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabase } from "angularfire2/database";
-import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
-import { FilterItemsPage } from '../../pages/filter-items/filter-items';
+
 @Injectable()
 export class ProjectProvider {
 
@@ -15,35 +14,44 @@ constructor(private fdb: AngularFireDatabase){
 }
 originalProjects: any;
 projects: any;
-kar : any;
-searchTerm : any="";
+likesArr : any  = [];
+filtercateg='none';
 
 
 
-
-
+// load method first method to be called
 load(){
 
 this.fdb.list("/myprojects/name").valueChanges().subscribe((data) => {
-      this.projects = data;
-      this.originalProjects = data;
+    console.log("i updated the project"+"  filter categ "+this.filtercateg);
+
+    this.projects = data;
 
 
-    },(err)=>{ console.log("probleme : ", err) });
+  if(this.filtercateg!='none'){     // filter the  project after the update
+   this.sortByKey(this.projects,this.filtercateg.substring(2),this.filtercateg.substring(0,2));
+  }
+
+       for(let i=0;i<data.length;i++)   // for icon like statue
+        this.likesArr.push(false);
+
+},(err)=>{ console.log("probleme : ", err); });
 
 }
+
+
+// go to the project page  and add views
 accessProject(project){
 
   let newViews=project['views']+1;
 
   this.fdb.list("/myprojects/name").update(project['id'],{
-
   views : newViews
-
 });
-// go to the project page
+
 }
 
+// open another page of project form
 addProject(){
 
   let id=this.projects.length.toString();
@@ -65,18 +73,16 @@ tags : ['software','hardware']
 
 }
 
-filterProject(){
-// filter project by tags or sort the project
-
-//filter by tag name
-this.projects=this.projects.filter((project)=>{
-  return project.tags.includes('hardware');
-})
-
-}
-
-likeProject(project){  //like project and add it in likes section
-
+//like project and add it in likes section
+likeProject(project)
+{
+  this.likesArr[project.id]=!this.likesArr[project.id];
+  /*
+   if (profile.id.like)
+   newLikes=project['likes']+1;
+   else
+   newLikes=project['likes']-1;
+  */
   let newLikes=project['likes']+1;
 
   this.fdb.list("/myprojects/name").update(project['id'],{
@@ -87,4 +93,31 @@ likeProject(project){  //like project and add it in likes section
 
 }
 
+
+   // sort by key method ( time or likes )
+  sortByKey(array, key,order) {
+          console.log("here i sort "+key+"  "+order);
+         return array.sort(function (a, b) {
+          var x,y;
+          var parts1,parts2;
+
+             if(key=='likes')
+             {
+              x = a[key];
+              y = b[key];
+             }
+             else if(key=='time')
+             {parts1=a[key].split("/");
+              parts2=b[key].split("/");
+               x = new Date(parts1[2], parts1[1] - 1, parts1[0]);
+               y = new Date(parts2[2], parts2[1] - 1, parts2[0]);
+
+             }
+             if(order=='As')
+             return ((x < y) ? -1 : ((x > y) ? 0 : 1));
+             else
+             return ((x > y) ? -1 : ((x < y) ? 0 : 1));
+        });
+
+    }
 }

@@ -3,18 +3,17 @@ import { Component,ViewChild } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
 import { NavController, NavParams, PopoverController,Keyboard } from 'ionic-angular';
 import { FilterItemsPage } from '../filter-items/filter-items';
+
+
 @Component({
   selector: 'page-AdvancedSocial',
-  templateUrl: 'AdvancedSocial.html',
-
+  templateUrl: 'AdvancedSocial.html'
 })
 
 
 
-
 export class AdvancedSocialPage {
-   @ViewChild('kk') content;
-
+   @ViewChild('myContent') content;
 
 showSearch = false;
 
@@ -22,7 +21,8 @@ showSearch = false;
    {
 this.projectProvider.projects = this.navParams.get('projects');
 console.log(this.navParams.get('chak'));
-
+if(this.navParams.get('filter'))
+this.projectProvider.filtercateg=this.navParams.get('filter');
     }
  fakeUsers: Array<any> = new Array(8);
 
@@ -36,6 +36,7 @@ console.log(this.navParams.get('chak'));
 
 ionViewDidLoad(){
   setTimeout(() => {
+
     if(!this.projectProvider.projects)
 this.projectProvider.load();
 
@@ -48,7 +49,9 @@ this.projectProvider.load();
 
     this.showSearch = !this.showSearch;
     this.content.scrollToTop();
-   
+
   }
+
+
 
  }

@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-
-import { AppareilsPage } from '../appareils/appareils';
-
 import { SettingsPage } from '../settings/settings';
-
-import {HomePage} from "../home/home";
-
 import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
 
 @Component({
@@ -22,5 +16,5 @@ export class TabsPage {
 
   settingsPage: any = SettingsPage;
 
-  homePage: any = HomePage;
+  homePage: any = AdvancedSocialPage;
 }

@@ -30,7 +30,7 @@
 
 
       <ion-searchbar [(ngModel)]="terms"></ion-searchbar>
-
+  <ion-icon name='heart-outline' color="green"></ion-icon>
  -->
 <ion-header>
   <ion-navbar color="navgreen"  >
@@ -51,8 +51,8 @@
 
 
 
-<ion-content class="cards-bg social-cards"  #kk  >
-  <ion-searchbar [(ngModel)]="terms"  *ngIf='showSearch'></ion-searchbar>
+<ion-content class="cards-bg social-cards"  #myContent  >
+  <ion-searchbar [(ngModel)]="terms"  *ngIf='showSearch' placeholder="Search by project or tag name"></ion-searchbar>
 
 
 
@@ -78,9 +78,9 @@
     <ion-row   >
       <ion-col   >
         <button ion-button  clear  outline small icon-start color="lightwhite"  (click)="projectProvider.likeProject(project)">
+      <ion-icon [name]="projectProvider.likesArr[project.id] ? 'heart' : 'heart-outline'"  color="green"></ion-icon>
 
-          <ion-icon name='heart-outline' color="green"></ion-icon>
-          {{ project.likes }} Likes
+             {{ project.likes }} Likes
         </button>
       </ion-col>
 
@@ -122,9 +122,6 @@
        <p></p>
      </ion-item>
    </ion-list>
-
-
-
 
 </ion-content>
 

@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
-import { ProjectProvider } from '../../providers/project/project';
 import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
-/**
- * Generated class for the FilterItemsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -16,12 +9,11 @@ import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
 })
 export class FilterItemsPage {
 
-       PassedFilteredItems:[];
+       PassedFilteredItems:any;
        itemsToFilterBy=[{item: 'sort by likes',filter: 'likes'},{item: 'sort by recent',filter: 'time'}];
 
 
-        constructor(private navCtrl: NavController, public navParams: NavParams,
-           private viewCtrl: ViewController) {
+        constructor(private navCtrl: NavController, public navParams: NavParams) {
            this.PassedFilteredItems = this.navParams.get('project');
            console.log(this.PassedFilteredItems);
          }
@@ -30,8 +22,8 @@ export class FilterItemsPage {
          filter(itemsToFilterBy,order){
 
                  this.PassedFilteredItems  = this.sortByKey( this.PassedFilteredItems ,itemsToFilterBy['filter'],order);
-                 console.log(this.PassedFilteredItems);
-                   this.navCtrl.push(AdvancedSocialPage,{'projects': this.PassedFilteredItems,'chak' :"yes"});
+
+                   this.navCtrl.push(AdvancedSocialPage,{'projects': this.PassedFilteredItems,'filter' :order.concat(itemsToFilterBy['filter'])});
          }
 
 
@@ -60,8 +52,6 @@ export class FilterItemsPage {
                  });
 
              }
-
-
 
 
 

@@ -10,7 +10,21 @@ export class SearchPipe implements PipeTransform {
     if(!terms) return items;
     terms = terms.toLowerCase();
     return items.filter( it => {
-      return it.projectname.toLowerCase().includes(terms);
+
+      let boo=false;
+
+      if(it.projectname.toLowerCase().includes(terms))
+      return true;
+      else {
+
+      for(let i=0;i<it.tags.length;i++)
+      if(it.tags[i].toLowerCase().includes(terms))
+      {
+        boo=true;
+        break;
+      }
+      return boo;
+    }
     });
 
   }
