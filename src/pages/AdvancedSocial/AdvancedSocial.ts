@@ -1,7 +1,7 @@
 
 import { Component,ViewChild } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
-import { NavController, NavParams, PopoverController,Keyboard } from 'ionic-angular';
+import { NavController, NavParams,Keyboard } from 'ionic-angular';
 import { FilterItemsPage } from '../filter-items/filter-items';
 
 

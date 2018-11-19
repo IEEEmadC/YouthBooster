@@ -1,6 +1,5 @@
 
 import { Injectable } from '@angular/core';
-import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabase } from "angularfire2/database";
 import 'rxjs/add/operator/map';
 
@@ -59,13 +58,13 @@ addProject(){
   this.fdb.list("/myprojects/name").set(id,{
 
 profilname : 'ahmed ben',
-projectname : 'Flying Car',
-time : '04/01/2019',   //"dd/MM/yyyy"
+projectname : 'Robotic Car',
+time : '03/02/2018',   //"dd/MM/yyyy"
 profilepic : 'assets/imgs/marty-avatar.png',
 projectpic : 'assets/imgs/advance-card-bttf.png',
-likes : 20,
-views : 1000,
-comments : 60,
+likes : 10,
+views : 15,
+comments : 70,
 description : 'this is a flying car prototype',
 id : id,
 tags : ['software','hardware']

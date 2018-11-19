@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
 
 @IonicPage()
@@ -10,7 +10,7 @@ import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
 export class FilterItemsPage {
 
        PassedFilteredItems:any;
-       itemsToFilterBy=[{item: 'sort by likes',filter: 'likes'},{item: 'sort by recent',filter: 'time'}];
+       itemsToFilterBy=[{item: 'Sort by likes :',filter: 'likes'},{item: 'Sort by time : ',filter: 'time'}];
 
 
         constructor(private navCtrl: NavController, public navParams: NavParams) {
@@ -23,7 +23,7 @@ export class FilterItemsPage {
 
                  this.PassedFilteredItems  = this.sortByKey( this.PassedFilteredItems ,itemsToFilterBy['filter'],order);
 
-                   this.navCtrl.push(AdvancedSocialPage,{'projects': this.PassedFilteredItems,'filter' :order.concat(itemsToFilterBy['filter'])});
+                   this.navCtrl.push(AdvancedSocialPage,{'projects': this.PassedFilteredItems,'filter' : order.concat(itemsToFilterBy['filter'])});
          }
 
 

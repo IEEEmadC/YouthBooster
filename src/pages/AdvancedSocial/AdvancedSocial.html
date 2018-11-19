@@ -36,12 +36,19 @@
   <ion-navbar color="navgreen"  >
 
 
-    <ion-title><ion-icon name='logo-vimeo' color="white" style="margin-right:8%"></ion-icon>Technology</ion-title>
+    <ion-title style="margin-right:10%" ><ion-icon name='logo-vimeo' color="white" style="margin-right:4%;font-size : 1.2em;"></ion-icon>Technology</ion-title>
 
-    <ion-buttons end style="margin-right: 15%;">
-    <button ion-button  large color="green" (click)="navigateFilter()" ><ion-icon name='funnel' color="white" ></ion-icon>FILTER</button>
-    <button ion-button icon-only (click)="openSearchBox()">
-      <ion-icon   name="search" *ngIf='!showSearch'></ion-icon>   <ion-icon   name="close-circle" *ngIf='showSearch'></ion-icon>
+    <ion-buttons end style="margin-right: 15%; " >
+    <button ion-button   large  color="white" (click)="navigateFilter()"   >
+
+      <ion-icon name='funnel' color="white" style="font-size :2.3em;"></ion-icon>
+
+    </button>
+    <button ion-button   large     color="white"   (click)="openSearchBox()"    >
+
+      <ion-icon large   name="search" *ngIf='!showSearch' style="font-size :2.3em;"></ion-icon>
+      <ion-icon  large  name="close-circle" *ngIf='showSearch' style="font-size :2.3em;" ></ion-icon>
+
     </button>
     </ion-buttons>
 
@@ -75,32 +82,35 @@
       <h4>{{ project.description }}</h4>
     </ion-card-content>
 
-    <ion-row   >
+    <ion-row padding >
       <ion-col   >
-        <button ion-button  clear  outline small icon-start color="lightwhite"  (click)="projectProvider.likeProject(project)">
+        <button ion-button  clear     small icon-start color="lightwhite"  (click)="projectProvider.likeProject(project)" no-margin no-padding>
       <ion-icon [name]="projectProvider.likesArr[project.id] ? 'heart' : 'heart-outline'"  color="green"></ion-icon>
 
              {{ project.likes }} Likes
         </button>
       </ion-col>
 
-      <ion-col   >
-        <button ion-button color="lightwhite" outline clear small icon-start>
-          <ion-icon name='eye' color="green"></ion-icon>
-          {{ project.views }} views
-        </button>
-      </ion-col>
+        <!--
+      -->
+        <ion-col center align-self-center >
+          <button ion-button color="lightwhite"    clear small icon-start no-margin no-padding   >
+            <ion-icon name='eye' color="green"></ion-icon>
+            {{ project.views }} views
+          </button>
+       </ion-col>
 
-      <ion-col   >
-        <button ion-button  clear outline small icon-start color="lightwhite">
-          <ion-icon name='text' color="green"></ion-icon>
+
+      <ion-col      >
+        <button ion-button  clear    small icon-start color="lightwhite" no-margin no-padding >
+          <ion-icon name='text' no-margin no-margin  color="green"></ion-icon>
           {{ project.comments }} Comments
         </button>
       </ion-col>
     </ion-row>
-<ion-row>
-  <ion-col width-10>
-   <button *ngFor="let tag of project.tags" large style="margin :7px;padding :5px;border-radius :8px;"  >
+<ion-row padding>
+  <ion-col >
+   <button *ngFor="let tag of project.tags" large style="margin : 2%;padding : 1.8%;border-radius :8px;"  >
      {{ tag }}
     </button>
     </ion-col>
@@ -134,9 +144,28 @@
     border-radius: 10px;
 
   }
+  ion-col {
+          padding-top: 0px !important;
+          padding-bottom: 0px !important;
+          padding-left: 0px !important;
+          padding-right: 0px !important;
+          margin-top: 0px !important;
+          margin-bottom: 0px !important;
+          margin-left: 0px !important;
+          margin-right: 0px !important;
 
 
+      }
+      ion-row {
+              padding-top: 0px !important;
+              padding-bottom: 0px !important;
 
+          }
+button{
+  font-size : 0.9em;
+}
 
-
+ion-icon {
+       font-size: 1.8em;
+   }
 </style>
