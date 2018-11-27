@@ -1,1 +1,57 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+
+ <ion-content>
+   <ion-item   >
+
+     <ion-avatar >
+       <img src="assets/imgs/marty-avatar.png">
+     </ion-avatar>
+     <h2 margin-top >Ahmed Ben</h2>
+     <p>ahmed.gmail.com</p>
+     <h3 margin>Edit Profile</h3>
+
+   </ion-item>
+
+
+   <ion-list >
+     <button menuClose large ion-item *ngFor="let p of pages" (click)="openPage(p)" >
+       <ion-icon [name]="p.icon" item-start color="grey" ></ion-icon>
+       {{p.title}}
+     </button>
+   </ion-list>
+
+
+   <ion-item  color="green" class="youth">
+     <h1>
+    YouthBooster
+    </h1>
+     </ion-item>
+
+ </ion-content>
+
+</ion-menu>
+
+
+<ion-nav [root]="rootPage" #content ></ion-nav>
+
+<style media="screen">
+
+.youth{
+position : absolute;
+top :88%;
+height : 12%;
+
+}
+  ion-item,img{
+
+  margin: auto;
+  text-align: center;
+
+  }
+
+  img {
+      width: auto !important;
+      height: auto !important;
+  }
+
+</style>

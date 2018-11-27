@@ -14,6 +14,7 @@ import { ProjectProvider } from '../providers/project/project';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SearchPipe } from '../pipes/search/search';
+import {BookmarkPage} from "../pages/bookmark/bookmark";
 
 export const firebaseConfig = {
 
@@ -35,7 +36,8 @@ export const firebaseConfig = {
     TabsPage,
     AdvancedSocialPage,
     SearchPipe,
-    FilterItemsPage
+    FilterItemsPage,
+    BookmarkPage
   ],
   imports: [
     FormsModule,
@@ -51,7 +53,8 @@ export const firebaseConfig = {
     SettingsPage,
     TabsPage,
     AdvancedSocialPage,
-    FilterItemsPage
+    FilterItemsPage,
+    BookmarkPage
   ],
   providers: [
     StatusBar,

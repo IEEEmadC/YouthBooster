@@ -15,7 +15,7 @@ originalProjects: any;
 projects: any;
 likesArr : any  = [];
 filtercateg='none';
-
+bookmarksprojects: any;
 
 
 // load method first method to be called
@@ -35,6 +35,12 @@ this.fdb.list("/myprojects/name").valueChanges().subscribe((data) => {
         this.likesArr.push(false);
 
 },(err)=>{ console.log("probleme : ", err); });
+
+this.fdb.list("/myprojects/profileid/likes").valueChanges().subscribe((data) => {
+this.bookmarksprojects=data;
+console.log(this.bookmarksprojects);
+},(err)=>{ console.log("probleme : ", err); });
+
 
 }
 
@@ -75,20 +81,46 @@ tags : ['software','hardware']
 //like project and add it in likes section
 likeProject(project)
 {
-  this.likesArr[project.id]=!this.likesArr[project.id];
-  /*
-   if (profile.id.like)
-   newLikes=project['likes']+1;
-   else
-   newLikes=project['likes']-1;
-  */
+
+  let bool=this.bookmarksprojects.some((element)=>{
+  return JSON.stringify(element)===JSON.stringify(project);});
+
+if((!bool)||(!this.bookmarksprojects))
+{
+  this.likesArr[project.id]=true;
   let newLikes=project['likes']+1;
 
   this.fdb.list("/myprojects/name").update(project['id'],{
+    likes : newLikes
+    });
 
-  likes : newLikes
+   this.fdb.list("/myprojects/profileid/likes").set(project['id'],{profilname : project.profilname,
+   projectname : project.projectname,
+   time : project.time,   //"dd/MM/yyyy"
+   profilepic : project.profilepic,
+   projectpic : project.projectpic,
+   likes : newLikes,
+   views : project.views,
+   comments : project.comments,
+   description : project.description,
+   id : project.id,
+   tags : project.tags});
 
-});
+console.log("it's added");
+}
+
+else {
+   console.log("it's removed");
+  this.likesArr[project.id]=false;
+  let newLikes=project['likes']-1;
+
+  this.fdb.list("/myprojects/name").update(project['id'],{
+    likes : newLikes
+    });
+
+   this.fdb.list("/myprojects/profileid/likes").remove(project['id']);
+
+}
 
 }
 

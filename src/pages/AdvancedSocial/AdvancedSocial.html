@@ -34,9 +34,11 @@
  -->
 <ion-header>
   <ion-navbar color="navgreen"  >
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
 
-
-    <ion-title style="margin-right:10%" ><ion-icon name='logo-vimeo' color="white" style="margin-right:4%;font-size : 1.2em;"></ion-icon>Technology</ion-title>
+    <ion-title style="margin-right:10%" >Technology</ion-title>
 
     <ion-buttons end style="margin-right: 15%; " >
     <button ion-button   large  color="white" (click)="navigateFilter()"   >
@@ -135,37 +137,4 @@
 
 </ion-content>
 
-<style>
-  .social-cards ion-col {
-    padding: 0;
-  }
-
-  ion-card {
-    border-radius: 10px;
-
-  }
-  ion-col {
-          padding-top: 0px !important;
-          padding-bottom: 0px !important;
-          padding-left: 0px !important;
-          padding-right: 0px !important;
-          margin-top: 0px !important;
-          margin-bottom: 0px !important;
-          margin-left: 0px !important;
-          margin-right: 0px !important;
-
-
-      }
-      ion-row {
-              padding-top: 0px !important;
-              padding-bottom: 0px !important;
-
-          }
-button{
-  font-size : 0.9em;
-}
-
-ion-icon {
-       font-size: 1.8em;
-   }
-</style>
+ 
