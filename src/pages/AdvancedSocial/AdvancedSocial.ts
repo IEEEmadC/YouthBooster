@@ -3,16 +3,26 @@ import { Component,ViewChild } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
 import { NavController, NavParams,Keyboard } from 'ionic-angular';
 import { FilterItemsPage } from '../filter-items/filter-items';
-
+import {trigger,state,style,animate,transition} from '@angular/animations';
 
 @Component({
   selector: 'page-AdvancedSocial',
-  templateUrl: 'AdvancedSocial.html'
+  templateUrl: 'AdvancedSocial.html',
+  animations: [
+  trigger('heart', [
+          state('unliked', style({
+            transform: 'scale(1,1)'
+          })),
+          state('liked', style({
+            transform: 'scale(1.3,1.3)'
+          })),
+          transition('unliked <=> liked', animate('200ms ease-in-out'))
+      ])]
 })
 
 
-
 export class AdvancedSocialPage {
+
    @ViewChild('myContent') content;
 
 showSearch = false;
@@ -24,6 +34,7 @@ console.log(this.navParams.get('chak'));
 if(this.navParams.get('filter'))
 this.projectProvider.filtercateg=this.navParams.get('filter');
     }
+
  fakeUsers: Array<any> = new Array(8);
 
 
@@ -51,7 +62,6 @@ this.projectProvider.load();
     this.content.scrollToTop();
 
   }
-
 
 
  }

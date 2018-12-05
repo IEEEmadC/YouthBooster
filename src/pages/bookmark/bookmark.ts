@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
-import 'rxjs/add/operator/map';
+
 /**
  * Generated class for the BookmarkPage page.
  *
@@ -19,7 +19,7 @@ export class BookmarkPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase) {
   }
 
- projects: any;
+ projects=[];
  fakeUsers: Array<any> = new Array(8);
    nolikes :boolean = false;
 
@@ -30,7 +30,7 @@ export class BookmarkPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad BookmarkPage');
     setTimeout(() => {
-
+        /* charge bookmarks of user from firebase */
     this.fdb.list("/myprojects/profileid/likes").valueChanges().subscribe((data) => {
 
         this.projects = data;
@@ -64,7 +64,7 @@ export class BookmarkPage {
    // view the entire project
   accessProject(project){
 
-    let newViews=project['views']+1;
+    let newViews=project.views+1;
 
     this.fdb.list("/myprojects/name").update(project['id'],{
     views : newViews
@@ -76,7 +76,7 @@ export class BookmarkPage {
 dislikeProject(project){
   console.log("it's removed");
 
- let newLikes=project['likes']-1;
+ let newLikes=project.likes-1;
 
  this.fdb.list("/myprojects/name").update(project['id'],{
    likes : newLikes

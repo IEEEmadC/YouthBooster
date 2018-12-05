@@ -15,6 +15,10 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SearchPipe } from '../pipes/search/search';
 import {BookmarkPage} from "../pages/bookmark/bookmark";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {TeamPage} from "../pages/team/team";
+import {NotifPage} from "../pages/notif/notif";
+import {ArchivePage} from "../pages/archive/archive";
 
 export const firebaseConfig = {
 
@@ -37,12 +41,16 @@ export const firebaseConfig = {
     AdvancedSocialPage,
     SearchPipe,
     FilterItemsPage,
-    BookmarkPage
+    BookmarkPage,
+    TeamPage,
+    NotifPage,
+    ArchivePage
   ],
   imports: [
     FormsModule,
     MbscModule,
     BrowserModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig)
@@ -54,7 +62,10 @@ export const firebaseConfig = {
     TabsPage,
     AdvancedSocialPage,
     FilterItemsPage,
-    BookmarkPage
+    BookmarkPage,
+    TeamPage,
+    NotifPage,
+    ArchivePage
   ],
   providers: [
     StatusBar,

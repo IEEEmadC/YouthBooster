@@ -1,51 +1,58 @@
 
 <ion-header>
 
-  <ion-navbar color="navgreen"  >
-    <ion-row style="padding-right:20%;padding-left:4%;" >
+  <ion-navbar color="navgreen" no-margin   >
+    <button ion-button menuToggle no-margin>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="margin-right:5%" >Sort by</ion-title>
 
-    <ion-title><ion-icon name='logo-vimeo' color="white" style="margin-right:8%"></ion-icon>Technology</ion-title>
-
-    </ion-row>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<ion-list>
-<ion-item  *ngFor="let myItem of itemsToFilterBy"   >
-{{myItem.item}}
-<ion-row padding>
-  <ion-col>
-<button ion-button small    color="navgreen" (click)="filter(myItem,'As')" > <ion-icon   name="arrow-up" style="margin-right: 10%;" ></ion-icon>Ascending</button>
-</ion-col>
-<ion-col>
-<button ion-button small    color="navgreen" (click)="filter(myItem,'Ds')"> <ion-icon   name="arrow-down" style="margin-right: 10%;" ></ion-icon>Descending</button>
-</ion-col>
+<ion-content >
+<ion-grid>
+<ion-row >
+<button ion-button large   color="navgreen" (click)="filter('likes')" >Likes</button>
 </ion-row>
- </ion-item>
 
-<ion-row padding>
-
+<ion-row >
+<button ion-button large    color="navgreen" (click)="filter('views')" >Views</button>
 </ion-row>
-  </ion-list>
+
+<ion-row >
+<button ion-button large    color="navgreen" (click)="filter('newest')" >Newest</button>
+</ion-row>
+
+<ion-row >
+<button ion-button large    color="navgreen" (click)="filter('oldest')">Oldest</button>
+</ion-row>
+
+</ion-grid>
+
 
 </ion-content>
 
 
 <style media="screen">
 
-ion-list{
+ion-grid{
+position : absolute;
+top :10%;
+height : 80%;
+width : 100%;
+}
 
-position :absolute;
-
-top :20%;
-height : 40%;
-left : 10%;
-width : 80%;
- 
+ion-row{
+  margin : auto;
+    width : 100%;
 }
 
 
+button{
+
+  margin : auto;
+}
 </style>

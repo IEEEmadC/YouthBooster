@@ -33,23 +33,23 @@
   <ion-icon name='heart-outline' color="green"></ion-icon>
  -->
 <ion-header>
-  <ion-navbar color="navgreen"  >
-    <button ion-button menuToggle>
+  <ion-navbar color="navgreen"  no-margin   >
+    <button ion-button menuToggle no-margin>
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-title style="margin-right:10%" >Technology</ion-title>
+    <ion-title style="margin-right:5%"  >Technology</ion-title>
 
-    <ion-buttons end style="margin-right: 15%; " >
+    <ion-buttons end style="margin-right: 10%; " >
     <button ion-button   large  color="white" (click)="navigateFilter()"   >
 
-      <ion-icon name='funnel' color="white" style="font-size :2.3em;"></ion-icon>
+      <ion-icon name='options' color="white" ></ion-icon>
 
     </button>
     <button ion-button   large     color="white"   (click)="openSearchBox()"    >
 
-      <ion-icon large   name="search" *ngIf='!showSearch' style="font-size :2.3em;"></ion-icon>
-      <ion-icon  large  name="close-circle" *ngIf='showSearch' style="font-size :2.3em;" ></ion-icon>
+      <ion-icon large   name="search" *ngIf='!showSearch' ></ion-icon>
+      <ion-icon  large  name="close-circle" *ngIf='showSearch'  ></ion-icon>
 
     </button>
     </ion-buttons>
@@ -60,18 +60,18 @@
 
 
 
-<ion-content class="cards-bg social-cards"  #myContent  >
-  <ion-searchbar [(ngModel)]="terms"  *ngIf='showSearch' placeholder="Search by project or tag name"></ion-searchbar>
+<ion-content class="cards-bg social-cards"  #myContent   >
+  <ion-searchbar [(ngModel)]="terms"  *ngIf='showSearch' placeholder="Search anything"></ion-searchbar>
 
 
 
-<ion-list *ngIf='projectProvider.projects' >
+<ion-list *ngIf='projectProvider.projects && projectProvider.users'  >
 
-  <ion-card  *ngFor="let project of projectProvider.projects | search : terms : showSearch"  >
+  <ion-card  *ngFor="let project of projectProvider.projects | search : terms : showSearch" >
 
-    <ion-item>
+    <ion-item >
       <ion-avatar item-start>
-        <img src="{{ project.profilepic }}">
+        <img src="{{ users[project.userId].profilepic }}">
       </ion-avatar>
       <h2>{{ project.profilname }}</h2>
       <p>{{ project.time }}</p>
@@ -84,32 +84,33 @@
       <h4>{{ project.description }}</h4>
     </ion-card-content>
 
-    <ion-row padding >
-      <ion-col   >
-        <button ion-button  clear     small icon-start color="lightwhite"  (click)="projectProvider.likeProject(project)" no-margin no-padding>
-      <ion-icon [name]="projectProvider.likesArr[project.id] ? 'heart' : 'heart-outline'"  color="green"></ion-icon>
-
-             {{ project.likes }} Likes
+    <ion-row  padding   >
+      <ion-col  no-margin no-padding >
+        <button ion-button  clear   center align-self-center  small icon-start color="lightwhite"  (click)="projectProvider.likeProject(project)" no-margin  style="font-size : 0.85em;" >
+      <ion-icon [name]="projectProvider.likeState[project.id]=='liked' ? 'heart' : 'heart-outline'"   [@heart]="projectProvider.likeState[project.id]"   color="green"></ion-icon>
+         {{ project.likes }} Likes
         </button>
       </ion-col>
 
         <!--
       -->
-        <ion-col center align-self-center >
-          <button ion-button color="lightwhite"    clear small icon-start no-margin no-padding   >
+        <ion-col center align-self-center no-margin  padding >
+          <button ion-button color="lightwhite"   clear small icon-start no-margin no-padding  style="font-size : 0.85em;" >
             <ion-icon name='eye' color="green"></ion-icon>
             {{ project.views }} views
           </button>
        </ion-col>
 
 
-      <ion-col      >
-        <button ion-button  clear    small icon-start color="lightwhite" no-margin no-padding >
-          <ion-icon name='text' no-margin no-margin  color="green"></ion-icon>
+      <ion-col no-margin no-padding >
+        <button ion-button  clear  float-center  small icon-start color="lightwhite" no-margin no-padding  style="font-size : 0.85em;" >
+          <ion-icon name='text'   color="green"></ion-icon>
           {{ project.comments }} Comments
         </button>
       </ion-col>
+
     </ion-row>
+
 <ion-row padding>
   <ion-col >
    <button *ngFor="let tag of project.tags" large style="margin : 2%;padding : 1.8%;border-radius :8px;"  >
@@ -127,8 +128,9 @@
     <button ion-fab color="green"><ion-icon name='add'  ></ion-icon></button>
   </ion-fab>
 
-    <ion-list *ngIf='!projectProvider.projects' >
-     <ion-item *ngFor="let fake of fakeUsers" class="fakeItem">
+    <ion-list *ngIf='!projectProvider.projects'    >
+     <ion-item *ngFor="let fake of fakeUsers" class="fakeItem" style="background : #10C488;">
+
        <h2></h2>
        <h3></h3>
        <p></p>
@@ -137,4 +139,14 @@
 
 </ion-content>
 
- 
+
+<style media="screen">
+ion-card{
+border-radius: 20px;
+
+}
+ion-content {
+background : #10C488;
+}
+
+</style>

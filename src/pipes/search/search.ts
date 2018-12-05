@@ -13,7 +13,7 @@ export class SearchPipe implements PipeTransform {
 
       let boo=false;
 
-      if(it.projectname.toLowerCase().includes(terms))
+      if((it.projectname.toLowerCase().includes(terms))||(it.profilname.toLowerCase().includes(terms)))
       return true;
       else {
 

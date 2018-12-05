@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SettingsPage } from '../settings/settings';
 import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
-
+import {TeamPage} from "../team/team";
+import {NotifPage} from "../notif/notif";
 @Component({
 
   selector: 'page-tabs',
@@ -14,7 +14,7 @@ export class TabsPage {
 
   advancedSocialPage: any = AdvancedSocialPage;
 
-  settingsPage: any = SettingsPage;
+  notifPage: any = NotifPage;
 
-  homePage: any = AdvancedSocialPage;
+  homePage: any = TeamPage;
 }

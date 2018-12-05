@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
 import {AdvancedSocialPage} from "../pages/AdvancedSocial/AdvancedSocial";
 import {BookmarkPage} from "../pages/bookmark/bookmark";
+import {TeamPage} from "../pages/team/team";
+import {NotifPage} from "../pages/notif/notif";
+import {ArchivePage} from "../pages/archive/archive";
 @Component({
   templateUrl: 'app.html'
 })
@@ -13,14 +16,16 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage:any = TabsPage;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any,icon: string}>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
 
     this.pages = [
       { title: 'Home', component: TabsPage, icon: 'home' },
+      { title: 'Notifications', component: NotifPage, icon: 'notifications' },
+      { title: 'Team', component: TeamPage, icon: 'people' },
       { title: 'Bookmarks', component: BookmarkPage, icon: 'bookmarks' },
-      { title: 'Archive', component: AdvancedSocialPage, icon: 'archive' },
+      { title: 'Archive', component: ArchivePage, icon: 'archive' },
       { title: 'Messages', component: AdvancedSocialPage, icon: 'chatbubbles' },
       { title: 'Settings', component: AdvancedSocialPage, icon: 'settings' },
       { title: 'Sign out', component: AdvancedSocialPage, icon: 'log-out' }

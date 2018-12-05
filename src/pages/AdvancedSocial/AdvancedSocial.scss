@@ -1,57 +1,12 @@
 page-AdvancedSocial{
 
-.fakeItem {
 
-  @keyframes animatedBar{
-    0%{
-        background-position: -406px 0;
-    }
-    100%{
-        background-position: 0 0;
-    }
- }
-
-  h2, h3, p {
-    background-color: lightgrey;
-    opacity: 0.5;
-    height: 1em;
-    margin-top: 10px;
-    position: relative;
-    background: linear-gradient(to right, #dddddd , #EEEEEE);
-    animation: animatedBar 700ms linear infinite;
-
-    &:after {
-      position: absolute;
-      display: block;
-      content: '';
-      right: 0;
-      bottom: 0;
-      top: 0;
-      background-color: white;
-    }
-  }
-
-  h2:after {
-    width: 65%;
-  }
-
-  h3:after {
-    width: 60%;
-  }
-
-  p:after {
-    width: 40%;
-  }
-}
 
 .social-cards ion-col {
   padding: 0;
 }
 
-ion-card {
-  border-radius: 10px;
 
-}
 ion-col {
         padding-top: 0px !important;
         padding-bottom: 0px !important;
@@ -79,79 +34,51 @@ ion-icon {
 
 
 
-/*
-$bubble-d: 4.5rem; // bubble diameter
-$bubble-r: .5*$bubble-d; // bubble-radius
 
-@mixin bubble($ext) {
-    transform: scale(1);
-    border-color: #cc8ef5;
-    border-width: $ext;
-}
+ .fakeItem {
 
-body {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    height: 100vh;
-}
+   @keyframes animatedBar{
+     0%{
+         background-position: -406px 0;
+     }
+     100%{
+         background-position: 0 0;
+     }
+  }
 
-[id='toggle-heart'] {
-  position: absolute;
-  left: -100vw;
+   h2, h3, p {
+     background-color: white;
+     opacity: 0.5;
+     height: 1em;
+     margin-top: 10px;
+     position: relative;
 
-    &:checked + label {
-        color: #e2264d;
-        will-change: font-size;
-        animation: heart 1s cubic-bezier(.17, .89, .32, 1.49);
+     background: linear-gradient(to right, #ffffff , #EEEEEE);
+     animation: animatedBar 700ms linear infinite;
 
-        &:before, &:after {
-            animation: inherit;
-            animation-timing-function: cubic-bezier(.21, .61, .35, 1);
-        }
+     &:after {
+       position: absolute;
+       display: block;
+       content: '';
+       right: 0;
+       bottom: 0;
+       top: 0;
+       background-color: white;
+     }
+   }
 
-        &:before {
-            will-change: transform, border-width, border-color;
-            animation-name: bubble;
-        }
-    }
-}
+   h2:after {
+     width: 65%;
+   }
 
-[for='toggle-heart'] {
-    align-self: center;
-    position: relative;
-    color: #aab8c2;
-    font-size: 2em;
-    cursor: pointer;
+   h3:after {
+     width: 60%;
+   }
 
-    &:before, &:after {
-        position: absolute;
-        z-index: -1;
-        top: 50%; left: 50%;
-        border-radius: 50%;
-        content: '';
-    }
-
-    &:before {
-        box-sizing: border-box;
-        margin: -$bubble-r;
-        border: solid $bubble-r #e2264d;
-        width: $bubble-d; height: $bubble-d;
-        transform: scale(0);
-    }
-}
-
-@keyframes heart {
-    0%, 17.5% { font-size: 0; }
-}
-
-@keyframes bubble {
-    15% { @include bubble($bubble-r); }
-    30%, 100% { @include bubble(0); }
-}
-*/
-
-
+   p:after {
+     width: 40%;
+   }
+ }
 
 
 
