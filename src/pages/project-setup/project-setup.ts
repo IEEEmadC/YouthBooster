@@ -1,3 +1,5 @@
+import { Project } from './../../modals/project.modal';
+import { DetailsPage } from './../details/details';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides, AlertController, ToastController, LoadingController, Platform, ActionSheetController, ModalController, ViewController } from 'ionic-angular';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -7,6 +9,7 @@ import { YtProvider } from './../../providers/yt/yt';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Keyboard } from '@ionic-native/keyboard';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { User } from '../../modals/user.modal';
 
 
 
@@ -44,13 +47,22 @@ export class ProjectSetupPage {
 
   selectedVideoUrl: any;
 
+  websiteUrl: string;
+  
   tagsArray:any= [];
   filesArray:any= [];
   imageSrcArray:any=[];
   urlsArray:any=[];
 
-  summary: any = "Add Summary text..";
+  summary: string = "Add Summary text..";
 
+  fullDescription: string = "Add Description text.."
+
+  // firebase project reference to create
+  project: Project;
+  // firebase author reference to create
+  author: User;
+  
   constructor(public navCtrl: NavController,
     public platform: Platform,
     public navParams: NavParams,
@@ -88,7 +100,7 @@ export class ProjectSetupPage {
     }
   ];
 
-  // to implement:: push project to backend system
+  // finilize project setup & prompt
   pushDataToFirebase() {
     const alert = this.alertCtrl.create({
       title: 'Almost Done!',
@@ -104,7 +116,10 @@ export class ProjectSetupPage {
         {
             text: "Got it!",
             handler: () => {
-            // push to firebase 
+            // push to firebase
+            this.commitChanges();
+            // navigate next page
+            this.navCtrl.push(DetailsPage);
           }
         }
     ],
@@ -112,6 +127,25 @@ export class ProjectSetupPage {
     });
     alert.present();
   
+  }
+
+  // push project to backend system:: firebase 
+  commitChanges() {
+//  this.author = findUser(mAuth.currentUser);
+    this.project.author = this.author;
+    this.project.attachments = this.filesArray;
+    this.project.description = this.fullDescription;
+    this.project.images = this.imageSrcArray;
+//  this.project.memberRequirements
+    this.project.tags = this.tagsArray;
+    this.project.timestamp = new Date().getDate();
+    this.project.title
+    this.project.videos = this.urlsArray;
+    this.project.websiteUrl = this.websiteUrl;
+    this.project.budget
+    this.project.dueDate
+    this.project.summary = this.summary;
+    this.project.dueDate
   }
 
   // to implement:: 
@@ -176,6 +210,7 @@ export class ProjectSetupPage {
           handler: data => {
             console.log("save clicked"); // to implement
             this.tagsArray.push({'value':data['TagName']});
+            // commit changes
           }
         }
       ]
@@ -339,6 +374,7 @@ export class ProjectSetupPage {
           text: 'Save',
           handler: data => {
             this.presentToast('Saved clicked'); // to implement
+            this.websiteUrl = data;
           }
         }
       ]
@@ -407,7 +443,7 @@ export class ModalContentPage {
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 5000,
+      duration: 3000,
       position: 'bottom'
     });
 

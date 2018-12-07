@@ -26,7 +26,7 @@
           PROJECT BUDGET
         </ion-list-header>
         <ion-item class="example">
-          <ion-input type="number" placeholder="100$ to start.."></ion-input>
+          <ion-input type="number" placeholder="100$ to start.." [(ngModel)]="project.budget"></ion-input>
         </ion-item>
         <ion-item class="page-item" no-lines>
           <ion-icon name="apps" item-end></ion-icon>
@@ -35,7 +35,7 @@
             Project Category
           </ion-label>
         </ion-item>
-        <ion-item class="page-select">
+        <ion-item class="page-select" [(ngModel)]="project.category">
           <ion-select multiple="true" cancelText="Dismiss" okText="Okay!">
             <ion-option value="Technology" selected="true">Technology</ion-option>
             <ion-option value="RN Energy">Renewbale Energy</ion-option>
@@ -90,7 +90,7 @@
           DUE DATE
         </ion-list-header>
         <ion-item class="example">
-          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
+          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="project.timestamp"></ion-datetime>
         </ion-item>
         <ion-item class="page-item" no-lines>
           <ion-icon name="attach" item-end></ion-icon>

@@ -1,0 +1,216 @@
+<ion-header>
+  <ion-navbar color=primary>
+    <ion-title>
+        {{ (projectObs$ | async)?.title }}
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addLikes()">
+        <ion-icon name="heart"></ion-icon>
+        +{{ (projectObs$ | async)?.likes }} likes
+      </button>
+      <button ion-button icon-only (click)="openSettings()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background: #eee;">
+ 
+  <ion-list>
+    <!--
+    <ion-item *ngFor="let project of projectListObs$ | async">
+      {{ project.key }}
+      {{ project.title }} 
+    </ion-item>
+    -->
+  </ion-list>
+
+  <!-- Real floating action button, fixed. It will not scroll with the content -->
+  <ion-fab bottom right>
+    <button ion-fab (click)="doRate()">
+      <ion-icon name="star"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <div *ngIf="project">
+    <div class="game-image">
+      <img src="{{ (projectObs$ | async)?.images[0] }}" class="tinted">
+    </div>
+
+    <div id="popover" [@fadeIn]>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <h4>Rating</h4>
+            <p class="larger-res">4.7<span style="font-size: 0.3em">({{ (projectObs$ | async)?.votes }} votes)</span></p>
+          </ion-col>
+          <ion-col col-6>
+            <h4>Donations</h4>
+            <p>${{ (projectObs$ | async)?.donationSum }} raised / $670</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <h4>Website</h4>
+            <button ion-button (click)="launchSite()" small>Visit</button>
+          </ion-col>
+          <ion-col col-6>
+            <h4>Due date</h4>
+            <ion-note class=" edit edit-date" item-end (click)="changeDate()">EDIT <ion-icon name="create"></ion-icon>
+            </ion-note>
+
+            <p [innerHTML]="dueDate">{{ (projectObs$ | async)?.dueDate }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div id="popover-line" [@fadeIn]></div>
+
+    <ion-card padding [@fadeUp]>
+      <ion-item (click)="openAuthorProfile()">
+        <ion-avatar item-start>
+          <div class="online"></div>
+          <img src="{{ author?.pictureUrl }}">
+        </ion-avatar>
+        <h2>{{ author?.username }}</h2>
+        <p>{{ author?.about }}</p>
+        <ion-note item-end>{{ (projectObs$ | async)?.timestamp }} pm</ion-note>
+      </ion-item>
+
+      <h4>Project Summary</h4>
+
+      <ion-note class="edit" item-end (click)="editSection('Summary')">EDIT <ion-icon name="create"></ion-icon>
+      </ion-note>
+
+      <ion-buttons>
+        <ion-badge round small *ngFor="let tag of (projectObs$ | async)?.tags ">{{ tag }}</ion-badge>
+      </ion-buttons>
+      <p>
+          {{ (projectObs$ | async)?.summary }}
+      </p>
+
+      <button ion-button outline style="margin-top: 16px; margin-bottom: 16px" (click)="processContribution()">
+        <ion-icon name="bookmark" padding></ion-icon> Contribute in This Project
+      </button>
+
+      <h4>Comments</h4>
+      <ion-list>
+        <ion-item>
+          <ion-avatar item-start>
+            <div class="online"></div>
+            <img src="{{ comments[0].from.pictureUrl }}">
+          </ion-avatar>
+          <h2>{{ comments[0].from }}</h2>
+          <p>{{ comments[0].content }}</p>
+          <ion-note item-end>3:43 pm</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-start>
+            <div class="online"></div>
+            <img src="{{ comments[0].from.pictureUrl }}">
+          </ion-avatar>
+          <h2>Londonguy97</h2>
+          <p>This town ain't big enough for the two of us!</p>
+          <ion-note item-end>3:43 pm</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-item>
+            <ion-avatar item-start>
+              <div class="online"></div>
+              <img src="{{ comments[0].from.pictureUrl }}">
+            </ion-avatar>
+            <h2>Woody</h2>
+            <p>This town ain't big enough for the two of us!</p>
+            <ion-note item-end>3:43 pm</ion-note>
+          </ion-item>
+        </ion-item>
+      </ion-list>
+
+      <button style="margin-left: 50%" (click)="openComments()">View All</button>
+      
+    </ion-card>
+
+    <div id="screenslider">
+      <h5>Screenshots
+        <ion-note class="edit" item-end (click)="openImageGallery('edit')">EDIT <ion-icon name="create"></ion-icon>
+        </ion-note>
+      </h5>
+
+      <div class="screenthumbs">
+        <ion-grid style="margin-left: auto; margin-right: auto">
+          <ion-row>
+            <ion-col col-8>
+              <img class="big-thumb" src="{{ (projectObs$ | async)?.images[0] }}" (click)="openImage('assets/imgs/blank.png')">
+            </ion-col>
+            <ion-col>
+              <ion-row>
+                <img class="small-thumb-1" src="{{ (projectObs$ | async)?.images[0] }}" (click)="openImage('assets/imgs/blank.png')">
+              </ion-row>
+              <ion-row>
+                <div class="small-thumb-2" (click)="openImageGallery()">
+                  <img style="height: 100%" src="{{ (projectObs$ | async)?.images[0] }}">
+                </div>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+
+    <h5>Videos &amp; Promotions</h5>
+
+    <ion-list>
+      <button ion-item *ngFor="let video of (projectObs$ | async)?.videos; let idx = index" (click)="showMenu('video',idx)">
+        <ion-icon name="play" small item-start color="primary" class="itemfix"></ion-icon>click and play this video
+      </button>
+    </ion-list>
+  </div>
+  
+  <h5>PROJECT DETAILS</h5>
+
+  <ion-card padding full>
+    <ion-note class="edit" item-end (click)="editSection('Requirements')">EDIT <ion-icon name="create"></ion-icon>
+    </ion-note>
+
+    <h4>Requirements</h4>
+    <p>
+        {{ (projectObs$ | async)?.requirements }}
+    </p>
+
+    <ion-note *ngIf="full_scroll" class="edit" item-end (click)="editSection('Fixed Budget')">EDIT <ion-icon name="create"></ion-icon>
+    </ion-note>
+
+    <h4 *ngIf="full_scroll">Fixed Budget</h4>
+    <p *ngIf="full_scroll">
+        {{ (projectObs$ | async)?.budget }}
+    </p>
+
+    <h4 *ngIf="full_scroll">Attachments</h4>
+    <div *ngIf="full_scroll">
+      <button *ngFor="let attach of (projectObs$ | async).attachments ; let idx = index" ion-item style="text-decoration: grey underline;"
+        (click)="showMenu('attach',idx)">
+        <ion-icon name="attach" small item-start color="primary" class="itemfix"></ion-icon>
+        {{ attach }}
+      </button>
+    </div>
+    <ion-buttons class="btn-separation">
+      <button [(innerHTML)]="toggleMode" ion-button outline round small (click)="showMore()">Read more</button>
+      <button ion-button outline round small (click)="sharePost()">Share</button>
+    </ion-buttons>
+    <button ion-item (click)="addSection()">
+      <ion-icon name="add" small item-start color="primary"></ion-icon>
+      <ion-icon name="arrow-forward" small item-end color="primary"></ion-icon>
+      Add new section
+    </button>
+
+    <button ion-item (click)="addEmbeddedMaps()">
+      <ion-icon name="navigate" small item-start color="primary"></ion-icon>
+      <ion-icon name="arrow-forward" small item-end color="primary"></ion-icon>
+      Add related location
+    </button>
+
+  </ion-card>
+  <iframe *ngIf="isAvailable" width="100%" height="450" frameborder="0" style="border:0" [src]='mapsURL()'></iframe>
+
+</ion-content>
