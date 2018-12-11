@@ -6,8 +6,8 @@ import { FilterItemsPage } from '../filter-items/filter-items';
 import {trigger,state,style,animate,transition} from '@angular/animations';
 
 @Component({
-  selector: 'page-AdvancedSocial',
-  templateUrl: 'AdvancedSocial.html',
+  selector: 'page-browse-projects',
+  templateUrl: 'browse-projects.html',
   animations: [
   trigger('heart', [
           state('unliked', style({
@@ -21,7 +21,7 @@ import {trigger,state,style,animate,transition} from '@angular/animations';
 })
 
 
-export class AdvancedSocialPage {
+export class BrowseProjectsPage {
 
    @ViewChild('myContent') content;
 
@@ -35,7 +35,7 @@ if(this.navParams.get('filter'))
 this.projectProvider.filtercateg=this.navParams.get('filter');
     }
 
- fakeUsers: Array<any> = new Array(8);
+ fakeProjects: Array<any> = new Array(8);
 
 
  navigateFilter(){

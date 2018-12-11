@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
-
+import { ProjectProvider } from '../../providers/project/project';
 
 @IonicPage()
 @Component({
@@ -10,7 +10,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 })
 export class ArchivePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase,public projectProvider : ProjectProvider) {
   }
 
 archive=[];
@@ -23,14 +23,13 @@ userId: string="nothing";
 
     console.log('ionViewDidLoad ArchivePage');
 
-    this.fdb.list("/myprojects/name").valueChanges().subscribe((data) => {
+    this.fdb.list("/projects").valueChanges().subscribe((data) => {
        /* te5ou projects l user w tchouf closed wala le */
 
-
-         data.forEach((element)=>{
-          // if((element.closed)&&(element.author==userId))
-           this.archive.push(element);
-         });
+       this.archive=data.filter((element)=> {
+             console.log(element+"  "+element.author);
+         return (JSON.stringify(element.author)==JSON.stringify(this.projectProvider.currentUser))&&JSON.stringify(element.closed);
+        });
 
           setTimeout(()=>{
               this.fakearchive=false;

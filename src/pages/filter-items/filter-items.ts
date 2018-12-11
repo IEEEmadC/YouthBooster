@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
+import {BrowseProjectsPage} from "../browse-projects/browse-projects";
 
 @IonicPage()
 @Component({
@@ -21,11 +21,10 @@ export class FilterItemsPage {
 
                  this.PassedFilteredItems  = this.sortByKey( this.PassedFilteredItems ,item);
 
-                   this.navCtrl.setRoot(AdvancedSocialPage,{'projects': this.PassedFilteredItems,'filter' : item });
+                   this.navCtrl.setRoot(BrowseProjectsPage,{'projects': this.PassedFilteredItems,'filter' : item });
          }
 
-
-
+ 
          public sortByKey(array, key) {
                   return array.sort(function (a, b) {
                    var x,y;
@@ -52,7 +51,6 @@ export class FilterItemsPage {
                  });
 
              }
-
 
 
 

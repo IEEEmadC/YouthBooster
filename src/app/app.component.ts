@@ -3,7 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
-import {AdvancedSocialPage} from "../pages/AdvancedSocial/AdvancedSocial";
+import {BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
 import {BookmarkPage} from "../pages/bookmark/bookmark";
 import {TeamPage} from "../pages/team/team";
 import {NotifPage} from "../pages/notif/notif";
@@ -22,13 +22,12 @@ export class MyApp {
 
     this.pages = [
       { title: 'Home', component: TabsPage, icon: 'home' },
-      { title: 'Notifications', component: NotifPage, icon: 'notifications' },
       { title: 'Team', component: TeamPage, icon: 'people' },
       { title: 'Bookmarks', component: BookmarkPage, icon: 'bookmarks' },
       { title: 'Archive', component: ArchivePage, icon: 'archive' },
-      { title: 'Messages', component: AdvancedSocialPage, icon: 'chatbubbles' },
-      { title: 'Settings', component: AdvancedSocialPage, icon: 'settings' },
-      { title: 'Sign out', component: AdvancedSocialPage, icon: 'log-out' }
+      { title: 'Messages', component: BrowseProjectsPage, icon: 'chatbubbles' },
+      { title: 'Settings', component: BrowseProjectsPage, icon: 'settings' },
+      { title: 'Sign out', component: BrowseProjectsPage, icon: 'log-out' }
     ];
 
 

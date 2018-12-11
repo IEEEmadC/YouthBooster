@@ -26,28 +26,28 @@
 <ion-list *ngIf='users'  >
 
   <ion-card *ngFor="let user of users"   >
-    
+
  <ion-row>
 
    <ion-col start  no-margin no-padding>
 
-    <ion-item (click)="accessMemberProfile('profile')">
+    <ion-item  style="height : 100%;" (click)="accessMemberProfile(user)">
 
       <ion-avatar item-start >
-        <img src="{{ user.profilepic }}">
+        <img src="{{ projectProvider.users[user].pictureUrl }}">   <!-- user.pictureUrl -->
       </ion-avatar>
-      <strong>{{ user.profilname }}</strong>
-      <h5>{{ user.description }}</h5>
-      <p>{{ user.description }}</p>
+      <strong>{{ projectProvider.users[user].fullname }}</strong>   <!-- user.fullname -->
+      <h4>{{ projectProvider.users[user].job }}</h4>    <!-- user.job -->
+
 
     </ion-item>
     </ion-col >
    <ion-col end  margin-top margin-bottom no-padding margin-right no-margin-left >
        <ion-buttons end no-margin no-padding >
-    <button ion-button  clear     no-margin no-padding large  color="lightwhite" (click)="chatWithMember('profile')" *ngIf='!delete'  >
+    <button ion-button  clear     no-margin no-padding large  color="lightwhite" (click)="chatWithMember(user)" *ngIf='!delete'  >
   <ion-icon name="chatbubbles"    color="green"></ion-icon>
     </button>
-    <button ion-button  clear     no-margin no-padding large color="lightwhite"  (click)="deleteMember('profile')"  *ngIf='delete' >
+    <button ion-button  clear     no-margin no-padding large color="lightwhite"  (click)="deleteMember(user)"  *ngIf='delete' >
   <ion-icon name="close-circle"    color="danger"  ></ion-icon>
     </button>
     </ion-buttons>

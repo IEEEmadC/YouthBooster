@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
-
+import { ProjectProvider } from '../../providers/project/project';
 /**
  * Generated class for the BookmarkPage page.
  *
@@ -16,49 +16,32 @@ import { AngularFireDatabase } from "angularfire2/database";
 })
 export class BookmarkPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase,public projectProvider : ProjectProvider) {
   }
 
+ mybookmarks=[];
  projects=[];
  fakeUsers: Array<any> = new Array(8);
    nolikes :boolean = false;
 
 
-
-
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BookmarkPage');
-    setTimeout(() => {
-        /* charge bookmarks of user from firebase */
-    this.fdb.list("/myprojects/profileid/likes").valueChanges().subscribe((data) => {
 
-        this.projects = data;
-        if(this.projects.length==0)
+        this.mybookmarks = this.projectProvider.bookmarks;
+        console.log(this.mybookmarks);
+        if((!this.mybookmarks)||(this.mybookmarks.length==0))
          this.nolikes=true;
-    },(err)=>{ console.log("probleme : ", err); });
-  },500);
+
+        this.projects=this.projectProvider.projects.filter((data)=>{
+
+            return this.mybookmarks.indexOf(data.projectId);
+        });
+           console.log(this.projects);
+
   }
 
 
   addProject(){
-
-    let id=this.projects.length.toString();
-    //open another page of creating page
-    this.fdb.list("/myprojects/name").set(id,{
-
-  profilname : 'ahmed ben',
-  projectname : 'Robotic Car',
-  time : '03/02/2018',   //"dd/MM/yyyy"
-  profilepic : 'assets/imgs/marty-avatar.png',
-  projectpic : 'assets/imgs/advance-card-bttf.png',
-  likes : 10,
-  views : 15,
-  comments : 70,
-  description : 'this is a flying car prototype',
-  id : id,
-  tags : ['software','hardware']
-  });
 
   }
    // view the entire project
@@ -66,7 +49,7 @@ export class BookmarkPage {
 
     let newViews=project.views+1;
 
-    this.fdb.list("/myprojects/name").update(project['id'],{
+    this.fdb.list("/projects").update(project['id'],{
     views : newViews
   });
 
@@ -75,15 +58,14 @@ export class BookmarkPage {
 
 dislikeProject(project){
   console.log("it's removed");
-
+let index=this.projectProvider.bookmarks.findIndex((element)=>{return JSON.stringify(element)===JSON.stringify(project.projectId);});
  let newLikes=project.likes-1;
 
- this.fdb.list("/myprojects/name").update(project['id'],{
+ this.fdb.list("/projects").update(project.projectId,{
    likes : newLikes
    });
 
-  this.fdb.list("/myprojects/profileid/likes").remove(project['id']);
-
+this.fdb.list("/bookmarks/"+this.projectProvider.currentUser+"/projects").remove(index.toString());
 
 
 }

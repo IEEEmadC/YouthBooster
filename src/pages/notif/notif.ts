@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
-
+import { ProjectProvider } from '../../providers/project/project';
 
 @IonicPage()
 @Component({
@@ -10,7 +10,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 })
 export class NotifPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase,public projectProvider : ProjectProvider) {
   }
 
   noNotif: boolean = false;
@@ -21,9 +21,11 @@ export class NotifPage {
   this.delete=!this.delete;
   }
 
-addToTeam(){
-console.log('added to team');
+addToTeam(profile){
+console.log('added to team  '+this.projectProvider.projectID );
 /* add user id to the team of the current user in firebase */
+
+this.fdb.list("/projects/"+this.projectProvider.projectID+"/joins").set(profile,profile);
 }
 
 deleteNotif(){
@@ -42,9 +44,15 @@ console.log('all deleted');
 
     setTimeout(() => {
      /* charge all the notifs donations and member join from notif firebase */
-    this.fdb.list("/myprojects/name").valueChanges().subscribe((data) => {
+    this.fdb.list("/notifications").valueChanges().subscribe((data) => {
+      console.log(data);
+      this.notifs = data.filter((element)=> {
+        console.log(JSON.stringify(element.notifTarget)==JSON.stringify(this.projectProvider.currentUser));
+        console.log(JSON.stringify(element.notifTarget)+"  "+JSON.stringify(this.projectProvider.currentUser));
+        return JSON.stringify(element.notifTarget)==JSON.stringify(this.projectProvider.currentUser);
+       });
+  console.log(this.notifs);
 
-        this.notifs = data;
         if(this.notifs.length==0)
          this.noNotif=true;
 

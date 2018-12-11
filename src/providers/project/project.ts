@@ -11,43 +11,69 @@ constructor(private fdb: AngularFireDatabase){
 
 
 }
-
+users=[];
 projects=[];
 filtercateg='none';
-bookmarksprojects=[];
+bookmarks=[];
 likeState= [];
-
+projectID: string ="";
+currentUser  ='DbuWTni47ZAkllESplv';   // jack balvin
 // load method first method to be called
+
+
 load(){
+
+  this.fdb.list("/users").valueChanges().subscribe((data) => {
+  data.forEach((each)=>{
+    this.users[each.userId]=each;
+  });
+
+  console.log(this.users);
+
+  },(err)=>{ console.log("probleme user : ", err); });
+
+
+
+
 
   if(!this.likeState)
   for(let i=0;i<10;i++)  // for icon like statue
      this.likeState.push('unliked');
 
-this.fdb.list("/myprojects/name").valueChanges().subscribe((data) => {
-    console.log("i updated the project"+"  filter categ "+this.filtercateg);
+this.fdb.list("/projects").valueChanges().subscribe((data) => {
 
-    this.projects = data;
-
+     this.projects = data;
+     this.projects.forEach((element)=>{
+     if(JSON.stringify(element.author)==JSON.stringify(this.currentUser)){
+       this.projectID=element.projectId;
+     }
+   });
+     console.log(this.projectID);
   if(this.filtercateg!='none'){     // filter the  project after the update
    this.sortByKey(this.projects,this.filtercateg);
   }
-
        for(let i=this.likeState.length;i<data.length;i++)   // for icon like statue
           this.likeState.push('unliked');
 
-
 },(err)=>{ console.log("probleme : ", err); });
+
+
                /*  tchargi men bookmarks datapage */
-this.fdb.list("/myprojects/profileid/likes"/*+user id*/).valueChanges().subscribe((data) => {
-this.bookmarksprojects=data;
-this.bookmarksprojects.forEach((data) => {
-  this.likeState[data.id]='liked';
+this.fdb.list("/bookmarks/"+this.currentUser+"/projects").valueChanges().subscribe((data) => {
+
+this.bookmarks=data;
+
+    if(this.bookmarks)
+  this.bookmarks.forEach((data) => {
+  this.likeState[data]='liked';
 });
+},(err)=>{ console.log("probleme bookmark : ", err); });
 
-console.log(this.bookmarksprojects);
 
-},(err)=>{ console.log("probleme : ", err); });
+
+
+
+
 
 
 }
@@ -56,9 +82,9 @@ console.log(this.bookmarksprojects);
 // go to the project page  and add views
 accessProject(project){
    //access page .push
-  let newViews=project['views']+1;
+  let newViews=project.views+1;
 
-  this.fdb.list("/myprojects/name").update(project['id'],{
+  this.fdb.list("/projects").update(project.projectId,{
   views : newViews
 });
 
@@ -67,77 +93,67 @@ accessProject(project){
 // open another page of project form
 addProject(){
 
-  let id=this.projects.length.toString();
-  //open another page of creating page
-  this.fdb.list("/myprojects/name").set(id,{
-profilid : 0,
-profilname : 'ahmed ben',
-projectname : 'Robotic Car',
-time : '03/02/2018',   //"dd/MM/yyyy"
-profilepic : 'assets/imgs/marty-avatar.png',
-projectpic : 'https://firebasestorage.googleapis.com/v0/b/youth-booster.appspot.com/o/advance-card-bttf.png?alt=media&token=3258db68-bf8b-47d2-9d10-83bb6045d104',
-likes : 10,
-views : 15,
-comments : 70,
-description : 'this is a flying car prototype ',
-id : id,
-tags : ['software','hardware']
-});
-
 }
 
 //like project and add it in likes section
 likeProject(project)
-{
+{    console.log(this.bookmarks);
 
-  let bool=this.bookmarksprojects.some((element)=>{
-  return JSON.stringify(element.id)===JSON.stringify(project.id);
+
+if(!this.bookmarks){
+ let newLikes=project.likes+1;
+  this.likeState[project.projectId] ='liked';
+
+   this.fdb.list("/projects").update(project.projectId,{  likes : newLikes  });
+
+   this.fdb.list("/bookmarks/"+this.currentUser+"/projects").set(project.projectId,project.projectId);
+console.log(" nothing is here")
+console.log("it's added");
+
+  }
+
+else{
+
+ let newLikes=project.likes+1;
+
+  let bool=this.bookmarks.some((element)=>{
+    console.log(JSON.stringify(element)==JSON.stringify(project.projectId));
+    console.log(JSON.stringify(element)+"  "+JSON.stringify(project.projectId));
+  return JSON.stringify(element)===JSON.stringify(project.projectId);  // wait
     });
 
-if((!bool)||(!this.bookmarksprojects))
+
+
+if(!bool)
 {
+   console.log("bool is here")
+  this.likeState[project.projectId] ='liked';
 
-  this.likeState[project.id] ='liked';
-  let newLikes=project.likes+1;
+   this.fdb.list("/projects").update(project.projectId,{  likes : newLikes  });
 
-  this.fdb.list("/myprojects/name").update(project['id'],{
-    likes : newLikes
-    });
-
-   this.fdb.list("/myprojects/profileid/likes").set(project['id'],{profilname : project.profilname,
-   projectname : project.projectname,
-   time : project.time,   //"dd/MM/yyyy"
-   profilepic : project.profilepic,
-   projectpic : project.projectpic,
-   likes : newLikes,
-   views : project.views,
-   comments : project.comments,
-   description : project.description,
-   id : project.id,
-   tags : project.tags});
+   this.fdb.list("/bookmarks/"+this.currentUser+"/projects").set(project.projectId,project.projectId);
 
 console.log("it's added");
 }
 
 else {
-   console.log("it's removed");
 
-  this.likeState[project.id] = 'unliked';
+  this.likeState[project.projectId] = 'unliked';
   let newLikes=project.likes-1;
+  let index=this.bookmarks.findIndex((element)=>{return JSON.stringify(element)===JSON.stringify(project.projectId);});
+   this.fdb.list("/projects").update(project.projectId,{ likes : newLikes });
 
-  this.fdb.list("/myprojects/name").update(project['id'],{
-    likes : newLikes
-    });
+   this.fdb.list("/bookmarks/"+this.currentUser+"/projects").remove(project.projectId);
 
-   this.fdb.list("/myprojects/profileid/likes").remove(project['id']);
+ console.log("it's removed");
 
 }
-
+}
 }
 
 
    // sort by key method ( time or likes or views )
-    sortByKey(array, key) {
+             sortByKey(array, key) {
             return array.sort(function (a, b) {
              var x,y;
              var parts1,parts2;
@@ -163,4 +179,7 @@ else {
            });
 
        }
+
+
+
 }

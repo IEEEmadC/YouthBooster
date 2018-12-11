@@ -7,9 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { FilterItemsPage } from '../pages/filter-items/filter-items';
-import {SettingsPage} from "../pages/settings/settings";
 import {TabsPage} from "../pages/tabs/tabs";
-import {AdvancedSocialPage} from "../pages/AdvancedSocial/AdvancedSocial";
+import {BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
 import { ProjectProvider } from '../providers/project/project';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -22,12 +21,13 @@ import {ArchivePage} from "../pages/archive/archive";
 
 export const firebaseConfig = {
 
-  apiKey: "AIzaSyBhUvfoOtNDdd4MKCUdzC9PLm3AFPfptSo",
-  authDomain: "youthboo-22ad5.firebaseapp.com",
-  databaseURL: "https://youthboo-22ad5.firebaseio.com",
-  projectId: "youthboo-22ad5",
-  storageBucket: "youthboo-22ad5.appspot.com",
-  messagingSenderId: "7456543972"
+  apiKey: "AIzaSyBDdaWIh6iS5SNbdtT1iXFtQ-DLFV4625E",
+  authDomain: "youth-booster.firebaseapp.com",
+  databaseURL: "https://youth-booster.firebaseio.com",
+  projectId: "youth-booster",
+  storageBucket: "youth-booster.appspot.com",
+  messagingSenderId: "358028150171"
+
 
 };
 
@@ -36,9 +36,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    SettingsPage,
     TabsPage,
-    AdvancedSocialPage,
+    BrowseProjectsPage,
     SearchPipe,
     FilterItemsPage,
     BookmarkPage,
@@ -58,9 +57,8 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    SettingsPage,
     TabsPage,
-    AdvancedSocialPage,
+    BrowseProjectsPage,
     FilterItemsPage,
     BookmarkPage,
     TeamPage,

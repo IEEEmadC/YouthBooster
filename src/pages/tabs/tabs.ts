@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AdvancedSocialPage} from "../AdvancedSocial/AdvancedSocial";
+import {BrowseProjectsPage} from "../browse-projects/browse-projects";
 import {TeamPage} from "../team/team";
 import {NotifPage} from "../notif/notif";
 @Component({
@@ -12,9 +12,9 @@ import {NotifPage} from "../notif/notif";
 
 export class TabsPage {
 
-  advancedSocialPage: any = AdvancedSocialPage;
+  browseProjectsPage: any = BrowseProjectsPage;
 
   notifPage: any = NotifPage;
 
-  homePage: any = TeamPage;
+  profilPage: any = TeamPage;
 }

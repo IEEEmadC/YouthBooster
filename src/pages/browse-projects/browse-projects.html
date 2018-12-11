@@ -40,16 +40,16 @@
 
     <ion-title style="margin-right:5%"  >Technology</ion-title>
 
-    <ion-buttons end style="margin-right: 10%; " >
+    <ion-buttons end large style="margin-right: 10%; " >
     <button ion-button   large  color="white" (click)="navigateFilter()"   >
 
-      <ion-icon name='options' color="white" ></ion-icon>
+      <ion-icon   name='options' color="white" ></ion-icon>
 
     </button>
     <button ion-button   large     color="white"   (click)="openSearchBox()"    >
 
-      <ion-icon large   name="search" *ngIf='!showSearch' ></ion-icon>
-      <ion-icon  large  name="close-circle" *ngIf='showSearch'  ></ion-icon>
+      <ion-icon     name="search" *ngIf='!showSearch' ></ion-icon>
+      <ion-icon     name="close-circle" *ngIf='showSearch'  ></ion-icon>
 
     </button>
     </ion-buttons>
@@ -65,36 +65,37 @@
 
 
 
-<ion-list *ngIf='projectProvider.projects && projectProvider.users'  >
+<ion-list *ngIf='projectProvider.projects&&projectProvider.users'  >
 
   <ion-card  *ngFor="let project of projectProvider.projects | search : terms : showSearch" >
 
     <ion-item >
       <ion-avatar item-start>
-        <img src="{{ users[project.userId].profilepic }}">
+        <img src="{{projectProvider.users[project.author].pictureUrl}}">
       </ion-avatar>
-      <h2>{{ project.profilname }}</h2>
-      <p>{{ project.time }}</p>
+      <h2>{{ projectProvider.users[project.author].fullname }} </h2>
+      <p>{{ project.timestamp | date : 'yyyy/MM/dd' }}</p>
     </ion-item>
 
-    <img src="{{ project.projectpic }}">
+    <img style="width : 100%;height : auto;border-top :  3px solid #10C488;border-bottom :  3px solid #10C488;" src="{{ project.images['0'] }}">
 
     <ion-card-content>
-      <strong>{{ project.projectname }}</strong>
-      <h4>{{ project.description }}</h4>
+
+      <strong>{{ project.title }}</strong>
+      <h4>{{ project.summary }}</h4>
     </ion-card-content>
 
-    <ion-row  padding   >
+    <ion-row   padding-right padding-left   >
       <ion-col  no-margin no-padding >
         <button ion-button  clear   center align-self-center  small icon-start color="lightwhite"  (click)="projectProvider.likeProject(project)" no-margin  style="font-size : 0.85em;" >
-      <ion-icon [name]="projectProvider.likeState[project.id]=='liked' ? 'heart' : 'heart-outline'"   [@heart]="projectProvider.likeState[project.id]"   color="green"></ion-icon>
+      <ion-icon [name]="projectProvider.likeState[project.projectId]=='liked' ? 'heart' : 'heart-outline'"   [@heart]="projectProvider.likeState[project.projectId]"   color="green"></ion-icon>
          {{ project.likes }} Likes
         </button>
       </ion-col>
 
         <!--
       -->
-        <ion-col center align-self-center no-margin  padding >
+        <ion-col center align-self-center no-margin  no-padding >
           <button ion-button color="lightwhite"   clear small icon-start no-margin no-padding  style="font-size : 0.85em;" >
             <ion-icon name='eye' color="green"></ion-icon>
             {{ project.views }} views
@@ -105,13 +106,13 @@
       <ion-col no-margin no-padding >
         <button ion-button  clear  float-center  small icon-start color="lightwhite" no-margin no-padding  style="font-size : 0.85em;" >
           <ion-icon name='text'   color="green"></ion-icon>
-          {{ project.comments }} Comments
+          {{ project.commentsCount }} Comments
         </button>
       </ion-col>
 
     </ion-row>
 
-<ion-row padding>
+<ion-row no-padding>
   <ion-col >
    <button *ngFor="let tag of project.tags" large style="margin : 2%;padding : 1.8%;border-radius :8px;"  >
      {{ tag }}
@@ -128,8 +129,8 @@
     <button ion-fab color="green"><ion-icon name='add'  ></ion-icon></button>
   </ion-fab>
 
-    <ion-list *ngIf='!projectProvider.projects'    >
-     <ion-item *ngFor="let fake of fakeUsers" class="fakeItem" style="background : #10C488;">
+    <ion-list *ngIf='!projectProvider.projects||!projectProvider.users'    >
+     <ion-item *ngFor="let fake of fakeProjects" class="fakeItem" style="background : #10C488;">
 
        <h2></h2>
        <h3></h3>

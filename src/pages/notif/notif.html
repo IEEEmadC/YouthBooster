@@ -21,43 +21,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-  <ion-item>
-    <ion-avatar item-start >
-      <img src="assets/imgs/marty-avatar.png">
-    </ion-avatar>
-    <strong>Ahmed Ben</strong>
-    <h5>software engineer</h5>
-    <h2>Donated 5$</h2>
-    </ion-item>
-    </ion-card>
+
 <ion-list *ngIf='notifs' >
 
-  <ion-card    *ngFor="let user of notifs"  >
- <ion-row no-padding  >
-   <ion-col start  no-margin no-padding>
-    <ion-item (click)="accessMemberProfile('profile')">
-      <ion-avatar item-start >
-        <img src="{{ user.profilepic }}">
-      </ion-avatar>
-      <strong>{{ user.profilname }}</strong>
-      <h5>{{ user.description }}</h5>
-      <h2>Join Request</h2>
+  <ion-card    *ngFor="let notif of notifs"  >
 
-    </ion-item>
-    </ion-col >
-   <ion-col end  margin-top margin-bottom no-padding margin-right no-margin-left >
-       <ion-buttons end no-margin no-padding large >
-    <button ion-button  clear     no-margin no-padding large  color="lightwhite" (click)="chatWithMember('profile')" *ngIf='!delete'  >
-  <ion-icon name="add-circle"   large color="green"></ion-icon>
+     <ion-row no-padding   >
+       <ion-col start  no-margin no-padding>
+        <ion-item (click)="accessMemberProfile('notif')">
+          <ion-avatar item-start >
+            <img src="{{ projectProvider.users[notif.notifRef].pictureUrl }}">
+          </ion-avatar>
+          <strong>{{ projectProvider.users[notif.notifRef].fullname }}</strong>  <!-- user[notif.notifRef].fullName -->
+          <h5>{{ projectProvider.users[notif.notifRef].job }}</h5>     <!-- user[notif.notifRef].profession -->
+          <h2 *ngIf="notif.notifObject=='donation'" >{{notif.notifObject}} {{notif.donation}} </h2>      <!-- *ngIf="notif.profilname=='join'" -->
+          <h2 *ngIf="notif.notifObject=='join'" >{{notif.notifObject}} </h2>
+        </ion-item>
+        </ion-col >
+       <ion-col end  margin-top margin-bottom no-padding margin-right no-margin-left >
+           <ion-buttons end no-margin no-padding large >
+        <button ion-button  clear     no-margin no-padding large  color="lightwhite" (click)="addToTeam(notif.notifRef)" *ngIf="!delete&&notif.notifObject=='join'" >  <!-- *ngIf="!delete&&notif.notifObject=='join' "-->
+      <ion-icon name="add-circle"   large color="green"></ion-icon>
+        </button>
+        <button ion-button  clear     no-margin no-padding large  color="lightwhite"  (click)="deleteMember(notif.notifRef)"  *ngIf='delete' >
+      <ion-icon name="close-circle"  large  color="danger"  ></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-col>
+         </ion-row>
 
-    </button>
-    <button ion-button  clear     no-margin no-padding large  color="lightwhite"  (click)="deleteMember('profile')"  *ngIf='delete' >
-  <ion-icon name="close-circle"  large  color="danger"  ></ion-icon>
-    </button>
-    </ion-buttons>
-</ion-col>
-     </ion-row>
+
   </ion-card>
 
 

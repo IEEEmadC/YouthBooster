@@ -24,19 +24,20 @@
 
   <ion-card  *ngFor="let project of projects"  >
 
-    <ion-item>
+    <ion-item >
       <ion-avatar item-start>
-        <img src="{{ project.profilepic }}">
+        <img src="{{projectProvider.users[project.author].pictureUrl}}">
       </ion-avatar>
-      <h2>{{ project.profilname }}</h2>
-      <p>{{ project.time }}</p>
+      <h2>{{ projectProvider.users[project.author].fullname }} </h2>
+      <p>{{ project.timestamp }}</p>
     </ion-item>
 
-    <img src="{{ project.projectpic }}">
+    <img style="width : 100%;height : auto;border-top :  3px solid #10C488;border-bottom :  3px solid #10C488;" src="{{ project.images['0'] }}">
 
     <ion-card-content>
-      <strong>{{ project.projectname }}</strong>
-      <h4>{{ project.description }}</h4>
+
+      <strong>{{ project.title }}</strong>
+      <h4>{{ project.summary }}</h4>
     </ion-card-content>
 
     <ion-row padding >
@@ -61,7 +62,7 @@
       <ion-col      >
         <button ion-button  clear    small icon-start color="lightwhite" no-margin no-padding >
           <ion-icon name='text' no-margin no-margin  color="green"></ion-icon>
-          {{ project.comments }} Comments
+          {{ project.commentsCount }} Comments
         </button>
       </ion-col>
     </ion-row>
