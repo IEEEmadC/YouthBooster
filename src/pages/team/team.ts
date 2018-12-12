@@ -1,7 +1,7 @@
 
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
-import { Component,ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
 
 @IonicPage()

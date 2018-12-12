@@ -6,10 +6,10 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
 import {BookmarkPage} from "../pages/bookmark/bookmark";
 import {TeamPage} from "../pages/team/team";
-import {NotifPage} from "../pages/notif/notif";
+
 import {ArchivePage} from "../pages/archive/archive";
 import { ProjectProvider } from '../providers/project/project';
-import { SignupPage } from '../pages/signup/signup';
+ 
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 
@@ -47,6 +47,7 @@ export class MyApp {
           .subscribe(
             user => {
               if (user) {
+                console.log(user);
                 this.rootPage = TabsPage;
               } else {
                 this.rootPage = LoginPage;

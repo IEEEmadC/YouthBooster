@@ -26,6 +26,7 @@
     "@ionic-native/status-bar": "~4.15.0",
     "@ionic/storage": "2.2.0",
     "@mobiscroll/angular": "https://npm.mobiscroll.com/@mobiscroll/angular-trial/-/angular-trial-4.4.0.tgz",
+    "@types/numeral": "0.0.25",
     "@ultimate/ngxerrors": "^1.4.0",
     "angularfire2": "^5.1.0",
     "aos": "^3.0.0-beta.6",

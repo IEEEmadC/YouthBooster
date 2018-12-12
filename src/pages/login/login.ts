@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
  import {TabsPage} from "../tabs/tabs";
 import { AuthService } from '../../services/auth.service';
 import { SignupPage } from '../signup/signup';
- import { NgxErrorsModule } from '@ultimate/ngxerrors';
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -51,7 +51,7 @@ export class LoginPage {
   this.auth.signInWithGoogle()
     .then(
       () => this.navCtrl.setRoot(TabsPage),
-      error => console.log(error.message)
+      error => console.log(error.message+" here i am")
     );
   }
 

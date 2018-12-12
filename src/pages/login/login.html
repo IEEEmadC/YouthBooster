@@ -31,7 +31,7 @@
 		<div padding-horizontal>
 			<div class="form-error">{{loginError}}</div>
 
-			<button ion-button full type="submit" [disabled]="!loginForm.valid" color="green">Log in</button>
+			<button margin ion-button full type="submit" [disabled]="!loginForm.valid" color="green">Log in</button>
 		<!--	<div class="login-footer">
 				<p>
 					<a href="#">Forgot password?</a>
@@ -41,12 +41,12 @@
 
 			<ion-list>
 
-				<button ion-button icon-left block clear (click)="loginWithGoogle()"  >
+				<button margin  ion-button icon-left full (click)="loginWithGoogle()"  color="green">
 					<ion-icon name="logo-google"></ion-icon>
 					Log in with Google
 				</button>
 
-				<button ion-button icon-left block clear (click)="signup()"  >
+				<button margin ion-button icon-left  full (click)="signup()" color="green"  >
 					<ion-icon name="person-add"></ion-icon>
 					Sign up
 				</button>

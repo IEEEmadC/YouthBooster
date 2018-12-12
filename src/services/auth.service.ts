@@ -53,6 +53,7 @@ export class AuthService {
 					// The signed-in user info.
 					let user = result.user;
 					console.log(token+" i'm here "+user);
+					return result;
 				}).catch(function(error) {
 					// Handle Errors here.
 					alert("my errors "+error.message);
