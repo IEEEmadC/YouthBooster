@@ -19,11 +19,10 @@ export class TeamPage {
     delete: boolean = false;
 
 
-  accessMemberProfile(profile){
+    accessProfile(profile){
+      this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[profile]})
+    }
 
-  console.log("profile")
-  /*     navigate to profile of user */
-  }
 
   chatWithMember(profile){
 

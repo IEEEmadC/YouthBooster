@@ -25,9 +25,9 @@ userId: string="nothing";
 
     this.fdb.list("/projects").valueChanges().subscribe((data) => {
        /* te5ou projects l user w tchouf closed wala le */
-
+           if(data)
        this.archive=data.filter((element)=> {
-             console.log(element+"  "+element.author);
+             //console.log(element+"  "+element.author);
          return (JSON.stringify(element.author)==JSON.stringify(this.projectProvider.currentUser))&&JSON.stringify(element.closed);
         });
 
@@ -48,7 +48,6 @@ userId: string="nothing";
 accessProject(project){
 
 console.log('access project');
-
 
 }
 

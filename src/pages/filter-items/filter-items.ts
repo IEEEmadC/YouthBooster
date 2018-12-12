@@ -12,7 +12,7 @@ export class FilterItemsPage {
        PassedFilteredItems:any;
 
         constructor(private navCtrl: NavController, public navParams: NavParams) {
-           this.PassedFilteredItems = this.navParams.get('project');
+           this.PassedFilteredItems = this.navParams.get('projects');
            console.log(this.PassedFilteredItems);
          }
 
@@ -24,7 +24,7 @@ export class FilterItemsPage {
                    this.navCtrl.setRoot(BrowseProjectsPage,{'projects': this.PassedFilteredItems,'filter' : item });
          }
 
- 
+
          public sortByKey(array, key) {
                   return array.sort(function (a, b) {
                    var x,y;

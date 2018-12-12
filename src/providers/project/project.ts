@@ -68,27 +68,11 @@ this.bookmarks=data;
   this.likeState[data]='liked';
 });
 },(err)=>{ console.log("probleme bookmark : ", err); });
-
-
-
-
-
-
-
-
+ 
 }
 
 
-// go to the project page  and add views
-accessProject(project){
-   //access page .push
-  let newViews=project.views+1;
 
-  this.fdb.list("/projects").update(project.projectId,{
-  views : newViews
-});
-
-}
 
 // open another page of project form
 addProject(){

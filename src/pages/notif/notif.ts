@@ -21,22 +21,31 @@ export class NotifPage {
   this.delete=!this.delete;
   }
 
-addToTeam(profile){
+addToTeam(notif){
 console.log('added to team  '+this.projectProvider.projectID );
 /* add user id to the team of the current user in firebase */
 
-this.fdb.list("/projects/"+this.projectProvider.projectID+"/joins").set(profile,profile);
+this.fdb.list("/projects/"+this.projectProvider.projectID+"/joins").set(notif.notifRef,notif.notifRef);
+this.fdb.list("/notifications").remove(notif.notifId);
 }
 
-deleteNotif(){
+deleteNotif(notif){
 console.log('notif deleted');
+this.fdb.list("/notifications").remove(notif.notifId);
 /* delete notif from firebase */
 }
 
 deleteAll(){
 console.log('all deleted');
+this.fdb.list("/notifications").remove();
 /* delete all notif from firebase */
 }
+
+accessProfile(notif){
+  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[notif.notifRef]})
+}
+
+
 
   ionViewDidLoad() {
 
@@ -47,8 +56,8 @@ console.log('all deleted');
     this.fdb.list("/notifications").valueChanges().subscribe((data) => {
       console.log(data);
       this.notifs = data.filter((element)=> {
-        console.log(JSON.stringify(element.notifTarget)==JSON.stringify(this.projectProvider.currentUser));
-        console.log(JSON.stringify(element.notifTarget)+"  "+JSON.stringify(this.projectProvider.currentUser));
+      /*  console.log(JSON.stringify(element.notifTarget)==JSON.stringify(this.projectProvider.currentUser));
+        console.log(JSON.stringify(element.notifTarget)+"  "+JSON.stringify(this.projectProvider.currentUser)); */
         return JSON.stringify(element.notifTarget)==JSON.stringify(this.projectProvider.currentUser);
        });
   console.log(this.notifs);

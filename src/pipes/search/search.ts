@@ -1,9 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
+import { ProjectProvider } from '../../providers/project/project';
 @Pipe({
   name: 'search',
 })
 export class SearchPipe implements PipeTransform {
+  constructor(public projectProvider : ProjectProvider){
+
+  }
   transform(items: any[], terms: string,showSearch): any[] {
   showSearch=false;
     if(!items) return [];
@@ -13,7 +16,7 @@ export class SearchPipe implements PipeTransform {
 
       let boo=false;
 
-      if((it.projectname.toLowerCase().includes(terms))||(it.profilname.toLowerCase().includes(terms)))
+      if((it.title.toLowerCase().includes(terms))||(this.projectProvider.users[it.author].fullname.toLowerCase().includes(terms)))
       return true;
       else {
 

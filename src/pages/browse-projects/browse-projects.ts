@@ -38,10 +38,27 @@ this.projectProvider.filtercateg=this.navParams.get('filter');
  fakeProjects: Array<any> = new Array(8);
 
 
+ // go to the project page  and add views
+ accessProject(project){
+    //access page .push
+   let newViews=project.views+1;
+
+   this.fdb.list("/projects").update(project.projectId,{
+   views : newViews
+ });
+this.navCtrl.push(DetailsPage,{'project' : project , 'user' : this.projectProvider.users[project.author]})
+
+ }
+
+accessProfile(project){
+  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[project.author]})
+}
+
+
  navigateFilter(){
 
    if(this.projectProvider.projects)
-  this.navCtrl.push(FilterItemsPage,{'project': this.projectProvider.projects});
+  this.navCtrl.push(FilterItemsPage,{'projects': this.projectProvider.projects});
 
  }
 

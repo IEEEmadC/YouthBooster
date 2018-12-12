@@ -69,7 +69,7 @@
 
   <ion-card  *ngFor="let project of projectProvider.projects | search : terms : showSearch" >
 
-    <ion-item >
+    <ion-item  >
       <ion-avatar item-start>
         <img src="{{projectProvider.users[project.author].pictureUrl}}">
       </ion-avatar>
@@ -77,9 +77,9 @@
       <p>{{ project.timestamp | date : 'yyyy/MM/dd' }}</p>
     </ion-item>
 
-    <img style="width : 100%;height : auto;border-top :  3px solid #10C488;border-bottom :  3px solid #10C488;" src="{{ project.images['0'] }}">
+    <img style="width : 100%;height : auto;border-top :  3px solid #10C488;border-bottom :  3px solid #10C488;" src="{{ project.images['0'] }}"  (click)="accessProject(project)">
 
-    <ion-card-content>
+    <ion-card-content  (click)="accessProject(project)" >
 
       <strong>{{ project.title }}</strong>
       <h4>{{ project.summary }}</h4>

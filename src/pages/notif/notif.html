@@ -28,7 +28,7 @@
 
      <ion-row no-padding   >
        <ion-col start  no-margin no-padding>
-        <ion-item (click)="accessMemberProfile('notif')">
+        <ion-item (click)="accessProfile(notif)">
           <ion-avatar item-start >
             <img src="{{ projectProvider.users[notif.notifRef].pictureUrl }}">
           </ion-avatar>
@@ -40,10 +40,10 @@
         </ion-col >
        <ion-col end  margin-top margin-bottom no-padding margin-right no-margin-left >
            <ion-buttons end no-margin no-padding large >
-        <button ion-button  clear     no-margin no-padding large  color="lightwhite" (click)="addToTeam(notif.notifRef)" *ngIf="!delete&&notif.notifObject=='join'" >  <!-- *ngIf="!delete&&notif.notifObject=='join' "-->
+        <button ion-button  clear     no-margin no-padding large  color="lightwhite" (click)="addToTeam(notif)" *ngIf="!delete&&notif.notifObject=='join'" >  <!-- *ngIf="!delete&&notif.notifObject=='join' "-->
       <ion-icon name="add-circle"   large color="green"></ion-icon>
         </button>
-        <button ion-button  clear     no-margin no-padding large  color="lightwhite"  (click)="deleteMember(notif.notifRef)"  *ngIf='delete' >
+        <button ion-button  clear     no-margin no-padding large  color="lightwhite"  (click)="deleteNotif(notif)"  *ngIf='delete' >
       <ion-icon name="close-circle"  large  color="danger"  ></ion-icon>
         </button>
         </ion-buttons>
