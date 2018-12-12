@@ -11,13 +11,16 @@ constructor(private fdb: AngularFireDatabase){
 
 
 }
-users=[];
+users : any[]=[];
 projects=[];
 filtercateg='none';
 bookmarks=[];
 likeState= [];
 projectID: string ="";
-currentUser  ='DbuWTni47ZAkllESplv';   // jack balvin
+currentUser  ='DbuWTni47ZAkllESplv';
+currentpictureUrl="https://firebasestorage.googleapis.com/v0/b/youth-booster.appspot.com/o/profiles%2Findex.png?alt=media&token=4ef3ca76-28fe-42f5-b9a5-e10266470f34";
+currentfullName=" ";
+  // jack balvin
 // load method first method to be called
 
 
@@ -25,15 +28,15 @@ load(){
 
   this.fdb.list("/users").valueChanges().subscribe((data) => {
   data.forEach((each)=>{
-    this.users[each.userId]=each;
+    this.users[each['userId']]=each;
   });
 
   console.log(this.users);
-
+  if(this.users[this.currentUser]){
+   this.currentpictureUrl=this.users[this.currentUser]['pictureUrl'];
+   this.currentfullName=this.users[this.currentUser]['fullname'];
+   }
   },(err)=>{ console.log("probleme user : ", err); });
-
-
-
 
 
   if(!this.likeState)
@@ -44,8 +47,8 @@ this.fdb.list("/projects").valueChanges().subscribe((data) => {
 
      this.projects = data;
      this.projects.forEach((element)=>{
-     if(JSON.stringify(element.author)==JSON.stringify(this.currentUser)){
-       this.projectID=element.projectId;
+     if(JSON.stringify(element['author'])==JSON.stringify(this.currentUser)){
+       this.projectID=element['projectId'];
      }
    });
      console.log(this.projectID);
@@ -68,7 +71,7 @@ this.bookmarks=data;
   this.likeState[data]='liked';
 });
 },(err)=>{ console.log("probleme bookmark : ", err); });
- 
+
 }
 
 
@@ -86,7 +89,7 @@ likeProject(project)
 
 if(!this.bookmarks){
  let newLikes=project.likes+1;
-  this.likeState[project.projectId] ='liked';
+  this.likeState[project['projectId']] ='liked';
 
    this.fdb.list("/projects").update(project.projectId,{  likes : newLikes  });
 
@@ -124,7 +127,7 @@ else {
 
   this.likeState[project.projectId] = 'unliked';
   let newLikes=project.likes-1;
-  let index=this.bookmarks.findIndex((element)=>{return JSON.stringify(element)===JSON.stringify(project.projectId);});
+
    this.fdb.list("/projects").update(project.projectId,{ likes : newLikes });
 
    this.fdb.list("/bookmarks/"+this.currentUser+"/projects").remove(project.projectId);

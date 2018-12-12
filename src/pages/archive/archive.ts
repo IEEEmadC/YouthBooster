@@ -14,10 +14,10 @@ export class ArchivePage {
   }
 
 archive=[];
-noArchive: boolean=false;
-fakearchive: boolean=true;
+noArchive: boolean =false;
+fakearchive: boolean =true;
 fakeUsers: Array<any> = new Array(8);
-userId: string="nothing";
+ 
 
   ionViewDidLoad() {
 
@@ -28,7 +28,7 @@ userId: string="nothing";
            if(data)
        this.archive=data.filter((element)=> {
              //console.log(element+"  "+element.author);
-         return (JSON.stringify(element.author)==JSON.stringify(this.projectProvider.currentUser))&&JSON.stringify(element.closed);
+         return (JSON.stringify(element['author'])==JSON.stringify(this.projectProvider.currentUser))&&JSON.stringify(element['closed']);
         });
 
           setTimeout(()=>{

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Component,ViewChild } from '@angular/core';
@@ -15,12 +15,12 @@ export class TeamPage {
   }
 
     noTeam :boolean = false;
-    users: [];
+    users: any[]=[];
     delete: boolean = false;
 
 
     accessProfile(profile){
-      this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[profile]})
+    //  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[profile]})
     }
 
 
@@ -57,10 +57,10 @@ export class TeamPage {
                /* getting list of the team from user team firebase userid.team  of current project */
       let usersd= data.filter((element)=> {
 
-        return JSON.stringify(element.author)==JSON.stringify(this.projectProvider.currentUser);
+        return JSON.stringify(element['author'])==JSON.stringify(this.projectProvider.currentUser);
        });
-       if(usersd[0].joins)
-       this.users= Array.from(Object.keys(usersd[0].joins), k=>usersd[0].joins[k]);
+       if(usersd[0]['joins'])
+       this.users= Array.from(Object.keys(usersd[0]['joins']), k=>usersd[0]['joins'][k]);
        console.log(this.users);
         if((!this.users)||(this.users.length==0))
          this.noTeam=true;

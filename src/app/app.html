@@ -1,13 +1,17 @@
+
+
+
 <ion-menu [content]="content">
 
- <ion-content>
-   <ion-item  no-margin >
+ <ion-content   >
+
+   <ion-item  no-margin   >
 
      <ion-avatar >
-       <img src="{{projectProvider.users[projectProvider.currentUser].pictureUrl}}">
+     <img  src="{{projectProvider.currentpictureUrl}}">
      </ion-avatar>
-     <h2 margin-top >{{projectProvider.users[projectProvider.currentUser].fullname}}</h2>
-     <p>{{projectProvider.users[projectProvider.currentUser].email}}</p>
+     <h2 margin-top >{{projectProvider.currentfullName}}</h2>
+     <p *ngIf="auth.getEmail()">{{auth.getEmail()}}   </p>
 
    </ion-item>
 
@@ -17,8 +21,18 @@
        <ion-icon [name]="p.icon" item-start color="grey" ></ion-icon>
        {{p.title}}
      </button>
-   </ion-list>
 
+
+   <button (click)="logout()" menuClose large ion-item *ngIf="auth.authenticated"  >
+     <ion-icon name="log-out" item-start color="grey"></ion-icon>
+     Log out
+   </button>
+
+   <button (click)="login()" menuClose large ion-item *ngIf="!auth.authenticated"  >
+     <ion-icon name="log-in" item-start color="grey"></ion-icon>
+     Log in
+   </button>
+ </ion-list>
 
    <ion-item  color="green" class="youth"  >
      <h1>
@@ -31,26 +45,31 @@
 </ion-menu>
 
 
-<ion-nav [root]="rootPage" #content ></ion-nav>
 
-<style media="screen">
 
-.youth{
-position : fixed;
-top : 87%;
-height : 13%;
+<ion-nav id="nav" [root]="rootPage" #content ></ion-nav>
 
-}
-  ion-item,img{
 
-  margin: auto;
-  text-align: center;
+
+
+  <style media="screen">
+
+  .youth{
+  position : fixed;
+  top : 87%;
+  height : 13%;
 
   }
+    ion-item,img{
 
-  img {
-      width: auto !important;
-      height: auto !important;
-  }
+    margin: auto;
+    text-align: center;
 
-</style>
+    }
+
+    img {
+        width: 80px !important;
+        height: auto !important;
+    }
+
+  </style>

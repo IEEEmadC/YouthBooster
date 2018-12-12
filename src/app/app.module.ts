@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { MbscModule } from '@mobiscroll/angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -18,6 +17,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {TeamPage} from "../pages/team/team";
 import {NotifPage} from "../pages/notif/notif";
 import {ArchivePage} from "../pages/archive/archive";
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
+import { HttpModule } from '@angular/http';
+import { ComponentsModule } from '../pages/components/components.module';
+import { LoginPage } from '../pages/login/login';
+import { AuthService } from '../services/auth.service';
+import { EmailService } from '../services/email.service';
+import { SignupPage } from '../pages/signup/signup';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 export const firebaseConfig = {
 
@@ -43,12 +51,16 @@ export const firebaseConfig = {
     BookmarkPage,
     TeamPage,
     NotifPage,
-    ArchivePage
+    ArchivePage,
+    LoginPage,
+		SignupPage
   ],
   imports: [
     FormsModule,
-    MbscModule,
     BrowserModule,
+    ComponentsModule,
+    HttpModule,
+    NgxErrorsModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
@@ -63,13 +75,19 @@ export const firebaseConfig = {
     BookmarkPage,
     TeamPage,
     NotifPage,
-    ArchivePage
+    ArchivePage,
+    LoginPage,
+    SignupPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProjectProvider
+    ProjectProvider,
+    AngularFireAuth,
+		AuthService,
+    EmailService
+
   ]
 })
 export class AppModule {}

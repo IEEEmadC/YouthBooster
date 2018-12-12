@@ -4,6 +4,7 @@ import { ProjectProvider } from '../../providers/project/project';
 import { NavController, NavParams,Keyboard } from 'ionic-angular';
 import { FilterItemsPage } from '../filter-items/filter-items';
 import {trigger,state,style,animate,transition} from '@angular/animations';
+import { AngularFireDatabase } from "angularfire2/database";
 
 @Component({
   selector: 'page-browse-projects',
@@ -27,10 +28,10 @@ export class BrowseProjectsPage {
 
 showSearch = false;
 
-  constructor(public projectProvider : ProjectProvider,public navCtrl: NavController, public navParams: NavParams, public keyboard: Keyboard)
+  constructor(public projectProvider : ProjectProvider,public navCtrl: NavController, public navParams: NavParams, public keyboard: Keyboard,private fdb: AngularFireDatabase)
    {
 this.projectProvider.projects = this.navParams.get('projects');
-console.log(this.navParams.get('chak'));
+
 if(this.navParams.get('filter'))
 this.projectProvider.filtercateg=this.navParams.get('filter');
     }
@@ -46,12 +47,12 @@ this.projectProvider.filtercateg=this.navParams.get('filter');
    this.fdb.list("/projects").update(project.projectId,{
    views : newViews
  });
-this.navCtrl.push(DetailsPage,{'project' : project , 'user' : this.projectProvider.users[project.author]})
+//this.navCtrl.push(DetailsPage,{'project' : project , 'user' : this.projectProvider.users[project.author]})
 
  }
 
 accessProfile(project){
-  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[project.author]})
+//  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[project.author]})
 }
 
 
@@ -74,7 +75,7 @@ this.projectProvider.load();
 
 // show/hide search bar
   openSearchBox() {
-
+     console.log("search");
     this.showSearch = !this.showSearch;
     this.content.scrollToTop();
 

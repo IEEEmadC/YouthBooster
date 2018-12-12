@@ -14,7 +14,9 @@ export class NotifPage {
   }
 
   noNotif: boolean = false;
-  notifs: any;
+  notifs: any[]=[];
+
+
   delete: boolean = false;
 
   enableDelete(){
@@ -30,7 +32,7 @@ this.fdb.list("/notifications").remove(notif.notifId);
 }
 
 deleteNotif(notif){
-console.log('notif deleted');
+console.log('notif deleted'+" "+notif.notifId);
 this.fdb.list("/notifications").remove(notif.notifId);
 /* delete notif from firebase */
 }
@@ -42,7 +44,7 @@ this.fdb.list("/notifications").remove();
 }
 
 accessProfile(notif){
-  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[notif.notifRef]})
+  //this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[notif['notifRef']]})
 }
 
 
@@ -54,13 +56,13 @@ accessProfile(notif){
     setTimeout(() => {
      /* charge all the notifs donations and member join from notif firebase */
     this.fdb.list("/notifications").valueChanges().subscribe((data) => {
-      console.log(data);
+       
       this.notifs = data.filter((element)=> {
       /*  console.log(JSON.stringify(element.notifTarget)==JSON.stringify(this.projectProvider.currentUser));
         console.log(JSON.stringify(element.notifTarget)+"  "+JSON.stringify(this.projectProvider.currentUser)); */
-        return JSON.stringify(element.notifTarget)==JSON.stringify(this.projectProvider.currentUser);
+        return JSON.stringify(element['notifTarget'])==JSON.stringify(this.projectProvider.currentUser);
        });
-  console.log(this.notifs);
+       console.log(this.notifs);
 
         if(this.notifs.length==0)
          this.noNotif=true;

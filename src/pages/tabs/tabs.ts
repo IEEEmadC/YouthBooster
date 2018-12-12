@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import {BrowseProjectsPage} from "../browse-projects/browse-projects";
 import {TeamPage} from "../team/team";
 import {NotifPage} from "../notif/notif";
+import { ProjectProvider } from '../../providers/project/project';
+import {BookmarkPage} from "../bookmark/bookmark";
+import {ArchivePage} from "../archive/archive";
+
 @Component({
 
   selector: 'page-tabs',
@@ -12,9 +16,13 @@ import {NotifPage} from "../notif/notif";
 
 export class TabsPage {
 
-  browseProjectsPage: any = BrowseProjectsPage;
 
-  notifPage: any = NotifPage;
 
-  profilPage: any = TeamPage;
+  browseProjectsPage= BrowseProjectsPage;
+
+  notifPage= NotifPage;
+
+  profilPage= TeamPage;
+
+
 }

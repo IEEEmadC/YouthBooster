@@ -9,6 +9,10 @@ import {TeamPage} from "../pages/team/team";
 import {NotifPage} from "../pages/notif/notif";
 import {ArchivePage} from "../pages/archive/archive";
 import { ProjectProvider } from '../providers/project/project';
+import { SignupPage } from '../pages/signup/signup';
+import { LoginPage } from '../pages/login/login';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -17,10 +21,10 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage:any = TabsPage;
+  rootPage;
   pages: Array<{title: string, component: any,icon: string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, projectProvider : ProjectProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public projectProvider : ProjectProvider,public auth: AuthService) {
 
     this.pages = [
       { title: 'Home', component: TabsPage, icon: 'home' },
@@ -28,8 +32,7 @@ export class MyApp {
       { title: 'Bookmarks', component: BookmarkPage, icon: 'bookmarks' },
       { title: 'Archive', component: ArchivePage, icon: 'archive' },
       { title: 'Messages', component: BrowseProjectsPage, icon: 'chatbubbles' },
-      { title: 'Settings', component: BrowseProjectsPage, icon: 'settings' },
-      { title: 'Sign out', component: BrowseProjectsPage, icon: 'log-out' }
+      { title: 'Settings', component: BrowseProjectsPage, icon: 'settings' }
     ];
 
 
@@ -39,7 +42,42 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
+    this.auth.afAuth.authState
+          .subscribe(
+            user => {
+              if (user) {
+                this.rootPage = TabsPage;
+              } else {
+                this.rootPage = LoginPage;
+              }
+            },
+            () => {
+              this.rootPage = LoginPage;
+            }
+          );
   }
+
+
+
+
+	login() {
+
+		this.auth.signOut();
+		this.nav.setRoot(LoginPage);
+	}
+
+	logout() {
+
+		this.auth.signOut();
+		this.nav.setRoot(TabsPage);
+	}
+
+
+
+
+
+
 
   openPage(page) {
     // Reset the content nav to have just this page
