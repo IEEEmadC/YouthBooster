@@ -74,7 +74,7 @@
         </ion-row>
       </ion-card>
       <ion-label class="link-launcher" (click)="showMore()">
-        {{ // featuredProjects?.lenght }} others more
+        {{ featuredProjects }} others more
         <ion-icon name="arrow-dropdown"></ion-icon>
       </ion-label>
 
@@ -113,7 +113,7 @@
         </ion-row>
       </ion-card>
       <ion-label class="link-launcher" (click)="showMore()">
-        {{ // latestProjects?.lenght }} others more
+        {{ latestProjects }} others more
         <ion-icon name="arrow-dropdown"></ion-icon>
       </ion-label>
 
@@ -250,7 +250,7 @@
         <ion-item>
           Login
           <ion-note item-end primary>
-              {{ // mAuth.currentUser.email }}
+              {{ user.email }}
           </ion-note>
         </ion-item>
         <ion-item>
@@ -263,7 +263,7 @@
             </button>
           </ion-note>
         </ion-item>
-        <ion-item text-wrap>
+        <ion-item text-wrap>  
           <ion-label>
             <h2 item-start>Security </h2>
             <p item-start>personal info available for public</p>

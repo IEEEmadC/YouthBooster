@@ -24,7 +24,7 @@ export class ProjectProvider {
   }
 
   getProject(pid:string) {
-    let singleProjectRef = this.db.object<Project>('projects/' + pid)
+    let singleProjectRef = this.db.object<Project>('projects/' + pid);
     return singleProjectRef;
   }
 

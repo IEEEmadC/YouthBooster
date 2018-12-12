@@ -1,3 +1,4 @@
+import { Camera } from '@ionic-native/camera';
 import { ProfilePage } from './../pages/profile/profile';
 import { CommentsPage } from './../pages/comments/comments';
 import { ImageGalleryPage } from './../pages/image-gallery/image-gallery';
@@ -11,7 +12,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FileChooser } from '@ionic-native/file-chooser';
+import { IOSFilePicker } from '@ionic-native/file-picker';
 import { FilePath } from '@ionic-native/file-path';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Crop } from '@ionic-native/crop';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -34,6 +38,8 @@ import { OnboardingScreenPage } from '../pages/onboarding-screen/onboarding-scre
 import { environment } from '../environments/environment';
 import { AuthserviceProvider } from '../providers/authservice/authservice';
 import { ProjectProvider } from '../providers/project/project';
+import { PictureUtils } from '../providers/firebase-service/firebase-service';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 
 
@@ -88,13 +94,18 @@ import { ProjectProvider } from '../providers/project/project';
     DatePicker,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     FileChooser,
-    //FileUploadOptions,
+    ImagePicker,
+    IOSFilePicker,
+    Camera,
+    Crop,
+    FileTransfer,
     FilePath,
     YtProvider,
     YoutubeVideoPlayer,
     PhotoViewer,
     AuthserviceProvider,
-    ProjectProvider
+    ProjectProvider,
+    PictureUtils
   ]
 })
 export class AppModule { }

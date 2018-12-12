@@ -1,7 +1,8 @@
+import { PictureUtils } from './../../providers/firebase-service/firebase-service';
 import { Project } from './../../modals/project.modal';
 import { DetailsPage } from './../details/details';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, AlertController, ToastController, LoadingController, Platform, ActionSheetController, ModalController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, AlertController, ToastController, LoadingController, Platform, ActionSheetController, ModalController, ViewController, normalizeURL } from 'ionic-angular';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +11,11 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Keyboard } from '@ionic-native/keyboard';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { User } from '../../modals/user.modal';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Crop } from '@ionic-native/crop';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { IOSFilePicker } from '@ionic-native/file-picker';
+
 
 
 
@@ -33,7 +39,7 @@ export class ProjectSetupPage {
     month: '2015-06-15',
     timeStarts: '07:43',
     timeEnds: '2018-01-01'
-  }
+  };
 
   fileURI: any = "#ImagePicker";
   fileName: any;
@@ -48,21 +54,52 @@ export class ProjectSetupPage {
   selectedVideoUrl: any;
 
   websiteUrl: string;
-  
-  tagsArray:any= [];
-  filesArray:any= [];
-  imageSrcArray:any=[];
-  urlsArray:any=[];
+
+  tagsArray: any = [];
+  filesArray: any = [];
+  imageSrcArray: any = [];
+  urlsArray: any = [];
 
   summary: string = "Add Summary text..";
 
-  fullDescription: string = "Add Description text.."
+  fullDescription: string = "Add Description text..";
 
   // firebase project reference to create
-  project: Project;
+  project: Project = {
+    "projectId": "0",
+    "title": undefined,
+    "author": null,
+    "likes": undefined,
+    "views": undefined,
+    "commentsCount": undefined,
+    "dueDate": "2019-01-01",
+    "websiteUrl": undefined,
+    "category": undefined,
+    "rating": undefined,
+    "votes": undefined,
+    "closed": false,
+    "timestamp": undefined,
+    "summary": undefined,
+    "description": undefined,
+    "requirements": undefined,
+    "budget": undefined,
+    "donationSum": undefined,
+    "relatedLocation": {
+      "lat": undefined,
+      "lng": undefined
+    },
+    "donations": [],
+    "joins": [],
+    "memberRequirements": [],
+    "tags": [],
+    "attachments": [],
+    "videos": [],
+    "images": [],
+    "comments": []
+  };
   // firebase author reference to create
   author: User;
-  
+
   constructor(public navCtrl: NavController,
     public platform: Platform,
     public navParams: NavParams,
@@ -74,7 +111,13 @@ export class ProjectSetupPage {
     public toastCtrl: ToastController,
     public modalCtrl: ModalController,
     public keyboard: Keyboard,
-    public emailProvider: EmailComposer
+    public emailProvider: EmailComposer,
+    private iab: InAppBrowser,
+    private firebaseService: PictureUtils,
+    private imagePicker: ImagePicker,
+    private cropService: Crop,
+    private transfer: FileTransfer,
+    private filePicker: IOSFilePicker
   ) {
   }
 
@@ -82,23 +125,7 @@ export class ProjectSetupPage {
     console.log('ionViewDidLoad ProjectSetupPage');
   }
 
-  slides = [
-    {
-      title: "Welcome to the Docs!",
-      description: "The <b>Ionic Component Documentation</b> showcases a number of useful components that are included out of the box with Ionic.",
-      image: "assets/imgs/ica-slidebox-img-2.png",
-    },
-    {
-      title: "What is Ionic?",
-      description: "<b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
-      image: "assets/imgs/ica-slidebox-img-2.png",
-    },
-    {
-      title: "What is Ionic Cloud?",
-      description: "The <b>Ionic Cloud</b> is a cloud platform for managing and scaling Ionic apps with integrated services like push notifications, native builds, user auth, and live updating.",
-      image: "assets/imgs/ica-slidebox-img-2.png",
-    }
-  ];
+  slides = [1, 2, 3];
 
   // finilize project setup & prompt
   pushDataToFirebase() {
@@ -107,46 +134,54 @@ export class ProjectSetupPage {
       subTitle: "By submitting this post, your project become public by default; anyone can view and interact with this post.<br/>This content may be downloaded or shared",
       buttons: [
         {
-            text: "Cancel",
-            role: 'cancel',
-            handler: () => {
+          text: "Cancel",
+          role: 'cancel',
+          handler: () => {
             // dismiss
-            }
+          }
         },
         {
-            text: "Got it!",
-            handler: () => {
+          text: "Got it!",
+          handler: () => {
             // push to firebase
             this.commitChanges();
             // navigate next page
-            this.navCtrl.push(DetailsPage);
+            // this.navCtrl.push(DetailsPage);
           }
         }
-    ],
+      ],
       cssClass: 'alertCustomCss'
     });
     alert.present();
-  
+
   }
 
   // push project to backend system:: firebase 
   commitChanges() {
-//  this.author = findUser(mAuth.currentUser);
+
     this.project.author = this.author;
     this.project.attachments = this.filesArray;
     this.project.description = this.fullDescription;
     this.project.images = this.imageSrcArray;
-//  this.project.memberRequirements
     this.project.tags = this.tagsArray;
-    this.project.timestamp = new Date().getDate();
-    this.project.title
+    this.project.timestamp = new Date().getTime();
     this.project.videos = this.urlsArray;
     this.project.websiteUrl = this.websiteUrl;
-    this.project.budget
-    this.project.dueDate
     this.project.summary = this.summary;
-    this.project.dueDate
+    //  this.author = findUser(mAuth.currentUser);
+    //  this.project.memberRequirements
+    this.project.title;
+    this.project.dueDate;
+    this.project.budget;
+    this.project.dueDate;
+
+    console.log(this.project);
+
+    console.warn(this.project);
+
+
   }
+
 
   // to implement:: 
   openFavorites() {
@@ -156,8 +191,8 @@ export class ProjectSetupPage {
   // to implement:: ask for help
   openEmailProvider() {
 
-    this.emailProvider.isAvailable().then((available: boolean) =>{
-      if(available) {
+    this.emailProvider.isAvailable().then((available: boolean) => {
+      if (available) {
         //Now we know we can send
 
         let email = {
@@ -174,12 +209,12 @@ export class ProjectSetupPage {
           body: 'How are you? Nice greetings from Leipzig',
           isHtml: true
         };
-        
+
         // Send a text message using default options
         this.emailProvider.open(email);
-   
+
       }
-     });
+    });
   }
 
   // sliding between 3 steps to post your new project
@@ -209,42 +244,156 @@ export class ProjectSetupPage {
           text: 'Save',
           handler: data => {
             console.log("save clicked"); // to implement
-            this.tagsArray.push({'value':data['TagName']});
+            this.tagsArray.push({ 'value': data['TagName'] });
             // commit changes
           }
         }
       ]
     });
     prompt.present();
-
   }
 
   // get attached file locally
   // to implement:: open from drive 
   getFile(caller) {
-    this.fileChooser.open().then(file => {
-      this.filePath.resolveNativePath(file).then(resolvedFilePath => {
-        //this.presentToast(resolvedFilePath.split('/'));
-        let subpaths = resolvedFilePath.split('/');
-        this.fileName = subpaths[subpaths.length - 1];
-        this.fileURI = this.fileName;
-        this.presentToast(this.fileURI);
+    this.firebaseService.uploadFile();
 
-        switch(caller) {
-          case 'file_manager':
-            this.filesArray.push({'value':this.fileURI});
-          break;
-          case 'image_manager':
-            this.imageSrcArray.push({'value':this.fileURI});
-          break;
-        }
-            
+    /*
+    if (this.platform.is('android')) {
+
+      this.fileChooser.open().then(file => {
+        this.filePath.resolveNativePath(file).then(resolvedFilePath => {
+          //this.presentToast(resolvedFilePath.split('/'));
+          let subpaths = resolvedFilePath.split('/');
+          this.fileName = subpaths[subpaths.length - 1];
+          this.fileURI = this.fileName;
+          this.presentToast(this.fileURI);
+
+          console.log(file)
+          this.filesArray.push({ 'value': file });
+          const fileTransfer: FileTransferObject = this.transfer.create();
+
+          // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
+          let options1: FileUploadOptions = {
+            fileKey: 'image_upload_file',
+            fileName: 'name.pdf',
+            headers: {},
+            params: { "app_key": "Testappkey" },
+            chunkedMode: false
+          }
+
+          fileTransfer.upload(file, 'your API that can take the required type of file that you want to upload.', options1)
+            .then((data) => {
+              // success
+              alert("success" + JSON.stringify(data));
+            }, (err) => {
+              // error
+              alert("error" + JSON.stringify(err));
+            });
+
+        }).catch(err => {
+          this.presentToast(JSON.stringify(err));
+        });
       }).catch(err => {
         this.presentToast(JSON.stringify(err));
       });
-    }).catch(err => {
-      this.presentToast(JSON.stringify(err));
+      
+    }
+
+    else if (this.platform.is('ios')) {
+      this.filePicker.pickFile()
+        .then(uri => {
+          console.log(uri);
+          const fileTransfer: FileTransferObject = this.transfer.create();
+
+          // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
+          let options1: FileUploadOptions = {
+            fileKey: 'image_upload_file',
+            fileName: 'name.pdf',
+            headers: {},
+            params: { "app_key": "Testappkey" },
+            chunkedMode: false
+          }
+            
+          this.filesArray.push({ 'value': uri });
+          
+          fileTransfer.upload(uri, 'your API that can take the required type of file that you want to upload.', options1)
+            .then((data) => {
+              // success
+              alert("success" + JSON.stringify(data));
+            }, (err) => {
+              // error
+              alert("error" + JSON.stringify(err));
+            });
+        }).catch(err => {
+          this.presentToast(JSON.stringify(err));
+        });
+    }
+    else {
+      this.presentToast("Cannot attach files with windows phone!");
+    }
+    */
+  }
+
+  openImagePickerCrop() {
+    this.firebaseService.uploadFromGallery();
+    /*
+    this.imagePicker.hasReadPermission().then(
+      (result) => {
+        if (result == false) {
+          // no callbacks required as this opens a popup which returns async
+          this.imagePicker.requestReadPermission();
+        }
+        else if (result == true) {
+          this.imagePicker.getPictures({
+            maximumImagesCount: 1
+          }).then(
+            (results) => {
+              for (var i = 0; i < results.length; i++) {
+                this.cropService.crop(results[i], { quality: 75 }).then(
+                  newImage => {
+                    this.tagsArray.push({ 'value': newImage });
+                    this.uploadImageToFirebase(newImage);
+                  },
+                  error => console.error("Error cropping image", error)
+                );
+              }
+            }, (err) => console.log(err)
+          );
+        }
+      }, (err) => {
+        console.log(err);
+      });
+      */
+  }
+
+  uploadImageToFirebase(image) {
+    /*
+    image = normalizeURL(image);
+
+    //uploads img to firebase storage
+    this.firebaseService.uploadImage(image)
+      .then(photoURL => {
+
+        let toast = this.toastCtrl.create({
+          message: 'Image was updated successfully',
+          duration: 3000
+        });
+        toast.present();
+      })
+      //
+      let upload = this.firebaseService.uploadToStorage(image);
+ 
+    // Perhaps this syntax might change, it's no error here!
+    upload.then().then(res => {
+      //this.firebaseService.storeInfoToDatabase(res.metadata).then(() => {
+        let toast = this.toastCtrl.create({
+          message: 'New File added!' + JSON.stringify(res),
+          duration: 3000
+        });
+        toast.present();
     });
+    */
   }
 
   // generic method for creating toasts
@@ -263,7 +412,7 @@ export class ProjectSetupPage {
   }
 
   // actionSheet to file imported 
-  openMenu(caller,index) {
+  openMenu(caller, index) {
     let actionSheet = this.actionsheetCtrl.create({
       title: this.fileURI,
       cssClass: 'action-sheets-basic-page',
@@ -274,19 +423,19 @@ export class ProjectSetupPage {
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             console.log('Delete clicked');
-            switch(caller){
+            switch (caller) {
               case 'tagsArray':
-                  this.tagsArray.splice(index,1);
-              break;
+                this.tagsArray.splice(index, 1);
+                break;
               case 'filesArray':
-                  this.filesArray.splice(index,1);
-              break;
+                this.filesArray.splice(index, 1);
+                break;
               case 'imageSrcArray':
-                  this.imageSrcArray.splice(index,1);
-              break;
+                this.imageSrcArray.splice(index, 1);
+                break;
               case 'urlsArray':
-                  this.urlsArray.splice(index,1);
-              break;
+                this.urlsArray.splice(index, 1);
+                break;
             }
           }
         },
@@ -302,6 +451,18 @@ export class ProjectSetupPage {
           icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
           handler: () => {
             console.log('Play clicked');
+            switch (caller) {
+              case 'tagsArray':
+                break;
+              case 'filesArray':
+                break;
+              case 'imageSrcArray':
+                break;
+              case 'urlsArray':
+                // For system browser, you'll be prompt to choose your browser if you have more than one let browser = new InAppBrowser('url', '_blank'); //For webview,
+                let browser = this.iab.create(this.urlsArray[index].value, '_system');
+                break;
+            }
           }
         },
         {
@@ -330,7 +491,7 @@ export class ProjectSetupPage {
     let modal = this.modalCtrl.create(ModalContentPage, characterNum);
     modal.onDidDismiss((data) => {
       this.presentToast(data);
-      this.urlsArray.push({'value':data});
+      this.urlsArray.push({ 'value': data });
       this.selectedVideoUrl = data;
       this.ifSelected_link_1 = true;
     });
@@ -342,15 +503,21 @@ export class ProjectSetupPage {
   // project details modal
   openTextModal(characterNum) {
 
-    let modal = this.modalCtrl.create(ModalTextContentPage, characterNum);
+    let modal = this.modalCtrl.create(ModalTextContentPage, { 'characterNum': characterNum });
     modal.onDidDismiss((data) => {
-      this.presentToast(data);
-      this.summary = data;
+      this.presentToast(data.text);
+      if (data.caller == 1) {
+        this.summary = data.text;
+      }
+      else {
+        this.fullDescription = data.text;
+      }
     });
 
     modal.present();
 
   }
+
 
   // prompt user to get website link (optional)
   promptLink() {
@@ -404,8 +571,6 @@ export class ModalContentPage {
     private ytProvider: YtProvider,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
-    private iab: InAppBrowser
-
   ) {
   }
 
@@ -465,6 +630,7 @@ export class ModalContentPage {
 export class ModalTextContentPage {
 
   text: any;
+  placeholder: string;
 
   constructor(
     public platform: Platform,
@@ -473,9 +639,16 @@ export class ModalTextContentPage {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
   ) {
+    if (params.get('characterNum') == 1) { this.placeholder = "write your summary here.." }
+    else { this.placeholder = "write your description here.." }
   }
 
   dismiss() {
-    this.viewCtrl.dismiss(this.text);
+    this.viewCtrl.dismiss({
+      'text': this.text,
+      'caller': this.params.get('characterNum')
+    });
   }
+
+
 }

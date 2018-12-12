@@ -13,7 +13,7 @@ import { IonicPage, NavController, NavParams, Platform, ActionSheetController } 
 @IonicPage()
 @Component({
   selector: 'page-image-gallery',
-  templateUrl: 'image-gallery.html',
+  templateUrl: 'image-gallery.html'
 })
 export class ImageGalleryPage {
 

@@ -35,7 +35,7 @@
 
   <div *ngIf="project">
     <div class="game-image">
-      <img src="{{ (projectObs$ | async)?.images[0] }}" class="tinted">
+      <img src="{{ (projectObs$ | async) }}" class="tinted">
     </div>
 
     <div id="popover" [@fadeIn]>
@@ -84,31 +84,30 @@
       </ion-note>
 
       <ion-buttons>
-        <ion-badge round small *ngFor="let tag of (projectObs$ | async)?.tags ">{{ tag }}</ion-badge>
+        <ion-badge round small *ngFor="let tag of [1,2]">{{ tag }}</ion-badge>
       </ion-buttons>
       <p>
           {{ (projectObs$ | async)?.summary }}
       </p>
 
       <button ion-button outline style="margin-top: 16px; margin-bottom: 16px" (click)="processContribution()">
-        <ion-icon name="bookmark" padding></ion-icon> Contribute in This Project
-      </button>
+        <ion-icon name="bookmark" padding></ion-icon> Contribute in This Project</button>
 
       <h4>Comments</h4>
       <ion-list>
         <ion-item>
           <ion-avatar item-start>
             <div class="online"></div>
-            <img src="{{ comments[0].from.pictureUrl }}">
+            <img src="{{ comments?.from.pictureUrl }}">
           </ion-avatar>
-          <h2>{{ comments[0].from }}</h2>
-          <p>{{ comments[0].content }}</p>
+          <h2>{{ comments?.from }}</h2>
+          <p>{{ comments?.content }}</p>
           <ion-note item-end>3:43 pm</ion-note>
         </ion-item>
         <ion-item>
           <ion-avatar item-start>
             <div class="online"></div>
-            <img src="{{ comments[0].from.pictureUrl }}">
+            <img src="{{ comments?.from.pictureUrl }}">
           </ion-avatar>
           <h2>Londonguy97</h2>
           <p>This town ain't big enough for the two of us!</p>
@@ -118,7 +117,7 @@
           <ion-item>
             <ion-avatar item-start>
               <div class="online"></div>
-              <img src="{{ comments[0].from.pictureUrl }}">
+              <img src="{{ comments?.from.pictureUrl }}">
             </ion-avatar>
             <h2>Woody</h2>
             <p>This town ain't big enough for the two of us!</p>
@@ -141,15 +140,15 @@
         <ion-grid style="margin-left: auto; margin-right: auto">
           <ion-row>
             <ion-col col-8>
-              <img class="big-thumb" src="{{ (projectObs$ | async)?.images[0] }}" (click)="openImage('assets/imgs/blank.png')">
+              <img class="big-thumb" src="{{ (projectObs$ | async)?.images }}" (click)="openImage('assets/imgs/blank.png')">
             </ion-col>
             <ion-col>
               <ion-row>
-                <img class="small-thumb-1" src="{{ (projectObs$ | async)?.images[0] }}" (click)="openImage('assets/imgs/blank.png')">
+                <img class="small-thumb-1" src="{{ (projectObs$ | async)?.images }}" (click)="openImage('assets/imgs/blank.png')">
               </ion-row>
               <ion-row>
                 <div class="small-thumb-2" (click)="openImageGallery()">
-                  <img style="height: 100%" src="{{ (projectObs$ | async)?.images[0] }}">
+                  <img style="height: 100%" src="{{ (projectObs$ | async)?.images }}">
                 </div>
               </ion-row>
             </ion-col>

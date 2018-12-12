@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import "rxjs/add/operator/map";
 import { Http } from '@angular/http';
+import { map } from 'rxjs/operators';
 
 /*
   Generated class for the YtProvider provider.
@@ -24,16 +24,18 @@ export class YtProvider {
     + '&q=' 
     + video 
     + '&type=video&order=viewCount&part=snippet&maxResults=20')
-    .map((res) =>{
+    .pipe(
+      map((res) =>{
       return res.json()['items'];
-    });
+    }));
   }
  
   getVideos(listId) {
     return this.http.get('https://www.googleapis.com/youtube/v3/playlistItems?key=' + this.apiKey + '&playlistId=' + listId +'&part=snippet,id&maxResults=20')
-    .map((res)=>{
+    .pipe(
+     map((res)=>{
       return res.json()['items'];
-    });
+    }));
   }
 
 }

@@ -15,6 +15,9 @@ import { Observable } from 'rxjs/Observable';
 import { Project } from '../../modals/project.modal';
 import { User } from '../../modals/user.modal';
 
+import { map } from 'rxjs/operators';
+
+
 declare var google;
 
 
@@ -143,19 +146,21 @@ export class DetailsPage {
     this.projectListObs$ = this.projectService
       .getAllProjects()
       .snapshotChanges()
-      .map(
+      .pipe(
+        map(
         changes => {
           return changes.map( c => ({
             key: c.payload.key, 
             ...c.payload.val()
           }));
-        });
+        }));
 
     // related to firebase 
     this.projectObs$ = this.projectService
     .getProject('0')
     .snapshotChanges()
-    .map(
+    .pipe(
+     map(
       changes => {
 
         console.log(changes.payload.val());
@@ -164,7 +169,7 @@ export class DetailsPage {
         key: changes.payload.key, 
         ...changes.payload.val()
       };
-    });
+    }));
 
     // get passed author
     this.author = this.navParams.get('author');

@@ -1,4 +1,4 @@
-import { DetailsPage } from './../pages/details/details';
+import { ProjectSetupPage } from './../pages/project-setup/project-setup';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,7 +11,7 @@ import { AuthserviceProvider } from './../providers/authservice/authservice';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = DetailsPage;
+  rootPage: any = ProjectSetupPage;
 
   private auth: AuthserviceProvider;
 

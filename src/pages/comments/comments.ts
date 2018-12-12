@@ -15,7 +15,7 @@ import { IonicPage, NavController, NavParams, Content, AlertController } from 'i
 @IonicPage()
 @Component({
   selector: 'page-comments',
-  templateUrl: 'comments.html',
+  templateUrl: 'comments.html'
 })
 export class CommentsPage {
 

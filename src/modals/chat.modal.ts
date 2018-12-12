@@ -1,9 +1,9 @@
 
 export interface Chat {
 
-    senderId:string,
-    receiverId:string,
-    lastMessage:string,
-    messages:[string]
+    senderId: string;
+    receiverId: string;
+    lastMessage: string;
+    messages: string[];
 
 }
