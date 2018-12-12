@@ -4,10 +4,10 @@
    <ion-item  no-margin >
 
      <ion-avatar >
-       <img src="assets/imgs/marty-avatar.png">
+       <img src="{{projectProvider.users[projectProvider.currentUser].pictureUrl}}">
      </ion-avatar>
-     <h2 margin-top >Ahmed Ben</h2>
-     <p>ahmed.gmail.com</p>
+     <h2 margin-top >{{projectProvider.users[projectProvider.currentUser].fullname}}</h2>
+     <p>{{projectProvider.users[projectProvider.currentUser].email}}</p>
 
    </ion-item>
 

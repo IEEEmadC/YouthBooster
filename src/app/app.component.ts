@@ -8,6 +8,8 @@ import {BookmarkPage} from "../pages/bookmark/bookmark";
 import {TeamPage} from "../pages/team/team";
 import {NotifPage} from "../pages/notif/notif";
 import {ArchivePage} from "../pages/archive/archive";
+import { ProjectProvider } from '../providers/project/project';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -18,7 +20,7 @@ export class MyApp {
   rootPage:any = TabsPage;
   pages: Array<{title: string, component: any,icon: string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, projectProvider : ProjectProvider) {
 
     this.pages = [
       { title: 'Home', component: TabsPage, icon: 'home' },
