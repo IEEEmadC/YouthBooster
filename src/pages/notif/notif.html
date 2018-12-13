@@ -27,7 +27,7 @@
   <ion-card    *ngFor="let notif of notifs"  >
 
      <ion-row no-padding   >
-       <ion-col start  no-margin no-padding>
+       <ion-col start  no-margin no-padding  col-10>
         <ion-item (click)="accessProfile(notif)">
           <ion-avatar item-start >
             <img src="{{ projectProvider.users[notif.notifRef].pictureUrl }}">

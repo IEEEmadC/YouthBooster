@@ -29,20 +29,21 @@
 
  <ion-row>
 
-   <ion-col start  no-margin no-padding>
 
-    <ion-item  style="height : 100%;" (click)="accessProfile(user)">
-
-      <ion-avatar item-start >
-        <img src="{{ projectProvider.users[user].pictureUrl }}">   <!-- user.pictureUrl -->
-      </ion-avatar>
+   <ion-col    no-margin no-padding  col-10  >
+ <ion-item  style="height : 100%;" (click)="accessProfile(user)">
+   <ion-avatar item-start >
+     <img src="{{ projectProvider.users[user].pictureUrl }}">   <!-- user.pictureUrl -->
+   </ion-avatar>
       <strong>{{ projectProvider.users[user].fullname }}</strong>   <!-- user.fullname -->
       <h4>{{ projectProvider.users[user].job }}</h4>    <!-- user.job -->
 
 
     </ion-item>
     </ion-col >
-   <ion-col end  margin-top margin-bottom no-padding margin-right no-margin-left >
+
+
+   <ion-col    margin-top margin-bottom no-padding margin-right no-margin-left   >
        <ion-buttons end no-margin no-padding >
     <button ion-button  clear     no-margin no-padding large  color="lightwhite" (click)="chatWithMember(user)" *ngIf='!delete'  >
   <ion-icon name="chatbubbles"    color="green"></ion-icon>
@@ -52,6 +53,8 @@
     </button>
     </ion-buttons>
 </ion-col>
+
+
      </ion-row>
   </ion-card>
 

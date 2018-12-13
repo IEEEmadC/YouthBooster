@@ -20,7 +20,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <universal-links>
-        <host name="https://youthbooster.page.link/eNh4" scheme="https">
+        <host name="youthbooster.page.link/eNh4" scheme="https">
             <path url="https://youthbooster.page.link/eNh4" />
         </host>
         <host name="youth-booster.firebaseapp.com" scheme="https">
