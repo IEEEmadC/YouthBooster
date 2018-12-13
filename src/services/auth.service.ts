@@ -42,6 +42,7 @@ export class AuthService {
 
 	private oauthSignIn(provider: AuthProvider) {
 		if (!(<any>window).cordova) {
+			console.log("without cordova")
 			return this.afAuth.auth.signInWithPopup(provider);
 		} else {
 			return this.afAuth.auth.signInWithRedirect(provider)
