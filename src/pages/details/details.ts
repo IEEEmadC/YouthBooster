@@ -10,7 +10,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { ImageGalleryPage } from '../image-gallery/image-gallery';
 import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
-import { ProjectProvider } from './../../providers/project/project';
+import { ProjectProvider } from './../../providers/projects/project';
 import { Observable } from 'rxjs/Observable';
 import { Project } from '../../modals/project.modal';
 import { User } from '../../modals/user.modal';

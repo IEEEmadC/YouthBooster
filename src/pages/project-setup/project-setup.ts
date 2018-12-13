@@ -1,3 +1,4 @@
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PictureUtils } from './../../providers/firebase-service/firebase-service';
 import { Project } from './../../modals/project.modal';
 import { DetailsPage } from './../details/details';
@@ -100,6 +101,28 @@ export class ProjectSetupPage {
   // firebase author reference to create
   author: User;
 
+
+
+  private takePictureOptions: CameraOptions = {
+    allowEdit: false,
+    saveToPhotoAlbum: true,
+    targetWidth: 720,
+    targetHeight: 720,
+    cameraDirection: this.camera.Direction.BACK,
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    destinationType: this.camera.DestinationType.FILE_URI,
+  }
+
+  private galleryOptions: CameraOptions = {
+    allowEdit: true,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    targetWidth: 720,
+    targetHeight: 720,
+    correctOrientation: true
+  }
+
+
   constructor(public navCtrl: NavController,
     public platform: Platform,
     public navParams: NavParams,
@@ -116,7 +139,7 @@ export class ProjectSetupPage {
     private firebaseService: PictureUtils,
     private imagePicker: ImagePicker,
     private cropService: Crop,
-    private transfer: FileTransfer,
+    private camera: Camera,
     private filePicker: IOSFilePicker
   ) {
   }
@@ -146,7 +169,6 @@ export class ProjectSetupPage {
             // push to firebase
             this.commitChanges();
             // navigate next page
-            // this.navCtrl.push(DetailsPage);
           }
         }
       ],
@@ -176,9 +198,11 @@ export class ProjectSetupPage {
     this.project.dueDate;
 
     console.log(this.project);
+    
+    this.uploadImageToFirebase();
+    this.uploadFiles();
 
-    console.warn(this.project);
-
+    // this.navCtrl.push(DetailsPage);
 
   }
 
@@ -253,14 +277,28 @@ export class ProjectSetupPage {
     prompt.present();
   }
 
+  getChosenFiles(index) {
+    return new Promise((resolve, reject) => {
+      resolve(this.filesArray[index].value);
+      reject(null);
+    });
+  }
+
+
+  getChosenImages(index) {
+    return new Promise((resolve, reject) => {
+      resolve(this.imageSrcArray[index].value);
+      reject(null);
+    });
+  }
+
+
+
   // get attached file locally
   // to implement:: open from drive 
   getFile(caller) {
-    this.firebaseService.uploadFile();
 
-    /*
     if (this.platform.is('android')) {
-
       this.fileChooser.open().then(file => {
         this.filePath.resolveNativePath(file).then(resolvedFilePath => {
           //this.presentToast(resolvedFilePath.split('/'));
@@ -268,106 +306,107 @@ export class ProjectSetupPage {
           this.fileName = subpaths[subpaths.length - 1];
           this.fileURI = this.fileName;
           this.presentToast(this.fileURI);
-
           console.log(file)
-          this.filesArray.push({ 'value': file });
-          const fileTransfer: FileTransferObject = this.transfer.create();
-
-          // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
-          let options1: FileUploadOptions = {
-            fileKey: 'image_upload_file',
-            fileName: 'name.pdf',
-            headers: {},
-            params: { "app_key": "Testappkey" },
-            chunkedMode: false
-          }
-
-          fileTransfer.upload(file, 'your API that can take the required type of file that you want to upload.', options1)
-            .then((data) => {
-              // success
-              alert("success" + JSON.stringify(data));
-            }, (err) => {
-              // error
-              alert("error" + JSON.stringify(err));
-            });
-
+          this.filesArray.push({ 'value': file, 'uri': this.fileURI });
         }).catch(err => {
           this.presentToast(JSON.stringify(err));
         });
       }).catch(err => {
         this.presentToast(JSON.stringify(err));
       });
-      
     }
 
     else if (this.platform.is('ios')) {
-      this.filePicker.pickFile()
-        .then(uri => {
-          console.log(uri);
-          const fileTransfer: FileTransferObject = this.transfer.create();
-
-          // regarding detailed description of this you cn just refere ionic 2 transfer plugin in official website
-          let options1: FileUploadOptions = {
-            fileKey: 'image_upload_file',
-            fileName: 'name.pdf',
-            headers: {},
-            params: { "app_key": "Testappkey" },
-            chunkedMode: false
-          }
-            
-          this.filesArray.push({ 'value': uri });
-          
-          fileTransfer.upload(uri, 'your API that can take the required type of file that you want to upload.', options1)
-            .then((data) => {
-              // success
-              alert("success" + JSON.stringify(data));
-            }, (err) => {
-              // error
-              alert("error" + JSON.stringify(err));
-            });
+      this.filePicker.pickFile().then(file => {
+        this.filePath.resolveNativePath(file).then(resolvedFilePath => {
+          //this.presentToast(resolvedFilePath.split('/'));
+          let subpaths = resolvedFilePath.split('/');
+          this.fileName = subpaths[subpaths.length - 1];
+          this.fileURI = this.fileName;
+          this.presentToast(this.fileURI);
+          console.log(file)
+          this.filesArray.push({ 'value': file, 'uri': this.fileURI });
         }).catch(err => {
           this.presentToast(JSON.stringify(err));
         });
+      }).catch(err => {
+        this.presentToast(JSON.stringify(err));
+      });
+
     }
     else {
       this.presentToast("Cannot attach files with windows phone!");
     }
-    */
   }
 
   openImagePickerCrop() {
-    this.firebaseService.uploadFromGallery();
-    /*
-    this.imagePicker.hasReadPermission().then(
+    this.camera.getPicture(this.takePictureOptions).then(
       (result) => {
-        if (result == false) {
-          // no callbacks required as this opens a popup which returns async
-          this.imagePicker.requestReadPermission();
-        }
-        else if (result == true) {
-          this.imagePicker.getPictures({
-            maximumImagesCount: 1
-          }).then(
-            (results) => {
-              for (var i = 0; i < results.length; i++) {
-                this.cropService.crop(results[i], { quality: 75 }).then(
-                  newImage => {
-                    this.tagsArray.push({ 'value': newImage });
-                    this.uploadImageToFirebase(newImage);
-                  },
-                  error => console.error("Error cropping image", error)
-                );
-              }
-            }, (err) => console.log(err)
-          );
-        }
-      }, (err) => {
-        console.log(err);
-      });
-      */
+        // no callbacks required as this opens a popup which returns async
+        this.cropService.crop(result, { quality: 75 }).then(
+          newImage => {
+              this.filePath.resolveNativePath(newImage).then(resolvedFilePath => {
+              //this.presentToast(resolvedFilePath.split('/'));
+              let subpaths = resolvedFilePath.split('/');
+              this.fileName = subpaths[subpaths.length - 1];
+              this.fileURI = this.fileName;
+              this.presentToast(this.fileURI);
+              console.log(newImage)
+              this.imageSrcArray.push({ 'value': newImage, 'uri': this.fileURI });
+            }).catch(err => {
+              this.presentToast(JSON.stringify(err));
+            });
+          },
+          error => console.error("Error cropping image", error)
+        );
+      }, (err) => console.log(err)
+    );
   }
 
-  uploadImageToFirebase(image) {
+  openGalleryImagePickerCrop() {
+    this.camera.getPicture(this.galleryOptions).then(
+      (result) => {
+        // no callbacks required as this opens a popup which returns async
+        this.cropService.crop(result, { quality: 75 }).then(
+          newImage => {
+              this.filePath.resolveNativePath(newImage).then(resolvedFilePath => {
+              //this.presentToast(resolvedFilePath.split('/'));
+              let subpaths = resolvedFilePath.split('/');
+              this.fileName = subpaths[subpaths.length - 1];
+              this.fileURI = this.fileName;
+              this.presentToast(this.fileURI);
+              console.log(newImage)
+              this.imageSrcArray.push({ 'value': newImage, 'uri': this.fileURI });
+            }).catch(err => {
+              this.presentToast(JSON.stringify(err));
+            });
+          },
+          error => console.error("Error cropping image", error)
+        );
+      }, (err) => console.log("Error cropping image", err)
+    );
+  }
+
+  uploadImageToFirebase() {
+    for (let index = 0; index < this.imageSrcArray.length; index++) {
+      this.getChosenImages(index).then((imagePath) => {
+        alert('got image path ' + imagePath);
+        return this.firebaseService.makeFileIntoBlob(imagePath, 'image');//convert picture to blob
+      }).then((imageBlob) => {
+        alert('got image blob ' + imageBlob);
+        return this.firebaseService.uploadToFirebase(imageBlob, 'image', 'covers/');//upload the blob
+      }).then((uploadSnapshot: any) => {
+        alert('file uploaded successfully  ' + uploadSnapshot.downloadURL);
+        return this.firebaseService.saveToDatabase(uploadSnapshot);//store reference to storage in database
+      }).then((_uploadSnapshot: any) => {
+        alert('file saved to asset catalog successfully  ');
+      }, (_error) => {
+        alert('Error ' + (_error.message || _error));
+      });
+    }
+
+
+
     /*
     image = normalizeURL(image);
 
@@ -396,11 +435,32 @@ export class ProjectSetupPage {
     */
   }
 
+
+  //open the gallery and Return a promise with the image data
+  uploadFiles() {
+    for (let index = 0; index < this.filesArray.length; index++) {
+      this.getChosenFiles(index).then(filePath => {
+        alert('got file path ' + filePath);
+        return this.firebaseService.makeFileIntoBlob(filePath, 'file');//convert picture to blob
+      }).then((fileBlob) => {
+        alert('got file blob ' + fileBlob);
+        return this.firebaseService.uploadToFirebase(fileBlob, 'file', "files/");//upload the blob
+      }).then((uploadSnapshot: any) => {
+        alert('file uploaded successfully ' + uploadSnapshot.downloadURL);
+        return this.firebaseService.saveToDatabase(uploadSnapshot);//store reference to storage in database
+      }).then((_uploadSnapshot: any) => {
+        alert('file saved to asset catalog successfully  ');
+      }, (_error) => {
+        alert('Error ' + (_error.message || _error));
+      });
+    }
+  }
+
   // generic method for creating toasts
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 5000,
+      duration: 3000,
       position: 'bottom'
     });
 

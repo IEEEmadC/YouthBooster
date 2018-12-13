@@ -37,7 +37,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { OnboardingScreenPage } from '../pages/onboarding-screen/onboarding-screen';
 import { environment } from '../environments/environment';
 import { AuthserviceProvider } from '../providers/authservice/authservice';
-import { ProjectProvider } from '../providers/project/project';
+import { ProjectProvider } from '../providers/projects/project';
 import { PictureUtils } from '../providers/firebase-service/firebase-service';
 import { FileTransfer } from '@ionic-native/file-transfer';
 
