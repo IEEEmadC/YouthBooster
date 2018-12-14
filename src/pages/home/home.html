@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color=primary>
+  <ion-navbar hideBackButton="true" color=primary>
     <ion-title>
       <img src="assets/imgs/logoicon.png" id="logo"> YBooster
     </ion-title>
@@ -24,27 +24,27 @@
   <ion-searchbar (search)="$event.target.value" [ngClass]="{'show-search': showSearch}"></ion-searchbar>
 
   <div>
-    <ion-card *ngFor="let category of categories; let i = index">
+    <ion-card *ngFor="let category of categories; let i = index" (click)="openPageSetup(category)">
       <div>
-        <div class="genre-cover" (click)="openPageSetup(category)">
+        <div class="genre-cover">
           <img src="assets/imgs/{{ category }}.png" class="tinted">
 
         </div>
       </div>
-      <div *ngIf="i==2; then remove else fav"></div> 
-      
+      <div *ngIf="i==9; then remove else fav"></div>
+
       <ng-template #fav>
         <button ion-button outline medium color="primary" icon-only (click)="addFavorite(i)" id="btn-star">
           <ion-icon name="star"></ion-icon>
         </button>
       </ng-template>
-      
+
       <ng-template #remove>
-          <button ion-button medium color="primary" icon-only (click)="addFavorite(i)" id="btn-star">
-            <ion-icon name="close"></ion-icon>
-          </button>
-        </ng-template>
-        
+        <button ion-button medium color="primary" icon-only (click)="addFavorite(i)" id="btn-star">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ng-template>
+
       <div class="card-title"> {{ categoryNames[i] }}</div>
       <div class="card-subtitle">{{ subCategoryNames[i] }}</div>
     </ion-card>

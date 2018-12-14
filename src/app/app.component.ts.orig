@@ -1,13 +1,11 @@
 <<<<<<< HEAD
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-
-import { HomePage } from '../pages/home/home';
-=======
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
+=======
+import { ProjectSetupPage } from './../pages/project-setup/project-setup';
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
+>>>>>>> origin/project-setup
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {TabsPage} from "../pages/tabs/tabs";
@@ -22,18 +20,26 @@ import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 
 
->>>>>>> origin/home-setup
+<<<<<<< HEAD
+=======
+import { AuthserviceProvider } from './../providers/authservice/authservice';
+
+
+>>>>>>> origin/project-setup
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
 <<<<<<< HEAD
-  rootPage:any = HomePage;
-
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-=======
 
   @ViewChild(Nav) nav: Nav;
+
+  rootPage:any = HomePage;
+=======
+  rootPage: any = ProjectSetupPage;
+
+  private auth: AuthserviceProvider;
+>>>>>>> origin/project-setup
 
   rootPage;
   pages: Array<{title: string, component: any,icon: string}>;
@@ -50,19 +56,14 @@ export class MyApp {
     ];
 
 
->>>>>>> origin/home-setup
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+
 <<<<<<< HEAD
-  }
-}
-
-=======
-
     this.auth.afAuth.authState
           .subscribe(
             user => {
@@ -77,6 +78,24 @@ export class MyApp {
               this.rootPage = LoginPage;
             }
           );
+=======
+    // check if user logged in on app load
+    /* 
+    this.auth.afAuth.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.rootPage = HomePage;
+          } else {
+            this.rootPage = OnboardingScreenPage;
+          }
+        },
+        () => {
+          this.rootPage = OnboardingScreenPage;
+        }
+      );
+    */
+>>>>>>> origin/project-setup
   }
 
 
@@ -109,4 +128,3 @@ export class MyApp {
 
 
 }
->>>>>>> origin/home-setup

@@ -1,0 +1,117 @@
+page-comments {
+
+    .grid {
+        padding: 0;
+      }
+    
+      .sender, .me {
+        .friend-img {
+          position: absolute;
+          border-radius: 40px;
+          width: 40px;
+          height: 40px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        p {
+          border-radius: 5px;
+          margin: 0;
+          color: grey;
+
+        }
+      }
+      
+      ion-content h4 {
+          margin-top: 32px; 
+          color: #306dd8;
+          font-weight: bold
+      }
+    
+      .sender {
+        p {
+          text-align: left;
+          background-color: #fff;
+          padding: 12px 10px;
+          border: 1px solid #d1d1d1;
+        }
+        .friend-img {
+          margin: 0 0;
+        }
+      }
+    
+    
+      .me {
+        .txt {
+          display: inline;
+          text-align: right;
+        }
+        .friend-img {
+          margin: 0 22px;
+        }
+        p {
+          background-color: #306dd8;
+          color: #fff;
+          padding: 12px 10px;
+        }
+      }
+    
+      .text-input {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 5px;
+      }
+
+      .comment-area {
+        color: grey;  
+      }
+
+      .note-ios {
+          color: #000;
+      }
+
+      .note-md {
+        color: #000;
+    }
+
+    .ion-md-arrow-round-up{
+        color: #306dd8;
+        padding: 0 8px 0 8px;
+    }
+
+    .ion-ios-arrow-round-up{
+        color: #306dd8;
+        padding: 0 8px 0 8px;
+    }
+
+    
+    ion-note .reply {
+        color: #10C488;
+        padding: 0 8px 0 8px;
+    }
+
+    ion-note .delete {
+        color: #555;
+        padding: 0 8px 0 8px;
+    }
+
+    ion-item ion-badge {
+        position: absolute;
+        right: 8px;
+    }  
+}
+
+.alertCustomCss{
+    background-color: rgba(42, 45, 45, 0.7);
+    color: #757575;
+    button{
+        color: #09c1ce!important;
+    }
+    .alert-message {
+        color: #757575;
+        margin: 8px;
+    }
+    .alert-title{
+        color: #08B47B;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+  }

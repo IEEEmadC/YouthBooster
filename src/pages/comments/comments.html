@@ -1,0 +1,96 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ project.title }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card padding>
+    <ion-item (click)="openAuthorProfile()">
+      <ion-avatar item-start>
+        <div class="online"></div>
+        <img src="{{ author?.pictureUrl }}">
+      </ion-avatar>
+      <h2>{{ author.fullname }}</h2>
+      <p>{{ author.about }}</p>
+      <ion-note item-end>{{ project.timestamp }}</ion-note>
+    </ion-item>
+
+    <h4>Project Summary</h4>
+
+    <ion-buttons>
+      <ion-badge round small *ngFor="let tag of (project | async)?.tags ">{{ tag }}</ion-badge>
+    </ion-buttons>
+    
+    <p>{{ project.timestamp }}</p>
+
+  </ion-card>
+
+  <h4>Comments</h4>
+  <ion-list>
+    <div *ngFor="let comment of commentaires; let counter = index">
+      <ion-item>
+        <ion-avatar item-start (click)="openProfile(comment.content)">
+          <div class="online"></div>
+          <img src="{{ comments[0].from.pictureUrl }}">
+        </ion-avatar>
+        <h2 [innerHTML]="comment.from"></h2>
+        <p [innerHTML]="comment.content"> {{ comment.content }}</p>
+        <ion-note item-end> {{ comment.timestamp }}</ion-note>
+        <ion-icon (click)="addLikes(counter)" name="arrow-round-up"></ion-icon>
+        <ion-note  [innerHTML]="comment.ups">12</ion-note>
+        <ion-note (click)="replyTo(counter)">
+          <ion-icon name="undo" class="reply"></ion-icon>reply
+        </ion-note>
+        <!-- to implement :: test with current active user  -->
+        <ion-note *ngIf="comment.from == 'me'" (click)="delete(counter)">
+          <ion-icon name="trash" class="delete"></ion-icon>delete
+        </ion-note>
+        <ion-badge *ngIf="comment.fans" (click)="undo(counter)">Liked</ion-badge>
+      </ion-item>
+      <ion-textarea *ngIf="comment.reply != []" 
+                    (keyup.enter)="doReply(counter)"
+                    (focusout)="onfocusOut(counter)" 
+                    [(ngModel)]="text_reply" placeholder="reply to.." 
+                    name="message" class="comment-area">
+      </ion-textarea>
+      <div *ngIf="comment.reply != []">
+        <ion-item *ngFor="let reply of comment.reply; let idx = index">
+          <ion-item no-lines>
+            <ion-avatar item-start (click)="openProfile(comment.content)">
+              <div class="online"></div>
+              <img src="{{ comments[0].from.pictureUrl }}">
+            </ion-avatar>
+            <h2 [innerHTML]="comment.reply[idx].from"></h2>
+            <p [innerHTML]="comment.reply[idx].content">{{ comment.reply[idx].content }}</p>
+            <ion-icon name="arrow-round-up" (click)="addLikes(counter,idx)" ></ion-icon>
+            <ion-note item-end>{{ comment.reply[idx].timestamp }}</ion-note>
+            <ion-note [innerHTML]="comment.reply[idx].likes">{{ comment.reply[idx].ups }}</ion-note>
+            <ion-note (click)="replyTo(counter)">
+              <ion-icon name="undo" class="reply"></ion-icon>reply
+            </ion-note>
+            <ion-note *ngIf="comment.reply[idx].from == 'me'" (click)="delete(counter,idx)">
+                <ion-icon name="trash" class="delete"></ion-icon>delete
+              </ion-note>
+              <ion-badge *ngIf="comment.reply[idx].liked" (click)="undo(counter,idx)">Liked</ion-badge>
+          </ion-item>
+        </ion-item>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar color="primary">
+    <ion-textarea (keyup.enter)="doSend()" [(ngModel)]="input" placeholder="Comment.." name="message" class="comment-area"></ion-textarea>
+    <ion-buttons end>
+      <button (click)="doSend()" ion-button icon-only>
+        <ion-icon name="send" color="light"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

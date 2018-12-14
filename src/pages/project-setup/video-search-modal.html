@@ -12,8 +12,8 @@
 <ion-content>
 
     <ion-list no-padding>
-        <button ion-item *ngFor="let list of Videos | async">
-            <ion-thumbnail item-start (click)="getVideoUrl(list.id.videoId)">
+        <button ion-item *ngFor="let list of Videos | async" (click)="getVideoUrl(list.id.videoId)">
+            <ion-thumbnail item-start>
                 <img [src]="list.snippet.thumbnails.default.url">
             </ion-thumbnail>
             <h2>{{ list.snippet.title }}</h2>

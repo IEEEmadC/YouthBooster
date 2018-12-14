@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
+
+page-details {
+ion-header{
+
+    .btn-txt ion-icon{
+        margin-right: 6px;
+    }
+    .btn-txt{
+        background-color: #08B47B;
+    }
+    #logo{
+        width: 25px;
+    }
+}
+
+
+ion-content{
+    .game-image {
+        max-width:100%;
+        margin: auto;
+    }
+
+    .game-image::after {
+        display:block;
+        position:relative;
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0, #000 100%);
+        margin-top: -150px;
+        height: 150px;
+        width:100%;
+        opacity: .8;
+        content: '';
+    }
+
+    #popover {
+        width:94%;
+        background: #0BAAB0;
+        position:relative;
+        margin-top: -110px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px 5px 0px 0px;
+        padding: 7px;
+    }
+
+    #popover-line {
+        width:94%;
+        position: relative;;
+        background: #20F7FF;
+        height: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+        opacity: .8;
+    }
+
+
+    h4 {
+        color: #8DF6FA;
+        text-transform: uppercase;
+        font-size: .5em;
+        letter-spacing: 1.5px;
+        margin:0;padding:0;
+    }
+
+    ion-card h4 {
+        font-weight: bold !important;
+        color: #0BAAB0;
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+    }
+
+    ion-card p {
+        color: gray !important;
+        line-height: 1.5em;
+    }
+
+    ion-col p {
+        color: #fff;
+        margin: 10px 0 0 0;
+        font-size: 0.55em;
+    }
+
+    ion-col p.larger-res {
+        font-size: 1.6em;
+        font-family: 'Raleway';
+        margin-top: 0;
+    }
+
+    ion-scroll {
+        height: 200px;
+    }
+
+    #screenslider .screenthumbs {
+        background: #fff;
+        align-content: center;
+    }
+/*
+    thumbnail args
+*/
+    $thumbnail_height : 140px;
+    $thumbnail_margin : 8px;
+    $thumb_fix : ($thumbnail_height / 2) - ($thumbnail_margin / 2) ;
+
+    .screenthumbs .big-thumb {
+        height: $thumbnail_height;
+    }
+
+    .screenthumbs .small-thumb-1 {
+        height: $thumb_fix ;
+        margin-bottom: $thumbnail_margin;
+    }
+
+    .screenthumbs .small-thumb-2 {
+        height: $thumb_fix;
+    }
+
+    .small-thumb-2::before {
+        display:block;
+        position:absolute;
+        background: #000;        
+        margin-bottom: ($thumbnail_height/2);
+        height: $thumb_fix;
+        width: 90%;
+        opacity: .5;
+        content: "";
+    }
+
+    .small-thumb-2::after {
+        display:block;
+        position: absolute;
+        margin-top: -$thumbnail_height/2 + 2*$thumbnail_margin;
+        margin-left: 20px;
+        font-size: .5em;
+        color: #fff;
+        width: 100%;
+        content: "14 Photos";
+    }
+
+    .btn-separation {
+        margin-top: 12px;
+    }
+
+    h5 {
+        text-transform:uppercase;
+        font-size:0.5em;
+        letter-spacing: 1px;
+        margin-left: 10px;
+        margin-top: 25px;
+        color: grey !important;
+    }
+
+    .item-inner {
+        margin-left: 5px !important;
+    }
+
+    ion-note {
+        font-size: 12px;
+        align-self: flex-start;
+        margin-top: 14px;
+    }
+
+    ion-badge {
+        background: #0BAAB0;
+        padding: 6px 8px;
+        margin-bottom: 12px;
+      }
+
+      ion-buttons{
+          margin-bottom: 8px; 
+      }
+
+    .online{
+        position: relative;
+        top: 12px;
+        margin-left: auto;
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        background: rgb(2, 156, 53) !important;
+    }
+
+    .edit {
+        font-size: 12px;
+        align-self: flex-end;
+        margin-top: 14px;
+        margin-right: 12px;
+        float: right;
+        color: #0BAAB0;
+        text-decoration: #0BAAB0 underline
+    }
+
+    .edit-date{
+        color: #fff !important
+    }
+
+    .ion-ios-arrow-forward {
+        visibility: hidden;      
+    }
+    
+    .ion-md-arrow-forward {
+        color: #999;      
+    }      
+  }
+}
+
+.filledstar {
+    width: 40px;
+    margin: 0 !important;
+    background-image:url('../assets/imgs/filled-star.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color:transparent !important;
+}
+.emptystar {
+    width: 40px !important;
+    margin: 0 !important;
+    background-image:url('../assets/imgs/empty-star.png') !important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    background-size: cover !important;
+    color:transparent !important;
+}
+
+.alert-ios .alert-button {
+    min-width: 0px;
+    border-top: none;
+    border-right: none;
+}
+.alertstar {
+    .alert-button-group {
+        padding:0; 
+        margin-top: 0px; 
+        flex-direction: row; 
+        justify-content: space-around;
+        
+    }
+    border-radius: 12px;
+    .alert-wrapper {
+        border-radius: 12px;
+        width: 85%;
+        height: 35%;
+        padding: 12px;
+    }
+    .alert-sub-title {
+        position: absolute;
+        color: #777;
+        bottom: 0px;
+        left: 0px;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+}
+
+project-details-maps {
+ 
+    button span {
+        margin-right: 8px
+    }
+
+    .scroll {
+      height: 100%
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+}

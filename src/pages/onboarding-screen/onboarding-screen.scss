@@ -1,0 +1,78 @@
+page-onboarding-screen {
+    @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
+
+    ion-content {
+        background-color: #EFEFEF !important;
+        font-family:'Raleway';
+    }
+
+    .diag {
+        position:absolute;
+        z-index:1;
+        width:100%;
+        top: 0;
+        height: 66%;
+    }
+    
+    ion-icon {
+        margin-top:40%;
+        font-size:7em;
+    }
+    
+    h2 {
+        margin-top:80% !important;
+        font-weight:bold;
+        font-size:1em;
+    }
+    
+    p {
+        width:80%;
+        display:block;
+        margin: 0 auto;
+        font-size:.9em;
+    }
+    
+    .swiper-pagination-bullet-active {
+        background:#C400FF;
+    }
+    
+    .swiper-pagination {
+        bottom: 12% !important;
+    }
+    
+    .skip {
+        position:absolute;
+        bottom: 20px;
+        width:100%;
+        background: none !important;
+        text-align: center;
+        cursor: pointer;
+        z-index: 5;
+    }
+
+    .ok-go {
+        position:relative;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+        z-index: 5;
+        border-radius: 2px;
+        height: 3.6rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #fff;
+        background-color: #0BAAB0;
+        -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), background-color 300ms cubic-bezier(0.4, 0, 0.2, 1), color 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0 1.1em;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -50px;
+
+    }
+}

@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { ProjectSetupPage } from './../pages/project-setup/project-setup';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -14,6 +15,10 @@ import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 
 
+import { HomePage } from '../pages/home/home';
+import { AuthserviceProvider } from './../providers/authservice/authservice';
+
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,7 +26,9 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage:any = HomePage;
+  rootPage: any = ProjectSetupPage;
+
+  private auth: AuthserviceProvider;
 
   rootPage;
   pages: Array<{title: string, component: any,icon: string}>;
@@ -59,6 +66,22 @@ export class MyApp {
               this.rootPage = LoginPage;
             }
           );
+    // check if user logged in on app load
+    /* 
+    this.auth.afAuth.authState
+      .subscribe(
+        user => {
+          if (user) {
+            this.rootPage = HomePage;
+          } else {
+            this.rootPage = OnboardingScreenPage;
+          }
+        },
+        () => {
+          this.rootPage = OnboardingScreenPage;
+        }
+      );
+    
   }
 
 
@@ -78,7 +101,7 @@ export class MyApp {
 
 
 
-
+}
 
 
 

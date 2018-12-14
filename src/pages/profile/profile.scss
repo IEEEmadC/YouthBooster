@@ -1,0 +1,291 @@
+ion-content {
+
+    
+
+    /*page-profile {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+    }
+
+  .card-title {
+    position: absolute;
+    top: 20%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    color: #fff;
+  }
+
+  .card-subtitle2 {
+    font-size: 1.5em;
+    position: absolute;
+    top: 60%;
+    width: 100%;
+    color: #fff;
+  }
+  .card-scem {
+    font-size: 3.5em;
+    position: absolute;
+    top: 80%;
+    width: 100%;
+    color: #fff ;
+     border: none;
+  }
+
+}*/
+
+
+/**
+ * Variables
+ */
+
+$white:    #FFF;
+$blue:     #1B3255;
+$gray-de:  #DEDEDE;
+$green-48:  #0BAAB0;
+$blue-48:  #0BAAB0;
+$green-4a:  #0BAAB0;
+$blue-4a:  #0BAAB0;
+$gray-89:  #898989;
+$gray-72:  #727272;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin background-horizontal($left, $middle, $right) {
+  background: $left;
+  background: -webkit-linear-gradient(left, $left 0%, $middle 50%, $right 100%);
+  background:    -moz-linear-gradient(left, $left 0%, $middle 50%, $right 100%);
+  background:         linear-gradient(to right, $left 0%, $middle 50%, $right 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$left', endColorstr='$right',GradientType=0);
+}
+/* End */
+
+ion-header {
+  .toolbar {
+    
+
+    .toolbar-background {
+      background: transparent !important;
+    }
+  }
+}
+.ion-md-log-out {
+  color: #FFF;
+  background: transparent !important;
+}
+.ion-ios-log-out {
+  color: #FFF;
+  background: transparent !important;
+}
+ion-header ion-icon.back-button-icon.icon {
+  color: #eee;
+}
+
+.profile-image {
+  max-width:100%;
+  height: 450px;
+  background: url('../assets/imgs/Blurred Overlay.png') no-repeat fixed ; 
+  background-size: cover;
+  margin: auto;
+}
+
+.profile-image::after {
+  display:block;
+  position:relative;
+  background: rgba(20, 20, 20, .5);
+  margin-top: -150px;
+  height: 450px;
+  width:100%;
+  opacity: .8;
+  content: '';
+}
+
+ion-segment {
+position: relative;
+bottom: 32px;
+background: #fff;
+
+}
+
+button .left-icon {
+width: 36px;
+height: 36px;
+margin-left: -14px;
+border: 4px solid $white;
+@include border-radius(100%);
+}
+
+button .right-icon {
+  width: 36px;
+  height: 36px;
+  margin-left: -18px;
+  border: 4px solid $white;
+  @include border-radius(100%);
+  }
+
+button .fix-icon {
+width:28px;
+height: 28px;
+}
+
+.link-launcher {
+  color: #0BAAB0;
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.link-launcher ion-icon {
+  color: #727272;
+  margin-left: 8px;
+  border: 2px solid #eee;
+  @include border-radius(100%);
+}
+.image-picker {
+  position: relative;
+  height: 150px;
+  font-size: 0.5em;
+  color: #727272;
+  background: #FFF ;
+  text-align: center 
+}
+.image-picker img {
+  display: block;
+  width: 50%;
+  height: 100%;
+  margin-top: -24px; 
+  margin-left: 25%;
+}
+.image-picker ion-label {
+  position: relative;
+  display: block;
+  margin-top: -24px;
+}
+
+.logout-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: transparent;
+}
+
+.back-btn {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: transparent;
+}
+
+.chat-list-wrap {
+  .list {
+    margin: 0;
+    .item {
+      margin: 0;
+      padding: 20px 10px;
+      background-color: transparent;
+      color: $white;
+      .item-inner {
+        border-bottom: none;
+        .label {
+          margin: 0;
+          img {
+            float: left;
+            max-height: 100px;
+            max-width: 100px;
+            height: 100px;
+            width: 100px;
+            margin-right: 20px;
+            border: 2px solid $white;
+            @include border-radius(100%);
+          }
+          .chat-list-title {
+            margin-bottom: 6px;
+            font-size: 20px;
+          }
+          .chat-list-sub-title,
+          .chat-list-price {
+            margin-bottom: 6px;
+            font-size: 16px;
+          }
+          .chat-list-discount {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 18px;
+            color: $white;
+            font-size: 16px;
+            opacity: 1;
+            -webkit-border-radius: 30px;
+            border-radius: 30px;
+            @include background-horizontal($green-48, $green-4a, $green-48);
+          }
+        }
+      }
+    }
+  }
+  &.grid-view {
+    .item {
+      position: absolute;;
+      top: 0px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 5px 5px 0px 0px;
+      padding: 20px 15px;
+      text-align: center;
+      .item-inner {
+        .label {
+          img {
+            float: none;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Header */
+.main-header {
+  .toolbar {
+    min-height: 60px;
+    .toolbar-background {
+      height: 60px;
+      @include background-horizontal($blue-48, $blue-4a, $blue-48);
+    }
+    .toolbar-title {
+      font-size: 22px;
+      /*text-align: center;*/
+    }
+    .bar-button-default-md:hover:not(.disable-hover) {
+      color: $white;
+    }
+  }
+}
+
+    .ion-logo-github {
+        color: #452188;      
+    }
+    .ion-logo-facebook {
+        color: #3b5998;      
+    }
+    .ion-logo-googleplus {
+        color: #DD4B39;      
+    }
+    .ion-logo-youtube {
+        color: #ff0022;      
+    }
+    .ion-logo-linkedin {
+        color: #0077B5;      
+    }
+}

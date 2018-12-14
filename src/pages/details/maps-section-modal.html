@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Related location</ion-title>
+      <ion-buttons start>
+          <button ion-button (click)="confirmLocation()">
+            <span ion-text color="primary">confirm</span>
+            <ion-icon name="md-checkmark-circle" showWhen="android, windows"></ion-icon>
+          </button>
+          <button ion-button (click)="dismiss()">
+            <span ion-text color="primary" showWhen="ios">Cancel</span>
+            <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+          </button>
+          </ion-buttons>
+      </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <div #map id="map"></div> 
+</ion-content>

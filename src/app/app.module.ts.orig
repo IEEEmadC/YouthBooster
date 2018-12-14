@@ -1,31 +1,47 @@
-<<<<<<< HEAD
+import { Camera } from '@ionic-native/camera';
+import { ProfilePage } from './../pages/profile/profile';
+import { CommentsPage } from './../pages/comments/comments';
+import { ImageGalleryPage } from './../pages/image-gallery/image-gallery';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ModalContentPage, ModalTextContentPage } from '../pages/project-setup/project-setup';
-=======
-import { FormsModule } from '@angular/forms';
->>>>>>> origin/home-setup
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-<<<<<<< HEAD
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FileChooser } from '@ionic-native/file-chooser';
+import { IOSFilePicker } from '@ionic-native/file-picker';
 import { FilePath } from '@ionic-native/file-path';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Crop } from '@ionic-native/crop';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ProjectSetupPage } from '../pages/project-setup/project-setup';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { EmailComposer } from '@ionic-native/email-composer';
 
 import { HttpModule } from '@angular/http';
 import { YtProvider } from '../providers/yt/yt';
 import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-=======
-import { MyApp } from './app.component';
+import { DetailsPage, NewSectionModal, EditSectionModal, MapsSectionModal } from '../pages/details/details';
+import { DatePicker } from '@ionic-native/date-picker';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { OnboardingScreenPage } from '../pages/onboarding-screen/onboarding-screen';
+import { environment } from '../environments/environment';
+import { AuthserviceProvider } from '../providers/authservice/authservice';
+import { ProjectProvider } from '../providers/projects/project';
+import { PictureUtils } from '../providers/firebase-service/firebase-service';
+import { FileTransfer } from '@ionic-native/file-transfer';
+
+import { FormsModule } from '@angular/forms';
 import { FilterItemsPage } from '../pages/filter-items/filter-items';
 import {TabsPage} from "../pages/tabs/tabs";
 import {BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
@@ -39,14 +55,12 @@ import {TeamPage} from "../pages/team/team";
 import {NotifPage} from "../pages/notif/notif";
 import {ArchivePage} from "../pages/archive/archive";
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
-import { HttpModule } from '@angular/http';
 import { ComponentsModule } from '../pages/components/components.module';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 import { EmailService } from '../services/email.service';
 import { SignupPage } from '../pages/signup/signup';
 import { AngularFireAuth } from '@angular/fire/auth';
-
 
 export const firebaseConfig = {
 
@@ -57,26 +71,20 @@ export const firebaseConfig = {
   storageBucket: "youth-booster.appspot.com",
   messagingSenderId: "358028150171"
 
-
 };
->>>>>>> origin/home-setup
 
 
 
 @NgModule({
   declarations: [
     MyApp,
-<<<<<<< HEAD
+    OnboardingScreenPage,
     HomePage,
     ProjectSetupPage,
     ModalContentPage,
-    ModalTextContentPage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    HttpModule
-=======
+    ModalTextContentPage,
+<<<<<<< HEAD
+    MyApp,
     TabsPage,
     BrowseProjectsPage,
     SearchPipe,
@@ -86,29 +94,47 @@ export const firebaseConfig = {
     NotifPage,
     ArchivePage,
     LoginPage,
-		SignupPage
+    SignupPage
+=======
+    DetailsPage,
+    NewSectionModal,
+    EditSectionModal,
+    MapsSectionModal,
+    ImageGalleryPage,
+    CommentsPage,
+    ProfilePage
+>>>>>>> origin/project-setup
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     FormsModule,
     BrowserModule,
     ComponentsModule,
-    HttpModule,
     NgxErrorsModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
+<<<<<<< HEAD
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig)
->>>>>>> origin/home-setup
+=======
+    HttpModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule, // imports firebase/realtime database, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule // imports firebase/storage only needed for storage features
+>>>>>>> origin/project-setup
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-<<<<<<< HEAD
+    OnboardingScreenPage,
     HomePage,
     ProjectSetupPage,
     ModalContentPage,
-    ModalTextContentPage
-=======
+    ModalTextContentPage,
+<<<<<<< HEAD
     TabsPage,
     BrowseProjectsPage,
     FilterItemsPage,
@@ -118,29 +144,50 @@ export const firebaseConfig = {
     ArchivePage,
     LoginPage,
     SignupPage
->>>>>>> origin/home-setup
+=======
+    DetailsPage,
+    NewSectionModal,
+    EditSectionModal,
+    MapsSectionModal,
+    ImageGalleryPage,
+    CommentsPage,
+    ProfilePage
+>>>>>>> origin/project-setup
   ],
   providers: [
     StatusBar,
     SplashScreen,
-<<<<<<< HEAD
     Keyboard,
     EmailComposer,
     InAppBrowser,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatePicker,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     FileChooser,
-    //FileUploadOptions,
+    ImagePicker,
+    IOSFilePicker,
+    Camera,
+    Crop,
+    FileTransfer,
     FilePath,
     YtProvider,
-    YoutubeVideoPlayer
-=======
+    YoutubeVideoPlayer,
+<<<<<<< HEAD
+    StatusBar,
+    SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ProjectProvider,
     AngularFireAuth,
-		AuthService,
+    AuthService,
     EmailService
-
->>>>>>> origin/home-setup
   ]
 })
 export class AppModule {}
+=======
+    PhotoViewer,
+    AuthserviceProvider,
+    ProjectProvider,
+    PictureUtils
+  ]
+})
+export class AppModule { }
+>>>>>>> origin/project-setup
