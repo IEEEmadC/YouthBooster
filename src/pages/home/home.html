@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>IonFire Chat</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding id="signInPage">
+  <h3>Sign In to IonFire Chat</h3>
+
+  <div id="signInForm">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="loginForm.email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Display Name</ion-label>
+        <ion-input type="text" [(ngModel)]="loginForm.name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <button ion-button large block (click)="loginUser()">Sign In</button>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+
+
+</ion-content>
