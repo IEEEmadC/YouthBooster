@@ -1,21 +1,20 @@
+import { HomePage } from './../pages/home/home';
 import { Component, ViewChild } from '@angular/core';
 import { ProjectSetupPage } from './../pages/project-setup/project-setup';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {TabsPage} from "../pages/tabs/tabs";
-import {BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
-import {BookmarkPage} from "../pages/bookmark/bookmark";
-import {TeamPage} from "../pages/team/team";
+import { TabsPage} from "../pages/tabs/tabs";
+import { BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
+import { BookmarkPage} from "../pages/bookmark/bookmark";
+import { TeamPage} from "../pages/team/team";
 
-import {ArchivePage} from "../pages/archive/archive";
+import { ArchivePage} from "../pages/archive/archive";
 import { ProjectProvider } from '../providers/project/project';
  
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 
-
-import { HomePage } from '../pages/home/home';
 import { AuthserviceProvider } from './../providers/authservice/authservice';
 
 
@@ -26,11 +25,8 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ProjectSetupPage;
-
-  private auth: AuthserviceProvider;
-
   rootPage;
+
   pages: Array<{title: string, component: any,icon: string}>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public projectProvider : ProjectProvider,public auth: AuthService) {
@@ -57,7 +53,7 @@ export class MyApp {
             user => {
               if (user) {
                 console.log(user);
-                this.rootPage = TabsPage;
+                this.rootPage = HomePage;
               } else {
                 this.rootPage = LoginPage;
               }
@@ -67,7 +63,7 @@ export class MyApp {
             }
           );
     // check if user logged in on app load
-    /* 
+    /*
     this.auth.afAuth.authState
       .subscribe(
         user => {
@@ -81,7 +77,7 @@ export class MyApp {
           this.rootPage = OnboardingScreenPage;
         }
       );
-    
+*/    
   }
 
 
@@ -99,16 +95,11 @@ export class MyApp {
 		this.nav.setRoot(TabsPage);
 	}
 
-
-
-}
-
-
-
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    
+    this.rootPage = page.component;
   }
 
 

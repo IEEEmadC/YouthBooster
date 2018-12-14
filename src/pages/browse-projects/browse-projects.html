@@ -38,7 +38,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-title style="margin-right:5%"  >Technology</ion-title>
+    <ion-title style="margin-right:5%"  >YBooster</ion-title>
 
     <ion-buttons end large style="margin-right: 10%; " >
     <button ion-button   large  color="white" (click)="navigateFilter()"   >
@@ -69,7 +69,7 @@
 
   <ion-card  *ngFor="let project of projectProvider.projects | search : terms : showSearch" >
 
-    <ion-item  >
+    <ion-item (click)="accessProfile()" >
       <ion-avatar item-start>
         <img src="{{projectProvider.users[project.author].pictureUrl}}">
       </ion-avatar>
@@ -125,7 +125,7 @@
 
  </ion-list >
 
- <ion-fab bottom right margin-right="10px;"  (click)="projectProvider.addProject()"  >
+ <ion-fab bottom right margin-right="10px;"  (click)="addProject()"  >
     <button ion-fab color="green"><ion-icon name='add'  ></ion-icon></button>
   </ion-fab>
 

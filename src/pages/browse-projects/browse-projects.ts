@@ -1,10 +1,12 @@
-
+import { ProjectSetupPage } from './../project-setup/project-setup';
 import { Component,ViewChild } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
 import { NavController, NavParams,Keyboard } from 'ionic-angular';
 import { FilterItemsPage } from '../filter-items/filter-items';
-import {trigger,state,style,animate,transition} from '@angular/animations';
+import { trigger,state,style,animate,transition} from '@angular/animations';
 import { AngularFireDatabase } from "angularfire2/database";
+import { ProfilePage } from '../profile/profile';
+import { DetailsPage } from '../details/details';
 
 @Component({
   selector: 'page-browse-projects',
@@ -24,17 +26,18 @@ import { AngularFireDatabase } from "angularfire2/database";
 
 export class BrowseProjectsPage {
 
-   @ViewChild('myContent') content;
+  @ViewChild('myContent') content;
 
-showSearch = false;
+  showSearch = false;
+  terms: string;
 
   constructor(public projectProvider : ProjectProvider,public navCtrl: NavController, public navParams: NavParams, public keyboard: Keyboard,private fdb: AngularFireDatabase)
-   {
-this.projectProvider.projects = this.navParams.get('projects');
+  {
+    this.projectProvider.projects = this.navParams.get('projects');
 
-if(this.navParams.get('filter'))
-this.projectProvider.filtercateg=this.navParams.get('filter');
-    }
+    if(this.navParams.get('filter'))
+      this.projectProvider.filtercateg=this.navParams.get('filter');
+  }
 
  fakeProjects: Array<any> = new Array(8);
 
@@ -47,14 +50,18 @@ this.projectProvider.filtercateg=this.navParams.get('filter');
    this.fdb.list("/projects").update(project.projectId,{
    views : newViews
  });
-//this.navCtrl.push(DetailsPage,{'project' : project , 'user' : this.projectProvider.users[project.author]})
+
+ this.navCtrl.push(DetailsPage,{'project' : project , 'user' : this.projectProvider.users[project.author]})
 
  }
 
 accessProfile(project){
-//  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[project.author]})
+  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[project.author]})
 }
 
+addProject() {
+  this.navCtrl.push(ProjectSetupPage);
+}
 
  navigateFilter(){
 

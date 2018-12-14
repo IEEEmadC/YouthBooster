@@ -14,7 +14,6 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { User } from '../../modals/user.modal';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { IOSFilePicker } from '@ionic-native/file-picker';
 
 

@@ -24,7 +24,7 @@
   <ion-searchbar (search)="$event.target.value" [ngClass]="{'show-search': showSearch}"></ion-searchbar>
 
   <div>
-    <ion-card *ngFor="let category of categories; let i = index" (click)="openPageSetup(category)">
+    <ion-card *ngFor="let category of categories; let i = index" (click)="browse(category)">
       <div>
         <div class="genre-cover">
           <img src="assets/imgs/{{ category }}.png" class="tinted">

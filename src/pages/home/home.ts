@@ -1,4 +1,4 @@
-import { ProjectSetupPage } from './../project-setup/project-setup';
+import { BrowseProjectsPage } from './../browse-projects/browse-projects';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Content } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -42,8 +42,8 @@ export class HomePage {
   }
 
   // navigate to project form page
-  openPageSetup(category){
-    this.navCtrl.push(ProjectSetupPage);
+  browse(category){
+    this.navCtrl.setRoot(BrowseProjectsPage);
   }
 
   // show/hide search bar

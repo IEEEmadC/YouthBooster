@@ -19,7 +19,7 @@ export class BookmarkPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase,public projectProvider : ProjectProvider) {
   }
 
- mybookmarks=[];
+ mybookmarks: string [] = [];
  projects=[];
  fakeUsers: Array<any> = new Array(8);
    nolikes :boolean = false;
@@ -29,12 +29,12 @@ export class BookmarkPage {
 
         this.mybookmarks = this.projectProvider.bookmarks;
         console.log(this.mybookmarks);
-        if((!this.mybookmarks)||(this.mybookmarks.length==0))
+        if ((!this.mybookmarks)||(this.mybookmarks.length==0))
          this.nolikes=true;
 
         this.projects=this.projectProvider.projects.filter((data)=>{
 
-            return this.mybookmarks.indexOf(data.projectId);
+            return this.mybookmarks.indexOf(data.projectId.toString()) > -1;
         });
            console.log(this.projects);
 

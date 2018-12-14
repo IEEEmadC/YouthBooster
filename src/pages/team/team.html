@@ -23,7 +23,7 @@
 <ion-content  >
 
 
-<ion-list *ngIf='users'  >
+<ion-list *ngIf='users && projectProvider.users'  >
 
   <ion-card *ngFor="let user of users"   >
 
@@ -33,7 +33,7 @@
    <ion-col    no-margin no-padding  col-10  >
  <ion-item  style="height : 100%;" (click)="accessProfile(user)">
    <ion-avatar item-start >
-     <img src="{{ projectProvider.users[user].pictureUrl }}">   <!-- user.pictureUrl -->
+     <img [src]="projectProvider.users[user].pictureUrl">   <!-- user.pictureUrl -->
    </ion-avatar>
       <strong>{{ projectProvider.users[user].fullname }}</strong>   <!-- user.fullname -->
       <h4>{{ projectProvider.users[user].job }}</h4>    <!-- user.job -->

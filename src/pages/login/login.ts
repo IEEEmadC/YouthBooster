@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NavController } from 'ionic-angular';
- import {TabsPage} from "../tabs/tabs";
+import { IonicPage, NavController } from 'ionic-angular';
+import { TabsPage} from "../tabs/tabs";
 import { AuthService } from '../../services/auth.service';
 import { SignupPage } from '../signup/signup';
+
 
 @IonicPage()
 @Component({

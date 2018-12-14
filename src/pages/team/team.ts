@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Component } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
+import { ProfilePage } from '../profile/profile';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,7 @@ export class TeamPage {
 
 
     accessProfile(profile){
-    //  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[profile]})
+      this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[profile]})
     }
 
 

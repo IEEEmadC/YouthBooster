@@ -1,3 +1,4 @@
+import { ProfilePage } from './../profile/profile';
 import { Component  } from '@angular/core';
 import {BrowseProjectsPage} from "../browse-projects/browse-projects";
 import {TeamPage} from "../team/team";
@@ -18,9 +19,9 @@ export class TabsPage {
 
   browseProjectsPage= BrowseProjectsPage;
 
-  notifPage= NotifPage;
+  notifPage= TeamPage;
 
-  profilPage= TeamPage;
+  profilPage= ProfilePage;
 
 
 }

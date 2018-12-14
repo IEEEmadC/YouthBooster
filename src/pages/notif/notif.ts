@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from "angularfire2/database";
 import { ProjectProvider } from '../../providers/project/project';
+import { ProfilePage } from '../profile/profile';
 
 @IonicPage()
 @Component({
@@ -44,7 +45,7 @@ this.fdb.list("/notifications").remove();
 }
 
 accessProfile(notif){
-  //this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[notif['notifRef']]})
+  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[notif['notifRef']]})
 }
 
 

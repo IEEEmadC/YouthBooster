@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import {BrowseProjectsPage} from "../browse-projects/browse-projects";
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { BrowseProjectsPage} from "../browse-projects/browse-projects";
+
 
 @IonicPage()
 @Component({

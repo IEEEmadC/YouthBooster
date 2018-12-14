@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
   and Angular DI.
 */
 @Injectable()
-export class ProjectProvider {
+export class ProjectsProvider {
 
   private projectsRef = this.db.list<Project>('projects');
 

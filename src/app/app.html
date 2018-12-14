@@ -1,19 +1,13 @@
 <ion-nav [root]="rootPage"></ion-nav>
-
-
-
 <ion-menu [content]="content">
 
  <ion-content   >
-
    <ion-item  no-margin   >
-
      <ion-avatar >
-     <img  src="{{projectProvider.currentpictureUrl}}">
+     <img  src="{{ projectProvider.currentpictureUrl }}">
      </ion-avatar>
      <h2 margin-top >{{projectProvider.currentfullName}}</h2>
      <p *ngIf="auth.getEmail()">{{auth.getEmail()}}   </p>
-
    </ion-item>
 
 
@@ -49,12 +43,7 @@
 
 
 <ion-nav id="nav" [root]="rootPage" #content ></ion-nav>
-
-
-
-
   <style media="screen">
-
   .youth{
   position : fixed;
   top : 87%;
@@ -65,12 +54,9 @@
 
     margin: auto;
     text-align: center;
-
     }
-
     img {
         width: 80px !important;
         height: auto !important;
     }
-
   </style>

@@ -10,7 +10,7 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { ImageGalleryPage } from '../image-gallery/image-gallery';
 import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
-import { ProjectProvider } from './../../providers/projects/project';
+import { ProjectsProvider } from './../../providers/projects/project';
 import { Observable } from 'rxjs/Observable';
 import { Project } from '../../modals/project.modal';
 import { User } from '../../modals/user.modal';
@@ -56,7 +56,7 @@ declare var google;
 })
 
 export class DetailsPage {
-
+/*
   project = {
     videos: [
       {
@@ -91,7 +91,7 @@ export class DetailsPage {
 
   }
 
-
+*/
   full_scroll = false;
   toggleMode: any = 'Read more'
 
@@ -109,6 +109,8 @@ export class DetailsPage {
 
   rates = ['emptystar', 'emptystar', 'emptystar', 'emptystar', 'emptystar'];
 
+  // project object  
+  project: Project;
 
   // observe any change for all projects
   projectListObs$ : Observable<Project[]>;
@@ -125,7 +127,7 @@ export class DetailsPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform,
-    private projectService: ProjectProvider,
+    private projectService: ProjectsProvider,
     public actionsheetCtrl: ActionSheetController,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
@@ -135,12 +137,14 @@ export class DetailsPage {
     private imageViewer: PhotoViewer,
     private sanitizer : DomSanitizer,
     private youtube: YoutubeVideoPlayer) {
-
+/*
     this.project.sections['Summary'] = "Project Summary text";
     this.project.sections['Requirements'] = "Project Description text";
     this.project.sections['Fixed Budget'] = "Project Budget text";
+*/
+    //this.project = this.navParams.get('project');
+    //this.author = this.navParams.get('user');
 
-    // let key = this.navParams.get('key');
 
     // related to firebase 
     this.projectListObs$ = this.projectService
@@ -272,18 +276,18 @@ export class DetailsPage {
   }
 
   launchSite() {
-    const browser = this.iab.create(this.project.site, '_system');
+    const browser = this.iab.create(this.project.websiteUrl, '_system');
     // browser.close();
   }
 
   playVideo(index) {
-    this.youtube.openVideo(this.project.videos[index].video_url);
+    this.youtube.openVideo(this.project.videos[index]);
   }
 
   editSection(section_name) {
     let data = {
       name: section_name,
-      text: this.project.sections[section_name]
+    //  text: this.project.sections[section_name]
     };
     let modal = this.modalCtrl.create(EditSectionModal, data);
     modal.onDidDismiss((data) => {
@@ -345,7 +349,7 @@ export class DetailsPage {
             switch (caller) {
               case 'attach':
                 // open file in browser
-                const browser = this.iab.create(this.project.site, '_system');
+                const browser = this.iab.create(this.project.websiteUrl, '_system');
                 browser.close();
                 break;
               // open video in youtube application with its url
