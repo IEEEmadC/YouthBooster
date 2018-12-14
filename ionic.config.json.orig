@@ -1,0 +1,15 @@
+{
+<<<<<<< HEAD
+  "name": "YBooster",
+=======
+  "name": "ionic7octV2",
+>>>>>>> origin/home-setup
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> origin/home-setup

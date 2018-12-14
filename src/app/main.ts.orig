@@ -1,0 +1,9 @@
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+<<<<<<< HEAD
+
+=======
+import 'rxjs/add/operator/map';
+>>>>>>> origin/home-setup
+import { AppModule } from './app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule);

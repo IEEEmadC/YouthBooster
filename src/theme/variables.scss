@@ -44,15 +44,20 @@ $colors: (
   subtle:     #444444,
   vibrant:    rebeccapurple,
   bright:     #ffc125
+  green:      #10C488,
+  lightwhite: #C7C7C7,
+  grey: #9c9c9c,
+  navgreen: #10C488,
+  white: #fff
 );
-
-
+$tabs-md-tab-icon-color-active : #10C488;
+$tabs-md-tab-icon-size : 2rem;
+$tabs-md-tab-font-size-active: 1.2rem;
+$tabs-md-tab-min-height: 4.5rem;
+$tabs-md-tab-opacity: .4;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
-
-
 
 // App Material Design Variables
 // --------------------------------------------------
@@ -68,15 +73,16 @@ $colors: (
 
 
 
+
+
+
+
 // App Theme
 // --------------------------------------------------
 // Ionic apps can have different themes applied, which can
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-
-@import "ionic.theme.default";
-
 
 // Ionicons
 // --------------------------------------------------
@@ -86,6 +92,11 @@ $colors: (
 @import "ionic.ionicons";
 
 
+@import "ionic.ionicons";
+
+
+@import "roboto";
+@import "noto-sans";
 // Fonts
 // --------------------------------------------------
 

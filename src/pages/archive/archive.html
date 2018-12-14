@@ -1,0 +1,96 @@
+
+<ion-header>
+  <ion-navbar color="navgreen"  >
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title style="margin-right:10%" >Archive</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="cards-bg social-cards"  >
+
+
+<ion-list *ngIf='archive' >
+
+  <ion-card  *ngFor="let project of archive"  >
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="{{ projectProvider.users[project.author].pictureUrl }}">
+      </ion-avatar>
+      <h2>{{ projectProvider.users[project.author].fullname }}</h2>
+      <p>{{ project.timestamp | date : 'yyyy/MM/dd' }}</p>
+    </ion-item>
+
+    <img style="width : 100%;height : auto;border-top :  3px solid #10C488;border-bottom :  3px solid #10C488;" src="{{ project.images['0'] }}">
+
+    <ion-card-content>
+
+      <strong>{{ project.title }}</strong>
+      <h4>{{ project.summary }}</h4>
+    </ion-card-content>
+
+    <ion-row padding >
+      <ion-col   >
+        <button ion-button  clear     small icon-start color="lightwhite" no-margin no-padding  >
+      <ion-icon [name]="'heart'"  color="green"></ion-icon>
+
+             {{ project.likes }} Likes
+        </button>
+      </ion-col>
+
+        <!--
+      -->
+        <ion-col center align-self-center >
+          <button ion-button color="lightwhite"    clear small icon-start no-margin no-padding   >
+            <ion-icon name='eye' color="green"></ion-icon>
+            {{ project.views }} views
+          </button>
+       </ion-col>
+
+
+      <ion-col      >
+        <button ion-button  clear    small icon-start color="lightwhite" no-margin no-padding >
+          <ion-icon name='text' no-margin no-margin  color="green"></ion-icon>
+          {{ project.commentsCount }} Comments
+        </button>
+      </ion-col>
+    </ion-row>
+<ion-row padding>
+  <ion-col >
+   <button *ngFor="let tag of project.tags" large style="margin : 2%;padding : 1.8%;border-radius :8px;"  >
+     {{ tag }}
+    </button>
+    </ion-col>
+</ion-row>
+  </ion-card>
+ </ion-list >
+
+
+ <ion-list *ngIf='fakearchive' >
+  <ion-item *ngFor="let fake of fakeUsers" class="fakeItem">
+    <h2></h2>
+    <h3></h3>
+    <p></p>
+  </ion-item>
+ </ion-list>
+
+<ion-item *ngIf='noArchive' >
+<h2><br>Sorry <br>Archive is empty</h2>
+ </ion-item>
+ <style media="screen">
+ ion-content{
+ background : #10C488;
+
+ }
+ ion-card{
+
+   border-radius : 20px;
+ }
+
+ </style>
