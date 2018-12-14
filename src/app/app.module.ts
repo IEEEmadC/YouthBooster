@@ -21,12 +21,6 @@ import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { MyApp } from './app.component';
 import { FilterItemsPage } from '../pages/filter-items/filter-items';
 import {TabsPage} from "../pages/tabs/tabs";
 import {BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
@@ -40,7 +34,6 @@ import {TeamPage} from "../pages/team/team";
 import {NotifPage} from "../pages/notif/notif";
 import {ArchivePage} from "../pages/archive/archive";
 import { NgxErrorsModule } from '@ultimate/ngxerrors';
-import { HttpModule } from '@angular/http';
 import { ComponentsModule } from '../pages/components/components.module';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
@@ -57,7 +50,6 @@ export const firebaseConfig = {
   storageBucket: "youth-booster.appspot.com",
   messagingSenderId: "358028150171"
 
-
 };
 
 
@@ -68,7 +60,7 @@ export const firebaseConfig = {
     HomePage,
     ProjectSetupPage,
     ModalContentPage,
-    ModalTextContentPagem
+    ModalTextContentPage,
     MyApp,
     TabsPage,
     BrowseProjectsPage,
@@ -83,12 +75,10 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
     HttpModule,
     FormsModule,
     BrowserModule,
     ComponentsModule,
-    HttpModule,
     NgxErrorsModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
@@ -102,7 +92,6 @@ export const firebaseConfig = {
     ProjectSetupPage,
     ModalContentPage,
     ModalTextContentPage,
-    MyApp,
     TabsPage,
     BrowseProjectsPage,
     FilterItemsPage,
