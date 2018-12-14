@@ -1,0 +1,58 @@
+
+<ion-header>
+
+  <ion-navbar color="navgreen" no-margin   >
+    <button ion-button menuToggle no-margin>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title style="margin-right:5%" >Sort by</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+<ion-grid>
+<ion-row >
+<button ion-button large   color="navgreen" (click)="filter('likes')" >Likes</button>
+</ion-row>
+
+<ion-row >
+<button ion-button large    color="navgreen" (click)="filter('views')" >Views</button>
+</ion-row>
+
+<ion-row >
+<button ion-button large    color="navgreen" (click)="filter('newest')" >Newest</button>
+</ion-row>
+
+<ion-row >
+<button ion-button large    color="navgreen" (click)="filter('oldest')">Oldest</button>
+</ion-row>
+
+</ion-grid>
+
+
+</ion-content>
+
+
+<style media="screen">
+
+ion-grid{
+position : absolute;
+top :10%;
+height : 80%;
+width : 100%;
+}
+
+ion-row{
+  margin : auto;
+    width : 100%;
+}
+
+
+button{
+
+  margin : auto;
+}
+</style>

@@ -1,0 +1,75 @@
+
+
+
+<ion-menu [content]="content">
+
+ <ion-content   >
+
+   <ion-item  no-margin   >
+
+     <ion-avatar >
+     <img  src="{{projectProvider.currentpictureUrl}}">
+     </ion-avatar>
+     <h2 margin-top >{{projectProvider.currentfullName}}</h2>
+     <p *ngIf="auth.getEmail()">{{auth.getEmail()}}   </p>
+
+   </ion-item>
+
+
+   <ion-list >
+     <button menuClose large ion-item *ngFor="let p of pages" (click)="openPage(p)" >
+       <ion-icon [name]="p.icon" item-start color="grey" ></ion-icon>
+       {{p.title}}
+     </button>
+
+
+   <button (click)="logout()" menuClose large ion-item *ngIf="auth.authenticated"  >
+     <ion-icon name="log-out" item-start color="grey"></ion-icon>
+     Log out
+   </button>
+
+   <button (click)="login()" menuClose large ion-item *ngIf="!auth.authenticated"  >
+     <ion-icon name="log-in" item-start color="grey"></ion-icon>
+     Log in
+   </button>
+ </ion-list>
+
+   <ion-item  color="green" class="youth"  >
+     <h1>
+    YouthBooster
+    </h1>
+     </ion-item>
+
+ </ion-content>
+
+</ion-menu>
+
+
+
+
+<ion-nav id="nav" [root]="rootPage" #content ></ion-nav>
+
+
+
+
+  <style media="screen">
+
+  .youth{
+  position : fixed;
+  top : 87%;
+  height : 13%;
+
+  }
+    ion-item,img{
+
+    margin: auto;
+    text-align: center;
+
+    }
+
+    img {
+        width: 80px !important;
+        height: auto !important;
+    }
+
+  </style>

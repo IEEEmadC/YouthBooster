@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar color="navgreen"  no-margin   >
+
+    <ion-title >Login</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content >
+   <div  id="di">
+	<form margin (ngSubmit)="login()" [formGroup]="loginForm" >
+		<ion-list inset    >
+
+		<!--	<ion-item   [ngClass]="{ invalid: emailErrors.hasError('*', ['touched', 'dirty']) }"     >   -->
+				<ion-input large  type="text" placeholder="Email" formControlName="email"   ></ion-input>
+	<!--		</ion-item>  -->
+ <!--
+			<div ngxErrors="email" #emailErrors="ngxErrors"   >
+				<div <!--[ngxError]="['email', 'required']" [when]="['touched', 'dirty']"    >It should be a valid email</div>
+			</div>
+<!--
+			<ion-item  [ngClass]="{ invalid: passwordErrors.hasError('*', ['touched']) }"    >   -->
+				<ion-input  large type="password" placeholder="Password" formControlName="password"></ion-input>
+		<!--	</ion-item>  -->
+
+		<!-- 	<div ngxErrors="password" #passwordErrors="ngxErrors">
+				<div [ngxError]="['minlength', 'required']" [when]="['touched']">It should be at least 5 characters</div>
+			</div>   -->
+		</ion-list>
+
+		<div padding-horizontal>
+			<div class="form-error">{{loginError}}</div>
+
+			<!--	<div class="login-footer">
+				<p>
+					<a href="#">Forgot password?</a>
+					If you're a new user, please sign up.
+				</p>
+			</div>   -->
+
+
+        <button margin ion-button full type="submit" [disabled]="!loginForm.valid" color="green"   >Log in</button>
+
+				<button margin  ion-button icon-left full (click)="loginWithGoogle()"  color="green">
+					<ion-icon name="logo-google"></ion-icon>
+					Log in with Google
+				</button>
+
+				<button margin ion-button icon-left  full (click)="signup()" color="green"  >
+					<ion-icon name="person-add"></ion-icon>
+					Sign up
+				</button>
+
+		</div>
+	</form>
+  </div>
+</ion-content>
+
+<style media="screen">
+
+button{
+margin : 20px auto !important;
+width : 80% !important;
+}
+
+#di{
+  position : absolute !important;
+  top : 15%  !important;
+  height : 70% !important;
+  left : 5% !important;
+
+  width : 90% !important;
+  margin : 0 !important;
+  padding : 0 !important;
+}
+ion-input{
+height : 70px !important;
+}
+
+
+</style>

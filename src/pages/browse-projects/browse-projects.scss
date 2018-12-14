@@ -1,0 +1,85 @@
+page-browse-projects{
+
+
+
+.social-cards ion-col {
+  padding: 0;
+}
+
+
+ion-col {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+
+
+    }
+    ion-row {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+
+        }
+button{
+font-size : 0.9em;
+}
+
+ion-icon {
+     font-size: 1.8em;
+ }
+
+
+
+
+ .fakeItem {
+
+   @keyframes animatedBar{
+     0%{
+         background-position: -406px 0;
+     }
+     100%{
+         background-position: 0 0;
+     }
+  }
+
+   h2, h3, p {
+     background-color: white;
+     opacity: 0.5;
+     height: 1em;
+     margin-top: 10px;
+     position: relative;
+
+     background: linear-gradient(to right, #ffffff , #EEEEEE);
+     animation: animatedBar 700ms linear infinite;
+
+     &:after {
+       position: absolute;
+       display: block;
+       content: '';
+       right: 0;
+       bottom: 0;
+       top: 0;
+       background-color: white;
+     }
+   }
+
+   h2:after {
+     width: 65%;
+   }
+
+   h3:after {
+     width: 60%;
+   }
+
+   p:after {
+     width: 40%;
+   }
+ }
+
+
+
+}
