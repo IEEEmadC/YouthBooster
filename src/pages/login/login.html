@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content >
+  <div id="di"  >
 	<form margin (ngSubmit)="login()" [formGroup]="loginForm" >
 		<ion-list inset>
 
@@ -53,4 +54,24 @@
 			</ion-list>
 		</div>
 	</form>
+  </div>
 </ion-content>
+
+<style media="screen">
+button{
+margin : 20px auto !important;
+width : 80% !important;
+}
+#di{
+  position : absolute !important;
+  top : 15%  !important;
+  height : 70% !important;
+  left : 5% !important;
+  width : 90% !important;
+  margin : 0 !important;
+  padding : 0 !important;
+}
+ion-input{
+height : 70px !important;
+}
+</style>
