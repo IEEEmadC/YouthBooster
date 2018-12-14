@@ -17,7 +17,7 @@ archive=[];
 noArchive: boolean =false;
 fakearchive: boolean =true;
 fakeUsers: Array<any> = new Array(8);
- 
+
 
   ionViewDidLoad() {
 
@@ -27,8 +27,8 @@ fakeUsers: Array<any> = new Array(8);
        /* te5ou projects l user w tchouf closed wala le */
            if(data)
        this.archive=data.filter((element)=> {
-             //console.log(element+"  "+element.author);
-         return (JSON.stringify(element['author'])==JSON.stringify(this.projectProvider.currentUser))&&JSON.stringify(element['closed']);
+           
+         return (JSON.stringify(element['author'])==JSON.stringify(this.projectProvider.currentUser))&&(element['closed']);
         });
 
           setTimeout(()=>{

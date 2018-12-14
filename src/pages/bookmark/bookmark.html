@@ -20,7 +20,7 @@
 <ion-content class="cards-bg social-cards"  >
 
 
-<ion-list *ngIf='projects' >
+<ion-list *ngIf='projects && projectProvider.users' >
 
   <ion-card  *ngFor="let project of projects"  >
 

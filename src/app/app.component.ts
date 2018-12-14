@@ -9,7 +9,6 @@ import {TeamPage} from "../pages/team/team";
 
 import {ArchivePage} from "../pages/archive/archive";
 import { ProjectProvider } from '../providers/project/project';
- 
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 

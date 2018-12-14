@@ -28,13 +28,18 @@ export class BookmarkPage {
   ionViewDidLoad() {
 
         this.mybookmarks = this.projectProvider.bookmarks;
+      //  this.mybookmarks= Array.from(Object.keys(this.mybookmarks[0]['projects']), k=>this.mybookmarks[0]['projects'][k]);
+
         console.log(this.mybookmarks);
+        console.log(this.projectProvider.projects);
         if((!this.mybookmarks)||(this.mybookmarks.length==0))
          this.nolikes=true;
 
         this.projects=this.projectProvider.projects.filter((data)=>{
 
-            return this.mybookmarks.indexOf(data.projectId);
+            return this.mybookmarks.indexOf(data.projectId.toString()) > -1;
+
+
         });
            console.log(this.projects);
 

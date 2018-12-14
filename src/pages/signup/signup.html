@@ -3,13 +3,13 @@
 
 
     <ion-title >Sign up</ion-title>
- 
+
   </ion-navbar>
 
 </ion-header>
 
 <ion-content>
-
+   <div  id="di" >
 	<form (ngSubmit)="signup()" [formGroup]="form">
 		<ion-list inset>
 
@@ -33,7 +33,27 @@
 		<div padding-horizontal>
 			<div class="form-error">{{signupError}}</div>
 
-			<button ion-button full type="submit" [disabled]="!form.valid">Sign up</button>
+			<button ion-button full type="submit" [disabled]="!form.valid"  color="green">Sign up</button>
 		</div>
 	</form>
+  </div>
 </ion-content>
+
+
+
+<style media="screen">
+  #di{
+    position : absolute !important;
+    top : 15%  !important;
+    height : 70% !important;
+    left : 10% !important;
+
+    width : 80% !important;
+    margin : 0 !important;
+    padding : 0 !important;
+  }
+ion-input{
+height : 70px !important;
+}
+
+</style>

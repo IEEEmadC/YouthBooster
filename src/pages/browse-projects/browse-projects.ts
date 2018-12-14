@@ -27,7 +27,7 @@ export class BrowseProjectsPage {
    @ViewChild('myContent') content;
 
 showSearch = false;
-
+ 
   constructor(public projectProvider : ProjectProvider,public navCtrl: NavController, public navParams: NavParams, public keyboard: Keyboard,private fdb: AngularFireDatabase)
    {
 this.projectProvider.projects = this.navParams.get('projects');
