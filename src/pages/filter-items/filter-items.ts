@@ -26,32 +26,35 @@ export class FilterItemsPage {
          }
 
 
-         public sortByKey(array, key) {
-                  return array.sort(function (a, b) {
-                   var x,y;
-                   var parts1,parts2;
+                      public   sortByKey(array, key) {
+                return array.sort(function (a, b) {
+                 var x,y;
+                 var parts1,parts2,atime,btime;
 
-                      if((key=='likes')||(key=='views'))
-                      {
-                       x = a[key];
-                       y = b[key];
-                      }
-                      else if((key=='newest')||(key=='oldest'))
-                      {
+                    if((key=='likes')||(key=='views'))
+                    {
+                     x = a[key];
+                     y = b[key];
+                    }
+                    else if((key=='newest')||(key=='oldest'))
+                    {
+                      atime=new Date(a['timestamp']);
+                      btime=new Date(b['timestamp']);
+                      atime=atime.getFullYear()+"/"+atime.getMonth()+"/"+atime.getDate();
+                      btime=btime.getFullYear()+"/"+btime.getMonth()+"/"+btime.getDate();
 
-                        parts1=a['time'].split("/");
-                        parts2=b['time'].split("/");
-                        x = new Date(parts1[2], parts1[1] - 1, parts1[0]);
-                        y = new Date(parts2[2], parts2[1] - 1, parts2[0]);
+                      parts1=atime.split("/");
+                      parts2=btime.split("/");
+                      y = new Date(parts1[2], parts1[1], parts1[0]);
+                      x = new Date(parts2[2], parts2[1], parts2[0]);
 
-                      }
-                      if(key=='oldest')
-                      return ((x < y) ? -1 : ((x > y) ? 0 : 1));
-                      else
-                      return ((x > y) ? -1 : ((x < y) ? 0 : 1));
-                 });
+                    }
+                    if(key=='oldest')
+                    return ((x < y) ? -1 : ((x > y) ? 0 : 1));
+                    else
+                    return ((x > y) ? -1 : ((x < y) ? 0 : 1));
+                });
 
-             }
 
 
 
