@@ -7,48 +7,24 @@ import { AngularFireDatabase } from "angularfire2/database";
 export class ProjectProvider {
 
 
-<<<<<<< HEAD
   constructor(private fdb: AngularFireDatabase) {
 
   }
   users: any[] = [];
   projects = [];
+comments=[];
   filtercateg = 'none';
   bookmarks = [];
   likeState = [];
   projectID: string = "";
-  currentUser = 'DbuWTni47ZAkllESplv';
+  currentUser = '';
   currentpictureUrl = "https://firebasestorage.googleapis.com/v0/b/youth-booster.appspot.com/o/profiles%2Findex.png?alt=media&token=4ef3ca76-28fe-42f5-b9a5-e10266470f34";
   currentfullName = " ";
   // jack balvin
-  // load method first method to be called
-=======
-constructor(private fdb: AngularFireDatabase){
-
-}
-users : any[]=[];
-projects=[];
-comments=[];
-filtercateg='none';
-bookmarks=[];
-likeState= [];
-projectID: string ="";
-currentUser  ='DbuWTni47ZAkllESplv';
-currentpictureUrl="https://firebasestorage.googleapis.com/v0/b/youth-booster.appspot.com/o/profiles%2Findex.png?alt=media&token=4ef3ca76-28fe-42f5-b9a5-e10266470f34";
-currentfullName=" ";
-  // jack balvin
+// load method first method to be called
 
 
 // load method first method to be called  loading bookmarks (with likes) projects users comments
-load(){
-
-  this.fdb.list("/users").valueChanges().subscribe((data) => {
-  data.forEach((each)=>{
-    this.users[each['userId']]=each;
-  });
->>>>>>> 9c5708dfd5c58eb982b7509a964579a8d47399a6
-
-
   load() {
 
     this.fdb.list("/users").valueChanges().subscribe((data) => {
@@ -70,7 +46,6 @@ load(){
 
     this.fdb.list("/projects").valueChanges().subscribe((data) => {
 
-<<<<<<< HEAD
       this.projects = data;
       this.projects.forEach((element) => {
         if (JSON.stringify(element['author']) == JSON.stringify(this.currentUser)) {
@@ -89,28 +64,12 @@ load(){
 
     /*  tchargi men bookmarks datapage */
     this.fdb.list("/bookmarks/" + this.currentUser + "/projects").valueChanges().subscribe((data) => {
-
       this.bookmarks = data;
-
       if (this.bookmarks)
         this.bookmarks.forEach((data) => {
           this.likeState[data] = 'liked';
         });
     }, (err) => { console.log("probleme bookmark : ", err); });
-
-  }
-
-
-
-=======
-               /*  tchargi men bookmarks datapage */
-this.fdb.list("/bookmarks/"+this.currentUser+"/projects").valueChanges().subscribe((data) => {
-this.bookmarks=data;
-    if(this.bookmarks)
-  this.bookmarks.forEach((data) => {
-  this.likeState[data]='liked';
-});
-},(err)=>{ console.log("probleme bookmark : ", err); });
 
 
 this.fdb.list("/comments").valueChanges().subscribe((data) => {
@@ -121,19 +80,12 @@ this.comments=data;
 
 }
 
-
-
-//like or unlike project and add it in likes section
-likeProject(project)
-{    console.log(this.bookmarks);
->>>>>>> 9c5708dfd5c58eb982b7509a964579a8d47399a6
-
   // open another page of project form
   addProject() {
 
   }
 
-  //like project and add it in likes section
+//like project and add it in likes section
   likeProject(project) {
     console.log(this.bookmarks);
 
@@ -188,8 +140,15 @@ likeProject(project)
     }
   }
 
+  addUser(uid,_user) {
+    this.fdb.list("/users").set(uid, _user).then( (response) => {
+      console.log(response);
+      
+    }).catch(err => {
+        alert(err);
+    });
+  }
 
-<<<<<<< HEAD
   // sort by key method ( time or likes or views )
   sortByKey(array, key) {
     return array.sort(function (a, b) {
@@ -217,16 +176,11 @@ likeProject(project)
       else
         return ((x > y) ? -1 : ((x < y) ? 0 : 1));
     });
-  }
-}
-=======
-              }
-              if(key=='oldest')
-              return ((x < y) ? -1 : ((x > y) ? 0 : 1));
-              else
-              return ((x > y) ? -1 : ((x < y) ? 0 : 1));
-              });
 }
 
+<<<<<<< HEAD
+  }
+=======
+
 }
->>>>>>> 9c5708dfd5c58eb982b7509a964579a8d47399a6
+>>>>>>> 51ac75f4b4042260bf9240f638cd6efbaa2ffbcf

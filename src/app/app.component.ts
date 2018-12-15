@@ -10,7 +10,7 @@ import { TeamPage} from "../pages/team/team";
 
 import { ArchivePage} from "../pages/archive/archive";
 import { ProjectProvider } from '../providers/project/project';
- 
+
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 
@@ -51,6 +51,8 @@ export class MyApp {
             user => {
               if (user) {
                 console.log(user);
+                this.projectProvider.currentUser=user.uid.toString();
+
                 this.rootPage = HomePage;
               } else {
                 this.rootPage = LoginPage;
@@ -75,7 +77,7 @@ export class MyApp {
           this.rootPage = OnboardingScreenPage;
         }
       );
-*/    
+*/
   }
 
 
@@ -90,13 +92,13 @@ export class MyApp {
 	logout() {
 
 		this.auth.signOut();
-		this.nav.setRoot(TabsPage);
+		this.nav.setRoot(LoginPage);
 	}
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    
+
     this.rootPage = page.component;
   }
 

@@ -77,7 +77,7 @@
       <p>{{ project.timestamp | date : 'yyyy/MM/dd' }}</p>
     </ion-item>
 
-    <img style="width : 100%;height : auto;border-top :  3px solid #10C488;border-bottom :  3px solid #10C488;" src="{{ project.images['0'] }}"  (click)="accessProject(project)">
+    <img style="width : 100%;height : auto;border-top :  3px solid #9c9c9c;border-bottom :  3px solid #9c9c9c;" src="{{ project.images['0'] }}"  (click)="accessProject(project)">
 
     <ion-card-content  (click)="accessProject(project)" >
 
@@ -130,7 +130,7 @@
   </ion-fab>
 
     <ion-list *ngIf='!projectProvider.projects||!projectProvider.users'    >
-     <ion-item *ngFor="let fake of fakeProjects" class="fakeItem" style="background : #10C488;">
+     <ion-item *ngFor="let fake of fakeProjects" class="fakeItem" > <!-- style="background : #10C488;" -->
 
        <h2></h2>
        <h3></h3>

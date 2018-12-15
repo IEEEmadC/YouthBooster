@@ -60,7 +60,7 @@ export class TeamPage {
 
         return JSON.stringify(element['author'])==JSON.stringify(this.projectProvider.currentUser);
        });
-       if(usersd[0]['joins'])
+       if((usersd[0])&&(usersd[0]['joins']))
        this.users= Array.from(Object.keys(usersd[0]['joins']), k=>usersd[0]['joins'][k]);
        console.log(this.users);
         if((!this.users)||(this.users.length==0))

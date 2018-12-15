@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar hideBackButton="true" color=primary>
     <ion-title>
-      <img src="assets/imgs/logoicon.png" id="logo"> YBooster
+    <!--  <img src="assets/imgs/logoicon.png" id="logo"> --> YBooster
     </ion-title>
-    <ion-buttons end>
+<!--    <ion-buttons end>
       <button ion-button icon-start (click)="openFavorites()" class="btn-txt">
         <ion-icon name="star"></ion-icon>
         Favs
@@ -15,7 +15,7 @@
       <button ion-button icon-only (click)="openSearchBox()">
         <ion-icon name="search"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>  -->
   </ion-navbar>
 </ion-header>
 
@@ -25,9 +25,9 @@
 
   <div>
     <ion-card *ngFor="let category of categories; let i = index" (click)="browse(category)">
-      <div>
-        <div class="genre-cover">
-          <img src="assets/imgs/{{ category }}.png" class="tinted">
+      <div  >
+        <div   class="genre-cover">
+          <img no-margin src="assets/imgs/{{ category }}.jpg" class="tinted">
 
         </div>
       </div>
