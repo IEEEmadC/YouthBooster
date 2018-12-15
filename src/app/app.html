@@ -7,7 +7,7 @@
      <img  src="{{ projectProvider.currentpictureUrl }}">
      </ion-avatar>
      <h2 margin-top >{{projectProvider.currentfullName}}</h2>
-     <p *ngIf="auth.getEmail()">{{auth.getEmail()}}   </p>
+     <p *ngIf="auth.getEmail()">{{auth.getUID()}}   </p>
    </ion-item>
 
 

@@ -12,6 +12,7 @@ export class ProjectProvider {
   }
   users: any[] = [];
   projects = [];
+comments=[];
   filtercateg = 'none';
   bookmarks = [];
   likeState = [];
@@ -20,9 +21,10 @@ export class ProjectProvider {
   currentpictureUrl = "https://firebasestorage.googleapis.com/v0/b/youth-booster.appspot.com/o/profiles%2Findex.png?alt=media&token=4ef3ca76-28fe-42f5-b9a5-e10266470f34";
   currentfullName = " ";
   // jack balvin
-  // load method first method to be called
+// load method first method to be called
 
 
+// load method first method to be called  loading bookmarks (with likes) projects users comments
   load() {
 
     this.fdb.list("/users").valueChanges().subscribe((data) => {
@@ -62,26 +64,28 @@ export class ProjectProvider {
 
     /*  tchargi men bookmarks datapage */
     this.fdb.list("/bookmarks/" + this.currentUser + "/projects").valueChanges().subscribe((data) => {
-
       this.bookmarks = data;
-
       if (this.bookmarks)
         this.bookmarks.forEach((data) => {
           this.likeState[data] = 'liked';
         });
     }, (err) => { console.log("probleme bookmark : ", err); });
 
-  }
 
+this.fdb.list("/comments").valueChanges().subscribe((data) => {
+this.comments=data;
+    console.log(this.comments);
 
+},(err)=>{ console.log("probleme bookmark : ", err); });
 
+}
 
   // open another page of project form
   addProject() {
 
   }
 
-  //like project and add it in likes section
+//like project and add it in likes section
   likeProject(project) {
     console.log(this.bookmarks);
 
@@ -164,5 +168,7 @@ export class ProjectProvider {
       else
         return ((x > y) ? -1 : ((x < y) ? 0 : 1));
     });
+}
+
   }
 }

@@ -26,7 +26,8 @@ export class FilterItemsPage {
   }
 
 
-          public   sortByKey(array, key) {
+<<<<<<< HEAD
+  public sortByKey(array, key) {
     return array.sort(function (a, b) {
       var x, y;
       var parts1, parts2, atime, btime;
@@ -40,6 +41,38 @@ export class FilterItemsPage {
         btime = new Date(b['timestamp']);
         atime = atime.getFullYear() + "/" + atime.getMonth() + "/" + atime.getDate();
         btime = btime.getFullYear() + "/" + btime.getMonth() + "/" + btime.getDate();
+=======
+          public   sortByKey(array, key) {
+                return array.sort(function (a, b) {
+                 var x,y;
+                 var parts1,parts2,atime,btime;
+
+                    if((key=='likes')||(key=='views'))
+                    {
+                     x = a[key];
+                     y = b[key];
+                    }
+                    else if((key=='newest')||(key=='oldest'))
+                    {
+                      atime=new Date(a['timestamp']);
+                      btime=new Date(b['timestamp']);
+                      atime=atime.getFullYear()+"/"+atime.getMonth()+"/"+atime.getDate();
+                      btime=btime.getFullYear()+"/"+btime.getMonth()+"/"+btime.getDate();
+
+                      parts1=atime.split("/");
+                      parts2=btime.split("/");
+                      y = new Date(parts1[2], parts1[1], parts1[0]);
+                      x = new Date(parts2[2], parts2[1], parts2[0]);
+
+                    }
+                    if(key=='oldest')
+                    return ((x < y) ? -1 : ((x > y) ? 0 : 1));
+                    else
+                    return ((x > y) ? -1 : ((x < y) ? 0 : 1));
+                });
+
+      }
+>>>>>>> 9c5708dfd5c58eb982b7509a964579a8d47399a6
 
         parts1 = atime.split("/");
         parts2 = btime.split("/");
@@ -53,5 +86,5 @@ export class FilterItemsPage {
         return ((x > y) ? -1 : ((x < y) ? 0 : 1));
     });
 
-      }
+  }
 }
