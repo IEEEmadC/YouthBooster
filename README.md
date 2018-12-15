@@ -20,7 +20,7 @@ We later plan to add many more categories in order to accept as many innovative 
 
 
 
-### ==> Youth Booster is the solution that will help bring change, success and innovation to our societies in a time all of that is most needed, by focusing on the only ones that can make it happen; the YOUTH !
+#### ==> Youth Booster is the solution that will help bring change, success and innovation to our societies in a time all of that is most needed, by focusing on the only ones that can make it happen; the YOUTH !
 
 -----------------------
 -----------------------
@@ -30,5 +30,5 @@ Youtube video link:
 -----------------------
 -----------------------
 
-| [App's executable file](https://github.com/khalilMejri/YouthBooster/tree/master/CODE/youth_booster.apk) | Team: KFI | Description: Youth Booster is a mobile application that helps the young innovators and visionaries launch their projects/startups/applications by providing them with the attention and resources they need. | Licence:  | Country: Tunisia | Collaborators: [Khalil](https://github.com/khalilMejri), [Firas](https://github.com/khalilMejri/YouthBooster/commits?author=losstrak8) and [Ilyes](https://github.com/ilyesG) |
+| [App's executable file](https://github.com/khalilMejri/YouthBooster/tree/master/CODE/youth_booster.apk) | Team Name: KFI | Short Description: Youth Booster is a mobile application that helps the young innovators and visionaries launch their projects/startups/applications by providing them with the attention and resources they need. | Licence:  | Country: Tunisia | Collaborators: [Khalil](https://github.com/khalilMejri), [Firas](https://github.com/khalilMejri/YouthBooster/commits?author=losstrak8) and [Ilyes](https://github.com/ilyesG) |
 | - | - | - | - | - | - |
