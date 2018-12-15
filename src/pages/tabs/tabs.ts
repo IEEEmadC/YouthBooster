@@ -3,7 +3,7 @@ import { Component  } from '@angular/core';
 import {BrowseProjectsPage} from "../browse-projects/browse-projects";
 import {TeamPage} from "../team/team";
 import {NotifPage} from "../notif/notif";
- 
+
 
 @Component({
 
@@ -19,7 +19,7 @@ export class TabsPage {
 
   browseProjectsPage= BrowseProjectsPage;
 
-  notifPage= TeamPage;
+  notifPage= NotifPage;
 
   profilPage= ProfilePage;
 

@@ -17,7 +17,7 @@ comments=[];
   bookmarks = [];
   likeState = [];
   projectID: string = "";
-  currentUser = 'DbuWTni47ZAkllESplv';
+  currentUser = '';
   currentpictureUrl = "https://firebasestorage.googleapis.com/v0/b/youth-booster.appspot.com/o/profiles%2Findex.png?alt=media&token=4ef3ca76-28fe-42f5-b9a5-e10266470f34";
   currentfullName = " ";
   // jack balvin
@@ -170,5 +170,5 @@ this.comments=data;
     });
 }
 
-  }
+
 }
