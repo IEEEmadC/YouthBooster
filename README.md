@@ -3,7 +3,7 @@ Youth Booster is a mobile application that helps the young innovators and vision
 
 Our application aims to connect project ideas in all domains with the rest of the world to boost and give them the attention they deserve. It offers its users the ability to form teams within the projects. Anyone can send a request to the project owner to join their team and collaborate with them by filling a certain role. We want to make it easier for investors to find projects worth investing in, in their regions and for our creative youth to get the funding they need!
 
-We chose to take just 5% of all donations made inside the app.
+For our profit, we chose to take just 5% of all donations made inside the app.
 
 The app will show slides for new-comers to help guide them and improve their experience in it! It is a cross-platform mobile application made using the Ionic3 framework. It has Firebase integration and uses Google authentication to make it easy for users to link their accounts on these platforms.
 
