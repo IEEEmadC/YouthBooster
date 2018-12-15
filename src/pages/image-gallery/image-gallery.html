@@ -21,7 +21,7 @@
     <ion-grid *ngSwitchCase="'regular'">
       <ion-row>
         <ion-col col-6 col-md-4 col-xl-3 *ngFor="let image of images; let idx =index">
-          <div imageViewer class="image-container" [style.background-image]="'url(image)'"
+          <div imageViewer class="image-container" [style.background-image]="imageURL(idx)"
             (click)="viewImage(image)"></div>
             <button icon-only primary small *ngIf="edit_mode" (click)="showMenu(idx)" >
               <ion-icon name="more" style="color:grey;"></ion-icon>
@@ -32,7 +32,7 @@
 
     <!-- More Pinterest floating gallery style -->
     <div class="images" *ngSwitchCase="'pinterest'">
-      <div class="one-image" *ngFor="let image of images; let idx = index">
+      <div class="one-image" *ngFor="let image of images; let idx = index" (click)="viewImage(image)">
         <img src="{{image}}">
         <button icon-only primary small *ngIf="edit_mode" (click)="showMenu(idx)" >
             <ion-icon name="more" style="color:grey;"></ion-icon>

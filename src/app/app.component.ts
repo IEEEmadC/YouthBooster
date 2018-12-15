@@ -1,7 +1,6 @@
 import { HomePage } from './../pages/home/home';
 import { Component, ViewChild } from '@angular/core';
-import { ProjectSetupPage } from './../pages/project-setup/project-setup';
-import { Nav, Platform, NavController } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage} from "../pages/tabs/tabs";
@@ -15,7 +14,6 @@ import { ProjectProvider } from '../providers/project/project';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 
-import { AuthserviceProvider } from './../providers/authservice/authservice';
 
 
 @Component({
@@ -32,7 +30,7 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public projectProvider : ProjectProvider,public auth: AuthService) {
 
     this.pages = [
-      { title: 'Home', component: TabsPage, icon: 'home' },
+      { title: 'Home', component: HomePage, icon: 'home' },
       { title: 'Team', component: TeamPage, icon: 'people' },
       { title: 'Bookmarks', component: BookmarkPage, icon: 'bookmarks' },
       { title: 'Archive', component: ArchivePage, icon: 'archive' },

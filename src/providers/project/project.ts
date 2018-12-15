@@ -9,7 +9,6 @@ export class ProjectProvider {
 
 constructor(private fdb: AngularFireDatabase){
 
-
 }
 users : any[]=[];
 projects=[];
@@ -164,9 +163,5 @@ else {
                 else
                 return ((x > y) ? -1 : ((x < y) ? 0 : 1));
            });
-
        }
-
-
-
 }

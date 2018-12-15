@@ -1,5 +1,5 @@
 import { Camera } from '@ionic-native/camera';
-import { ProfilePage } from './../pages/profile/profile';
+import { ProfilePage, AddSectionModal } from './../pages/profile/profile';
 import { CommentsPage } from './../pages/comments/comments';
 import { ImageGalleryPage } from './../pages/image-gallery/image-gallery';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -58,6 +58,7 @@ import { EmailService } from '../services/email.service';
 import { SignupPage } from '../pages/signup/signup';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserProvider } from '../providers/user/user';
+import { UtilityProvider } from '../providers/utility/utility';
 
 export const firebaseConfig = {
 
@@ -89,6 +90,7 @@ export const firebaseConfig = {
     TeamPage,
     DetailsPage,
     NewSectionModal,
+    AddSectionModal,
     EditSectionModal,
     MapsSectionModal,
     ImageGalleryPage,
@@ -132,6 +134,7 @@ export const firebaseConfig = {
     ArchivePage,
     DetailsPage,
     NewSectionModal,
+    AddSectionModal,
     EditSectionModal,
     MapsSectionModal,
     ImageGalleryPage,
@@ -168,7 +171,8 @@ export const firebaseConfig = {
     AngularFireAuth,
     AuthService,
     EmailService,
-    UserProvider
+    UserProvider,
+    UtilityProvider
   ]
 })
 export class AppModule { }

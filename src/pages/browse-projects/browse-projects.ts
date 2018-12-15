@@ -1,12 +1,13 @@
 import { ProjectSetupPage } from './../project-setup/project-setup';
 import { Component,ViewChild } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
-import { NavController, NavParams,Keyboard } from 'ionic-angular';
+import { NavController, NavParams, Keyboard, AlertController, ToastController } from 'ionic-angular';
 import { FilterItemsPage } from '../filter-items/filter-items';
 import { trigger,state,style,animate,transition} from '@angular/animations';
 import { AngularFireDatabase } from "angularfire2/database";
 import { ProfilePage } from '../profile/profile';
 import { DetailsPage } from '../details/details';
+import { User } from '../../modals/user.modal';
 
 @Component({
   selector: 'page-browse-projects',
@@ -31,7 +32,13 @@ export class BrowseProjectsPage {
   showSearch = false;
   terms: string;
 
-  constructor(public projectProvider : ProjectProvider,public navCtrl: NavController, public navParams: NavParams, public keyboard: Keyboard,private fdb: AngularFireDatabase)
+  constructor(public projectProvider : ProjectProvider,
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public keyboard: Keyboard,
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    private fdb: AngularFireDatabase)
   {
     this.projectProvider.projects = this.navParams.get('projects');
 
@@ -56,12 +63,54 @@ export class BrowseProjectsPage {
  }
 
 accessProfile(project){
-  this.navCtrl.push(ProfilePage,{'profile' : this.projectProvider.users[project.author]})
+  let p: User;
+  p = this.projectProvider.users[project.author];
+   
+  this.navCtrl.push(ProfilePage,{'profile' : p});
 }
 
 addProject() {
-  this.navCtrl.push(ProjectSetupPage);
+  const prompt = this.alertCtrl.create({
+    title: 'Start New Project..',
+    message: "Be the first to grow our community and give inspiration!",
+    inputs: [
+      {
+        name: 'title',
+        placeholder: 'Title here..'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+        }
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          this.navCtrl.push(ProjectSetupPage, {'title': data['title']});
+        }
+      }
+    ]
+  });
+  prompt.present();
 }
+
+
+  // generic method for creating toasts
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
 
  navigateFilter(){
 

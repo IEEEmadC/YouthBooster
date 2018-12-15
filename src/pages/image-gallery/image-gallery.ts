@@ -2,6 +2,7 @@ import { Project } from './../../modals/project.modal';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, ActionSheetController } from 'ionic-angular';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 /**
  * Generated class for the ImageGalleryPage page.
@@ -22,27 +23,33 @@ export class ImageGalleryPage {
   images: string[];
   edit_mode = false;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              private platform: Platform,
-              private actionsheetCtrl: ActionSheetController,
-              public imageViewer: PhotoViewer) {
-    if(navParams.data == 'edit') {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private platform: Platform,
+    private sanitizer : DomSanitizer,
+    private actionsheetCtrl: ActionSheetController,
+    public imageViewer: PhotoViewer) {
+    if (navParams.get('edit')) {
       this.edit_mode = true;
-    }     
-    
+    }
+
     this.project = navParams.get('project');
-    this.images = this.project.images;
+    this.images = navParams.get('gallery');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageGalleryPage');
   }
 
+  imageURL(index): SafeUrl {
+    let url = this.images[index];
+    return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
+  }
+
   viewImage(path) {
     // demo image 
     path = "https://images.unsplash.com/photo-1542764489-9a714a1dc657?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=39106215860331724b1cd47401f98379&auto=format&fit=crop&w=334&q=80";
-    this.imageViewer.show(path, 'My image title', {share: true});
+    this.imageViewer.show(path, 'My image title', { share: true });
   }
 
   doInfinite(infiniteScroll) {
@@ -69,8 +76,8 @@ export class ImageGalleryPage {
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
             console.log('Delete clicked');
-                this.images.splice(index, 1);
-                console.log(this.images);
+            this.images.splice(index, 1);
+            console.log(this.images);
           }
         },
         {

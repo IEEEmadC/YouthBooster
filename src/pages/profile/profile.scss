@@ -1,6 +1,99 @@
+page-profile {
 ion-content {
 
-    
+  h5 {
+    text-transform:uppercase;
+    font-size:0.5em;
+    letter-spacing: 1px;
+    margin-left: 10px;
+    margin-top: 25px;
+    color: grey !important;
+}
+
+
+.edit {
+  font-size: 12px;
+  align-self: flex-end;
+  margin-top: 14px;
+  margin-right: 12px;
+  float: right;
+  color: #0BAAB0;
+  text-decoration: #0BAAB0 underline
+}
+
+
+h4 {
+  color: #8DF6FA;
+  text-transform: uppercase;
+  font-size: .5em;
+  letter-spacing: 1.5px;
+  margin:0;padding:0;
+}
+
+ion-card h4 {
+  font-weight: bold !important;
+  color: #0BAAB0;
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+ion-card p {
+  color: gray !important;
+  line-height: 1.5em;
+}
+
+ion-col p {
+  color: #fff;
+  margin: 10px 0 0 0;
+  font-size: 0.55em;
+}
+
+ion-col p.larger-res {
+  font-size: 1.6em;
+  font-family: 'Raleway';
+  margin-top: 0;
+}
+
+ion-scroll {
+  height: 200px;
+}
+
+    h4 {
+        color: #8DF6FA;
+        text-transform: uppercase;
+        font-size: .5em;
+        letter-spacing: 1.5px;
+        margin:0;padding:0;
+    }
+
+    ion-card h4 {
+        font-weight: bold !important;
+        color: #0BAAB0;
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+    }
+
+    ion-card p {
+        color: gray !important;
+        line-height: 1.5em;
+    }
+
+    ion-col p {
+        color: #fff;
+        margin: 10px 0 0 0;
+        font-size: 0.55em;
+    }
+
+    ion-col p.larger-res {
+        font-size: 1.6em;
+        font-family: 'Raleway';
+        margin-top: 0;
+    }
+
+    ion-scroll {
+        height: 200px;
+    }
+
 
     /*page-profile {
 
@@ -288,4 +381,5 @@ height: 28px;
     .ion-logo-linkedin {
         color: #0077B5;      
     }
+}
 }

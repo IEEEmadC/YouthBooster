@@ -3,7 +3,7 @@
   <ion-header no-border transparent>
     <ion-navbar>
       <ion-buttons end>
-        <button ion-button icon-start>
+        <button ion-button icon-start (click)='doLogout()'>
           <ion-icon name="log-out"></ion-icon>
         </button>
       </ion-buttons>
@@ -20,7 +20,7 @@
         <div class="chat-list-sub-title">{{ user?.about }}</div>
         <div class="chat-list-price"><strong>52 followers</strong></div>
         <!-- to implement :: check whether edit mode is permitted -->
-        <div class="chat-list-discount" (click)="changePicture()">Edit </div>
+        <div class="chat-list-discount" (click)="openImagePickerCrop()">Edit </div>
       </ion-item>
     </ion-list>
 
@@ -44,10 +44,10 @@
 
         <ion-item>
           <ion-avatar item-start>
-            <img src="{{ featuredProjects?.author.pictureUrl }}">
+            <img [src]="forFeaturedUsers?.pictureUrl">
           </ion-avatar>
-          <h2>{{ featuredProjects?.author.fullname }}</h2>
-          <p>{{ featuredProjects?.timestamp }}</p>
+          <h2>{{ forFeaturedUsers?.username }}</h2>
+          <p>{{ forFeaturedUsers?.birthday }}</p>
         </ion-item>
 
         <img src="{{ featuredProjects?.images[0] }}">
@@ -59,11 +59,12 @@
         <ion-row>
           <ion-col>
             <button ion-button icon-start clear small>
-              <ion-icon class="fix-icon"><img src="{{ featuredProjects?.comments[0].from.pictureUrl }}">
+              
+              <ion-icon class="fix-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
-              <ion-icon class="left-icon"><img src="{{ featuredProjects?.comments[1].from.pictureUrl }}">
+              <ion-icon class="left-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
-              <ion-icon class="right-icon"><img src="{{ featuredProjects?.comments[2].from.pictureUrl }}">
+              <ion-icon class="right-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
               <div>{{ featuredProjects?.commentsCount }}</div>
             </button>
@@ -72,9 +73,9 @@
             <ion-icon name="heart-outline"></ion-icon>
           </button>
         </ion-row>
-      </ion-card>
+ </ion-card>
       <ion-label class="link-launcher" (click)="showMore()">
-        {{ featuredProjects }} others more
+        {{ projectService.projects.length }} others more
         <ion-icon name="arrow-dropdown"></ion-icon>
       </ion-label>
 
@@ -83,26 +84,26 @@
 
         <ion-item>
           <ion-avatar item-start>
-            <img src="{{ featuredProjects?.author.pictureUrl }}">
+            <img [src]="forLatestUsers?.pictureUrl">
           </ion-avatar>
-          <h2>{{ latestProjects?.author.fullname }}</h2>
-          <p>{{ latestProjects?.timestamp }}</p>
+          <h2>{{ forLatestUsers?.fullname }}</h2>
+          <p>{{ forLatestUsers?.birthday }}</p>
         </ion-item>
 
-        <img src="{{ featuredProjects?.images[0] }}">
+        <img src="{{ featuredProjects?.images[2] }}">
 
         <ion-card-content>
-          <p>{{ latestProjects?.summary }}</p>
+          <p>{{ featuredProjects?.summary }}</p>
         </ion-card-content>
 
         <ion-row>
           <ion-col>
             <button ion-button icon-start clear small>
-              <ion-icon class="fix-icon"><img src="{{ latestProjects?.comments[0].from.pictureUrl }}">
+              <ion-icon class="fix-icon"><img src="{{ comments$ | async  }}">
               </ion-icon>
-              <ion-icon class="left-icon"><img src="{{ latestProjects?.comments[1].from.pictureUrl }}">
+              <ion-icon class="left-icon"><img src="{{ comments$ | async  }}">
               </ion-icon>
-              <ion-icon class="right-icon"><img src="{{ latestProjects?.comments[2].from.pictureUrl }}">
+              <ion-icon class="right-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
               <div>{{ latestProjects?.commentsCount }}</div>
             </button>
@@ -113,7 +114,7 @@
         </ion-row>
       </ion-card>
       <ion-label class="link-launcher" (click)="showMore()">
-        {{ latestProjects }} others more
+        {{ projectService.projects.length - 2 }} others more
         <ion-icon name="arrow-dropdown"></ion-icon>
       </ion-label>
 
@@ -124,13 +125,13 @@
 
         <ion-item>
           <ion-avatar item-start>
-            <img src="{{ allProjects?.author.pictureUrl }}">
+            <img src="{{ forAllUsers?.pictureUrl }}">
           </ion-avatar>
-          <h2>{{ allProjects?.author.fullname }}</h2>
-          <p>{{ allProjects?.timestamp }}</p>
+          <h2>{{ forAllUsers?.fullname }}</h2>
+          <p>{{ forAllUsers?.birthday }}</p>
         </ion-item>
 
-        <img src="{{ allProjects?.images[0] }}">
+        <img src="{{ allProjects?.images[2] }}">
 
         <ion-card-content>
           <p>{{ allProjects?.summary }}</p>
@@ -139,11 +140,11 @@
         <ion-row>
           <ion-col>
             <button ion-button icon-start clear small>
-              <ion-icon class="fix-icon"><img src="{{ allProjects?.comments[0].from.pictureUrl }}">
+              <ion-icon class="fix-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
-              <ion-icon class="left-icon"><img src="{{ allProjects?.comments[1].from.pictureUrl }}">
+              <ion-icon class="left-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
-              <ion-icon class="right-icon"><img src="{{ allProjects?.comments[2].from.pictureUrl }}">
+              <ion-icon class="right-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
               <div>{{ allProjects?.commentsCount }}</div>
             </button>
@@ -152,6 +153,7 @@
             <ion-icon name="heart"></ion-icon>
           </button>
         </ion-row>
+        -->
       </ion-card>
       <ion-label class="link-launcher" (click)="showMore()">
         Expand
@@ -187,20 +189,35 @@
         <button ion-item (click)="addSection()">
           <ion-icon name="add" small item-start color="primary"></ion-icon>
           <ion-icon name="arrow-forward" small item-end color="primary"></ion-icon>
-          Complete profile (80%)
+          Complete profile (60%)
         </button>
 
       </ion-card>
 
       <h5>CONTACT</h5>
       <ion-list>
-        <button ion-item *ngFor="let contact of user.contacts; let idx = index" (click)="showContactInfo(contact)">
-          <ion-icon name="logo-{{ contact.key }}" small item-start color="primary" class="itemfix"></ion-icon>{{
-          contact }}
+        <button ion-item *ngIf="user.contacts.facebook" (click)="showContactInfo(user.contacts.facebook)">
+          <ion-icon name="logo-facebook" small item-start color="primary" class="itemfix"></ion-icon>
+          {{ user.contacts.facebook }}
+        </button>
+        <button ion-item *ngIf="user.contacts.github" (click)="showContactInfo(user.contacts.github)">
+          <ion-icon name="logo-github" small item-start color="primary" class="itemfix"></ion-icon>
+          {{ user.contacts.github }}
+        </button>
+        <button ion-item *ngIf="user.contacts.gmail" (click)="showContactInfo(user.contacts.gmail)">
+          <ion-icon name="logo-googleplus" small item-start color="primary" class="itemfix"></ion-icon>
+          {{ user.contacts.gmail }}
+        </button>
+        <button ion-item *ngIf="user.contacts.youtube" (click)="showContactInfo(user.contacts.youtube)">
+          <ion-icon name="logo-youtube" small item-start color="primary" class="itemfix"></ion-icon>
+          {{ user.contacts.youtube }}
+        </button>
+        <button ion-item *ngIf="user.contacts.linkedin" (click)="showContactInfo(user.contacts.linkedin)">
+          <ion-icon name="logo-linkedin" small item-start color="primary" class="itemfix"></ion-icon>
+          {{ user.contacts.linkedin }}
         </button>
       </ion-list>
     </div>
-
     <div style="margin-top: -32px" *ngSwitchCase="'account'">
       <h5>
         PROFILE
@@ -212,28 +229,28 @@
         <ion-item>
           Fullname
           <ion-note item-end>
-              {{ user?.fullname }}
+            {{ user?.fullname }}
           </ion-note>
         </ion-item>
         <ion-item>
           Username
           <ion-note item-end>
-              {{ user?.username }}
+            {{ user?.username }}
           </ion-note>
         </ion-item>
         <ion-item>
           Email
           <ion-note item-end>
-              {{ user?.email }}
+            {{ user?.email }}
           </ion-note>
         </ion-item>
         <ion-item>
           <ion-label color="primary">
             Birthday
           </ion-label>
-          <ion-datetime primary displayFormat="MMM DD YYYY" [(ngModel)]="user.birthday"></ion-datetime>
+          <ion-datetime primary displayFormat="MMM DD YYYY" [(ngModel)]="event.month"></ion-datetime>
         </ion-item>
-        <ion-item>
+        <ion-item (click)='editSection("Phone number")'>
           Phone number
           <ion-note item-end style="color:#0BAAB0; text-decoration: #0BAAB0 underline">
             (+216) {{ user?.phone }}
@@ -241,16 +258,16 @@
         </ion-item>
       </ion-list>
       <h5>PICTURE</h5>
-      <ion-card class="image-picker">
+      <ion-card class="image-picker" (click)='openGalleryImagePickerCrop()'>
         <img src="assets/imgs/placeholder.jpg">
         <ion-label>Select an image</ion-label>
       </ion-card>
       <h5>ACCOUNT</h5>
       <ion-list>
-        <ion-item>
+        <ion-item (click)='editSection("Login")'>
           Login
           <ion-note item-end primary>
-              {{ user.email }}
+            {{ user.email }}
           </ion-note>
         </ion-item>
         <ion-item>
@@ -258,12 +275,12 @@
           <ion-note item-end primary>
             ***********
             <br />
-            <button ion-button small item-end style="background:#0BAAB0">
+            <button ion-button small item-end style="background:#0BAAB0" (click)='resetPassword()'>
               RESET
             </button>
           </ion-note>
         </ion-item>
-        <ion-item text-wrap>  
+        <ion-item text-wrap (click)='changeSecurity()'>
           <ion-label>
             <h2 item-start>Security </h2>
             <p item-start>personal info available for public</p>
@@ -277,10 +294,10 @@
         <ion-item>
           Job / Education
           <ion-note item-end primary>
-              {{ user?.education }}
+            {{ user?.education }}
           </ion-note>
         </ion-item>
-        <ion-item>
+        <ion-item (click)='editSection("Location")'>
           Location
           <ion-note item-end primary>
             <ion-icon name="navigate"></ion-icon>
@@ -290,7 +307,7 @@
         <ion-item>
           Level
           <ion-note item-end>
-              {{ user?.level }}
+            {{ user?.level }}
           </ion-note>
         </ion-item>
         <button ion-button full primary (click)='doLogout()'>LOGOUT</button>

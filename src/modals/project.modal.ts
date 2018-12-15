@@ -6,7 +6,7 @@ export interface Project {
     key?: string;
     projectId?: string;
     title: string;
-    author: User;
+    author: string;
     likes: number;
     views: number;
     commentsCount: number;

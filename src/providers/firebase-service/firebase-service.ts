@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 import { AngularFireDatabase } from '@angular/fire/database';
 import 'firebase/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Project } from '../../modals/project.modal';
 
 /*
   Generated class for the FirebaseServiceProvider provider.
@@ -203,6 +204,20 @@ export class PictureUtils {
       });
     });
     */
+  }
+
+
+  pushToDatabase(project) {
+    var ref = firebase.database().ref('projects');
+
+    return new Promise((resolve, reject) => {
+      // we will save meta data of image in database
+      ref.push(project, (response) => {
+        resolve(response);
+      }).then((error) => {
+        reject(error);
+      });
+    });
   }
 
   /*

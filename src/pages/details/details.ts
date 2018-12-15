@@ -97,7 +97,7 @@ export class DetailsPage {
 
   screenshots: any = ['s1', 's2', 's3'];
   dueDate: string = "9 Dec 2018";
-
+  time: string;
   // for maps frame
   isAvailable = false;
 
@@ -142,10 +142,14 @@ export class DetailsPage {
     this.project.sections['Requirements'] = "Project Description text";
     this.project.sections['Fixed Budget'] = "Project Budget text";
 */
-    //this.project = this.navParams.get('project');
-    //this.author = this.navParams.get('user');
+    this.project = this.navParams.get('project');
+    this.author = this.navParams.get('user');
 
+    this.dueDate = new Date(this.project.dueDate).toDateString();
+    this.time = new Date(this.project.timestamp).toLocaleTimeString();
 
+    console.log("user " + JSON.stringify(this.author));
+    
     // related to firebase 
     this.projectListObs$ = this.projectService
       .getAllProjects()
@@ -174,9 +178,6 @@ export class DetailsPage {
         ...changes.payload.val()
       };
     }));
-
-    // get passed author
-    this.author = this.navParams.get('author');
   }
 
   ionViewDidLoad() {
@@ -201,7 +202,7 @@ export class DetailsPage {
 
   doRate() {
       const alert = this.alertCtrl.create({
-      title: 'How would you rate YBooster?',
+      title: 'How would you rate YB project?',
       subTitle: "Tap the number of stars you'd give us on a scale from 1-5",
       cssClass: 'alertstar',
       enableBackdropDismiss:true,
@@ -230,10 +231,9 @@ export class DetailsPage {
     }
   }
 
-  openAuthorProfile(author_id) { 
-    console.log("profile");
+  openAuthorProfile() { 
     
-    this.navCtrl.push(ProfilePage);
+    this.navCtrl.push(ProfilePage, {"profile": this.author});
   }
 
   processContribution() { }
@@ -272,7 +272,7 @@ export class DetailsPage {
   }
 
   openImageGallery(mode) {
-    this.navCtrl.push(ImageGalleryPage, mode);
+    this.navCtrl.push(ImageGalleryPage, {'edit': mode, 'gallery': this.project.images});
   }
 
   launchSite() {
@@ -342,14 +342,14 @@ export class DetailsPage {
           }
         },
         {
-          text: 'Play',
+          text: 'Open',
           icon: !this.platform.is('ios') ? 'arrow-dropright-circle' : null,
           handler: () => {
             console.log('Play clicked');
             switch (caller) {
               case 'attach':
                 // open file in browser
-                const browser = this.iab.create(this.project.websiteUrl, '_system');
+                const browser = this.iab.create(this.project.attachments[index], '_system');
                 browser.close();
                 break;
               // open video in youtube application with its url

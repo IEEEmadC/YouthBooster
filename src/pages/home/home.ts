@@ -1,3 +1,5 @@
+import { BookmarkPage } from './../bookmark/bookmark';
+import { FilterItemsPage } from './../filter-items/filter-items';
 import { BrowseProjectsPage } from './../browse-projects/browse-projects';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Content } from 'ionic-angular';
@@ -33,12 +35,12 @@ export class HomePage {
 
   // to implement:: filter page
   openGenres() {
-
+    this.navCtrl.push(FilterItemsPage);
   }
 
   // open favorites page 
   openFavorites(){
-    // this.navCtrl.push(FavoritesPage)
+    this.navCtrl.push(BookmarkPage)
   }
 
   // navigate to project form page

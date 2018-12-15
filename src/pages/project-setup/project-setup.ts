@@ -66,27 +66,27 @@ export class ProjectSetupPage {
 
   // firebase project reference to create
   project: Project = {
-    "projectId": "0",
-    "title": undefined,
+    "projectId": '0',
+    "title": '',
     "author": null,
-    "likes": undefined,
-    "views": undefined,
-    "commentsCount": undefined,
+    "likes": 0,
+    "views": 1,
+    "commentsCount": 0,
     "dueDate": "2019-01-01",
-    "websiteUrl": undefined,
-    "category": undefined,
-    "rating": undefined,
-    "votes": undefined,
+    "websiteUrl": '',
+    "category": '',
+    "rating": 1,
+    "votes": 0,
     "closed": false,
-    "timestamp": undefined,
-    "summary": undefined,
-    "description": undefined,
-    "requirements": undefined,
+    "timestamp": 0,
+    "summary": '',
+    "description": '',
+    "requirements": '',
     "budget": undefined,
-    "donationSum": undefined,
+    "donationSum": 0,
     "relatedLocation": {
-      "lat": undefined,
-      "lng": undefined
+      "lat": 0,
+      "lng": 0
     },
     "donations": [],
     "joins": [],
@@ -180,7 +180,6 @@ export class ProjectSetupPage {
   // push project to backend system:: firebase 
   commitChanges() {
 
-    this.project.author = this.author;
     this.project.attachments = this.filesArray;
     this.project.description = this.fullDescription;
     this.project.images = this.imageSrcArray;
@@ -189,20 +188,35 @@ export class ProjectSetupPage {
     this.project.videos = this.urlsArray;
     this.project.websiteUrl = this.websiteUrl;
     this.project.summary = this.summary;
-    //  this.author = findUser(mAuth.currentUser);
+    this.project.author = 'DbuWTni47ZAkllESplv'; // to test
     //  this.project.memberRequirements
-    this.project.title;
-    this.project.dueDate;
-    this.project.budget;
-    this.project.dueDate;
+    this.project.title = this.navParams.get('title');
+    //this.project.dueDate;
+    //this.project.budget;
 
     console.log(this.project);
     
     this.uploadImageToFirebase();
     this.uploadFiles();
+    
+    this.getProject().then((_project) => {
+      alert('got project object ' + _project);
+      return this.firebaseService.pushToDatabase(_project);
+    }).then((response) => {
+      alert('project saved to catalog successfully' + response);
+    }, (_error) => {
+      alert('Error ' + (_error.message || _error));
+    });
 
     // this.navCtrl.push(DetailsPage);
 
+  }
+
+  getProject() {
+    return new Promise((resolve, reject) => {
+      resolve(this.project);
+      reject(null);
+    });
   }
 
 
@@ -337,7 +351,7 @@ export class ProjectSetupPage {
       this.presentToast("Cannot attach files with windows phone!");
     }
   }
-
+ 
   openImagePickerCrop() {
     this.camera.getPicture(this.takePictureOptions).then(
       (result) => {

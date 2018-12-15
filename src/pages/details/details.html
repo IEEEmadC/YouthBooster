@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar color=primary>
     <ion-title>
-        {{ (projectObs$ | async)?.title }}
+        {{ project.title }}
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addLikes()">
         <ion-icon name="heart"></ion-icon>
-        +{{ (projectObs$ | async)?.likes }} likes
+        +{{ project.likes }} likes
       </button>
       <button ion-button icon-only (click)="openSettings()">
         <ion-icon name="more"></ion-icon>
@@ -35,7 +35,7 @@
 
   <div *ngIf="project">
     <div class="game-image">
-      <img src="{{ (projectObs$ | async) }}" class="tinted">
+      <img src="{{ project.images[0] }}" class="tinted">
     </div>
 
     <div id="popover" [@fadeIn]>
@@ -43,11 +43,11 @@
         <ion-row>
           <ion-col col-6>
             <h4>Rating</h4>
-            <p class="larger-res">4.7<span style="font-size: 0.3em">({{ (projectObs$ | async)?.votes }} votes)</span></p>
+            <p class="larger-res">{{ project.rating }}<span style="font-size: 0.3em">({{ project.votes }} votes)</span></p>
           </ion-col>
           <ion-col col-6>
             <h4>Donations</h4>
-            <p>${{ (projectObs$ | async)?.donationSum }} raised / $670</p>
+            <p>${{ project.donationSum }} raised / $670</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -60,7 +60,7 @@
             <ion-note class=" edit edit-date" item-end (click)="changeDate()">EDIT <ion-icon name="create"></ion-icon>
             </ion-note>
 
-            <p [innerHTML]="dueDate">{{ (projectObs$ | async)?.dueDate }}</p>
+            <p [innerHTML]="dueDate">{{ dueDate }}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -71,11 +71,11 @@
       <ion-item (click)="openAuthorProfile()">
         <ion-avatar item-start>
           <div class="online"></div>
-          <img src="{{ author?.pictureUrl }}">
+          <img src="{{ author.pictureUrl }}">
         </ion-avatar>
-        <h2>{{ author?.username }}</h2>
-        <p>{{ author?.about }}</p>
-        <ion-note item-end>{{ (projectObs$ | async)?.timestamp }} pm</ion-note>
+        <h2>{{ author.username }}</h2>
+        <p>{{ author.about }}</p>
+        <ion-note item-end>{{ time }} pm</ion-note>
       </ion-item>
 
       <h4>Project Summary</h4>
@@ -84,10 +84,10 @@
       </ion-note>
 
       <ion-buttons>
-        <ion-badge round small *ngFor="let tag of [1,2]">{{ tag }}</ion-badge>
+        <ion-badge round small *ngFor="let tag of project.tags">{{ tag }}</ion-badge>
       </ion-buttons>
       <p>
-          {{ (projectObs$ | async)?.summary }}
+          {{ project.summary }}
       </p>
 
       <button ion-button outline style="margin-top: 16px; margin-bottom: 16px" (click)="processContribution()">
@@ -140,15 +140,15 @@
         <ion-grid style="margin-left: auto; margin-right: auto">
           <ion-row>
             <ion-col col-8>
-              <img class="big-thumb" src="{{ (projectObs$ | async)?.images }}" (click)="openImage('assets/imgs/blank.png')">
+              <img class="big-thumb" src="{{ project.images[0] }}" (click)="openImage('project.images[0]')">
             </ion-col>
             <ion-col>
               <ion-row>
-                <img class="small-thumb-1" src="{{ (projectObs$ | async)?.images }}" (click)="openImage('assets/imgs/blank.png')">
+                <img class="small-thumb-1" src="{{ project.images[1] }}" (click)="openImage('project.images[1]')">
               </ion-row>
               <ion-row>
                 <div class="small-thumb-2" (click)="openImageGallery()">
-                  <img style="height: 100%" src="{{ (projectObs$ | async)?.images }}">
+                  <img style="height: 100%" src="{{ project.images[2] }}">
                 </div>
               </ion-row>
             </ion-col>
@@ -160,7 +160,7 @@
     <h5>Videos &amp; Promotions</h5>
 
     <ion-list>
-      <button ion-item *ngFor="let video of (projectObs$ | async)?.videos; let idx = index" (click)="showMenu('video',idx)">
+      <button ion-item *ngFor="let video of project.videos; let idx = index" (click)="showMenu('video',idx)">
         <ion-icon name="play" small item-start color="primary" class="itemfix"></ion-icon>click and play this video
       </button>
     </ion-list>
@@ -174,7 +174,7 @@
 
     <h4>Requirements</h4>
     <p>
-        {{ (projectObs$ | async)?.requirements }}
+        {{ project.requirements }}
     </p>
 
     <ion-note *ngIf="full_scroll" class="edit" item-end (click)="editSection('Fixed Budget')">EDIT <ion-icon name="create"></ion-icon>
@@ -182,13 +182,12 @@
 
     <h4 *ngIf="full_scroll">Fixed Budget</h4>
     <p *ngIf="full_scroll">
-        {{ (projectObs$ | async)?.budget }}
+        {{ project.budget }}
     </p>
 
     <h4 *ngIf="full_scroll">Attachments</h4>
     <div *ngIf="full_scroll">
-      <button *ngFor="let attach of (projectObs$ | async).attachments ; let idx = index" ion-item style="text-decoration: grey underline;"
-        (click)="showMenu('attach',idx)">
+      <button *ngFor="let attach of project.attachments ; let idx = index" ion-item style="text-decoration: grey underline;" (click)="showMenu('attach',idx)">
         <ion-icon name="attach" small item-start color="primary" class="itemfix"></ion-icon>
         {{ attach }}
       </button>
