@@ -13,6 +13,7 @@ import { ProjectProvider } from '../providers/project/project';
 
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
+import { OnboardingScreenPage } from '../pages/onboarding-screen/onboarding-screen';
 
 
 
@@ -53,7 +54,7 @@ export class MyApp {
                 console.log(user);
                 this.projectProvider.currentUser=user.uid.toString();
 
-                this.rootPage = HomePage;
+                this.rootPage = OnboardingScreenPage;
               } else {
                 this.rootPage = LoginPage;
               }

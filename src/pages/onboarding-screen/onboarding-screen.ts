@@ -40,11 +40,16 @@ export class OnboardingScreenPage {
   state: string = 'x';
   btnClass: string = "skip";
 
+  splash = true;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnboardingScreenPage');
+    setTimeout(() => {
+      this.splash = false;
+    }, 5000);
   }
 
   skip() {
