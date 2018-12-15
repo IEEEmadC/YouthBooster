@@ -30,5 +30,5 @@ Youtube video link:
 -----------------------
 -----------------------
 
-| [App's executable file](https://github.com/khalilMejri/YouthBooster/blob/master/app-debug.apk) | Team Name: KFI | Short Description: Youth Booster is a mobile application that helps the young innovators and visionaries launch their projects/startups/applications by providing them with the attention and resources they need. | Licence: MIT | Country: Tunisia | Collaborators: [Khalil](https://github.com/khalilMejri), [Firas](https://github.com/khalilMejri/YouthBooster/commits?author=losstrak8) and [Ilyes](https://github.com/ilyesG) |
+| [App's executable file](https://github.com/khalilMejri/YouthBooster/blob/master/Code/app-debug.apk) | Team Name: KFI | Short Description: Youth Booster is a mobile application that helps the young innovators and visionaries launch their projects/startups/applications by providing them with the attention and resources they need. | Licence: MIT | Country: Tunisia | Collaborators: [Khalil](https://github.com/khalilMejri), [Firas](https://github.com/khalilMejri/YouthBooster/commits?author=losstrak8) and [Ilyes](https://github.com/ilyesG) |
 | - | - | - | - | - | - |
