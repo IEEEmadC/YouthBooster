@@ -20,7 +20,7 @@ We later plan to add many more categories in order to accept as many innovative 
 
 
 
-#### ==> Youth Booster is the solution that will help bring change, success and innovation to our societies in a time all of that is most needed, by focusing on the only ones that can make it happen; the YOUTH !
+#### => Youth Booster is the solution that will help bring change, success and innovation to our societies in a time all of that is most needed, by focusing on the only ones that can make it happen; the YOUTH !
 
 -----------------------
 -----------------------
