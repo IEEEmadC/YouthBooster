@@ -140,6 +140,14 @@ this.comments=data;
     }
   }
 
+  addUser(uid,_user) {
+    this.fdb.list("/users").set(uid, _user).then( (response) => {
+      console.log(response);
+      
+    }).catch(err => {
+        alert(err);
+    });
+  }
 
   // sort by key method ( time or likes or views )
   sortByKey(array, key) {
@@ -171,4 +179,3 @@ this.comments=data;
 }
 
   }
-}

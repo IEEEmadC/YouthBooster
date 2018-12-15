@@ -122,10 +122,18 @@ export class ProfilePage {
     private cropService: Crop,
     private camera: Camera,
     public auth: AuthService) {
-    this.profile = 'projects';
-    this.user = this.navParams.get('profile');
-    console.log(this.navParams.get('profile'));
 
+    this.profile = 'projects';
+    if (this.navParams.get('profile') != undefined) {
+      this.user = this.navParams.get('profile');
+    }
+    else {
+
+      this.user = this.projectService.users['DbuWTni47ZAkllESplv'];
+      console.log("auth" + auth.getUID());
+      
+    }
+    console.log(this.navParams.get('profile'))
 
   }
 
