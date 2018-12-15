@@ -4,7 +4,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { TabsPage} from "../tabs/tabs";
 import { AuthService } from '../../services/auth.service';
 import { SignupPage } from '../signup/signup';
-
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -18,6 +18,7 @@ export class LoginPage {
 	constructor(
 		private navCtrl: NavController,
 		private auth: AuthService,
+    public toastCtrl: ToastController,
 		fb: FormBuilder
 	) {
 		this.loginForm = fb.group({
@@ -55,5 +56,19 @@ export class LoginPage {
       error => console.log(error.message+" here i am")
     );
   }
+
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Unavailable for now  \n Work still in progress',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    toast.present();
+  }
+
+
 
 }

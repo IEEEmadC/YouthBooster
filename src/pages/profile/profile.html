@@ -1,15 +1,17 @@
-<ion-content style="background: #eee;">
+<ion-header>
+  <ion-navbar color="navgreen"  no-margin>
+    <button ion-button menuToggle no-margin>
+      <ion-icon name="menu"></ion-icon>
+    </button>
 
-  <ion-header no-border transparent>
-    <ion-navbar>
-      <ion-buttons end>
-        <button ion-button icon-start (click)='doLogout()'>
-          <ion-icon name="log-out"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-header>
+    <ion-title>Profile</ion-title>
 
+
+
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
   <div class="profile-image"></div>
 
   <div class="chat-list-wrap grid-view">
@@ -59,7 +61,7 @@
         <ion-row>
           <ion-col>
             <button ion-button icon-start clear small>
-              
+
               <ion-icon class="fix-icon"><img src="{{ comments$ | async }}">
               </ion-icon>
               <ion-icon class="left-icon"><img src="{{ comments$ | async }}">

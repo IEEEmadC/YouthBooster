@@ -8,7 +8,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { ProfilePage } from '../profile/profile';
 import { DetailsPage } from '../details/details';
 import { User } from '../../modals/user.modal';
-
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'page-browse-projects',
   templateUrl: 'browse-projects.html',
@@ -33,11 +33,12 @@ export class BrowseProjectsPage {
   terms: string;
 
   constructor(public projectProvider : ProjectProvider,
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public keyboard: Keyboard,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
+    public auth : AuthService,
     private fdb: AngularFireDatabase)
   {
     this.projectProvider.projects = this.navParams.get('projects');
@@ -65,7 +66,7 @@ export class BrowseProjectsPage {
 accessProfile(project){
   let p: User;
   p = this.projectProvider.users[project.author];
-   
+
   this.navCtrl.push(ProfilePage,{'profile' : p});
 }
 
@@ -123,7 +124,7 @@ ionViewDidLoad(){
   setTimeout(() => {
 
     if(!this.projectProvider.projects)
-this.projectProvider.load();
+this.projectProvider.load(this.auth.getUID());
 
 //this.projectProvider.setFilteredItems();
 },1000);}
