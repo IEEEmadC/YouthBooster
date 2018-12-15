@@ -17,7 +17,7 @@ comments=[];
   bookmarks = [];
   likeState = [];
   projectID: string = "";
-  currentUser = '';
+  currentUser: string = "";
   currentpictureUrl = "https://firebasestorage.googleapis.com/v0/b/youth-booster.appspot.com/o/profiles%2Findex.png?alt=media&token=4ef3ca76-28fe-42f5-b9a5-e10266470f34";
   currentfullName = " ";
   // jack balvin
@@ -25,17 +25,19 @@ comments=[];
 
 
 // load method first method to be called  loading bookmarks (with likes) projects users comments
-  load() {
+  load(uid) {
 
     this.fdb.list("/users").valueChanges().subscribe((data) => {
       data.forEach((each) => {
         this.users[each['userId']] = each;
       });
+           this.currentUser=uid;
+           if(this.users[uid])
+             this.currentfullName=this.users[ uid ]['username']
+     if((this.users[ uid ])&&(this.users)&&(this.users[ uid ]['fullname'])) {
+           console.log(this.users[ uid ]['pictureUrl']);
+        this.currentpictureUrl = this.users[ uid ]['pictureUrl'];
 
-      console.log(this.users);
-      if (this.users[this.currentUser]) {
-        this.currentpictureUrl = this.users[this.currentUser]['pictureUrl'];
-        this.currentfullName = this.users[this.currentUser]['fullname'];
       }
     }, (err) => { console.log("probleme user : ", err); });
 
@@ -143,7 +145,7 @@ this.comments=data;
   addUser(uid,_user) {
     this.fdb.list("/users").set(uid, _user).then( (response) => {
       console.log(response);
-      
+        this.fdb.list("/users").update(uid,{userId : uid});
     }).catch(err => {
         alert(err);
     });
@@ -179,8 +181,7 @@ this.comments=data;
 }
 
 <<<<<<< HEAD
-  }
-=======
-
 }
->>>>>>> 51ac75f4b4042260bf9240f638cd6efbaa2ffbcf
+=======
+}
+>>>>>>> 02c196ce969adb44042b065ff5357094da02a67f

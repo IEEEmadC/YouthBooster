@@ -14,7 +14,7 @@ import { ProjectProvider } from '../providers/project/project';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
 import { OnboardingScreenPage } from '../pages/onboarding-screen/onboarding-screen';
-
+import { ToastController } from 'ionic-angular';
 
 
 @Component({
@@ -28,15 +28,14 @@ export class MyApp {
 
   pages: Array<{title: string, component: any,icon: string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public projectProvider : ProjectProvider,public auth: AuthService) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public projectProvider : ProjectProvider,public auth: AuthService,public toastCtrl : ToastController) {
 
     this.pages = [
       { title: 'Home', component: HomePage, icon: 'home' },
       { title: 'Team', component: TeamPage, icon: 'people' },
       { title: 'Bookmarks', component: BookmarkPage, icon: 'bookmarks' },
       { title: 'Archive', component: ArchivePage, icon: 'archive' },
-      { title: 'Messages', component: BrowseProjectsPage, icon: 'chatbubbles' },
-      { title: 'Settings', component: BrowseProjectsPage, icon: 'settings' }
+      { title: 'Messages', component: BrowseProjectsPage, icon: 'chatbubbles' }
     ];
 
 
@@ -97,12 +96,29 @@ export class MyApp {
 	}
 
   openPage(page) {
+
+
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-
+   if(page.title=="Messages")
+    this.presentToast();
+     else
     this.rootPage = page.component;
   }
 
+
+
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Unavailable for now  \n Work still in progress',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    toast.present();
+  } 
 
 
 }

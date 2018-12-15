@@ -1,58 +1,45 @@
-<<<<<<< HEAD
+import { HomePage } from './../pages/home/home';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-=======
-import { ProjectSetupPage } from './../pages/project-setup/project-setup';
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
->>>>>>> origin/project-setup
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {TabsPage} from "../pages/tabs/tabs";
-import {BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
-import {BookmarkPage} from "../pages/bookmark/bookmark";
-import {TeamPage} from "../pages/team/team";
+import { TabsPage} from "../pages/tabs/tabs";
+import { BrowseProjectsPage} from "../pages/browse-projects/browse-projects";
+import { BookmarkPage} from "../pages/bookmark/bookmark";
+import { TeamPage} from "../pages/team/team";
 
-import {ArchivePage} from "../pages/archive/archive";
+import { ArchivePage} from "../pages/archive/archive";
 import { ProjectProvider } from '../providers/project/project';
- 
+
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
-
-
 <<<<<<< HEAD
+import { OnboardingScreenPage } from '../pages/onboarding-screen/onboarding-screen';
+
 =======
-import { AuthserviceProvider } from './../providers/authservice/authservice';
+import { ToastController } from 'ionic-angular';
+>>>>>>> 02c196ce969adb44042b065ff5357094da02a67f
 
 
->>>>>>> origin/project-setup
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-<<<<<<< HEAD
 
   @ViewChild(Nav) nav: Nav;
 
-  rootPage:any = HomePage;
-=======
-  rootPage: any = ProjectSetupPage;
-
-  private auth: AuthserviceProvider;
->>>>>>> origin/project-setup
-
   rootPage;
+
   pages: Array<{title: string, component: any,icon: string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public projectProvider : ProjectProvider,public auth: AuthService) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,public projectProvider : ProjectProvider,public auth: AuthService,public toastCtrl : ToastController) {
 
     this.pages = [
-      { title: 'Home', component: TabsPage, icon: 'home' },
+      { title: 'Home', component: HomePage, icon: 'home' },
       { title: 'Team', component: TeamPage, icon: 'people' },
       { title: 'Bookmarks', component: BookmarkPage, icon: 'bookmarks' },
       { title: 'Archive', component: ArchivePage, icon: 'archive' },
-      { title: 'Messages', component: BrowseProjectsPage, icon: 'chatbubbles' },
-      { title: 'Settings', component: BrowseProjectsPage, icon: 'settings' }
+      { title: 'Messages', component: BrowseProjectsPage, icon: 'chatbubbles' }
     ];
 
 
@@ -63,13 +50,14 @@ export class MyApp {
       splashScreen.hide();
     });
 
-<<<<<<< HEAD
     this.auth.afAuth.authState
           .subscribe(
             user => {
               if (user) {
                 console.log(user);
-                this.rootPage = TabsPage;
+                this.projectProvider.currentUser=user.uid.toString();
+
+                this.rootPage = OnboardingScreenPage;
               } else {
                 this.rootPage = LoginPage;
               }
@@ -78,9 +66,8 @@ export class MyApp {
               this.rootPage = LoginPage;
             }
           );
-=======
     // check if user logged in on app load
-    /* 
+    /*
     this.auth.afAuth.authState
       .subscribe(
         user => {
@@ -94,8 +81,7 @@ export class MyApp {
           this.rootPage = OnboardingScreenPage;
         }
       );
-    */
->>>>>>> origin/project-setup
+*/
   }
 
 
@@ -110,21 +96,33 @@ export class MyApp {
 	logout() {
 
 		this.auth.signOut();
-		this.nav.setRoot(TabsPage);
+		this.nav.setRoot(LoginPage);
 	}
 
-
-
-
-
-
-
   openPage(page) {
+
+
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+   if(page.title=="Messages")
+    this.presentToast();
+     else
+    this.rootPage = page.component;
   }
 
+
+
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Unavailable for now  \n Work still in progress',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    toast.present();
+  } 
 
 
 }

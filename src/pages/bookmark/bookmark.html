@@ -29,10 +29,10 @@
         <img src="{{projectProvider.users[project.author].pictureUrl}}">
       </ion-avatar>
       <h2>{{ projectProvider.users[project.author].fullname }} </h2>
-      <p>{{ project.timestamp }}</p>
+      <p>{{ project.timestamp  | date : 'yyyy/MM/dd' }}</p>
     </ion-item>
 
-    <img style="width : 100%;height : auto;border-top :  3px solid #10C488;border-bottom :  3px solid #10C488;" src="{{ project.images['0'] }}">
+    <img style="width : 100%;height : auto;border-top :  3px solid #9c9c9c;border-bottom :  3px solid #9c9c9c;" src="{{ project.images['0'] }}">
 
     <ion-card-content>
 

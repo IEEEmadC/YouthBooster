@@ -4,7 +4,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { Component } from '@angular/core';
 import { ProjectProvider } from '../../providers/project/project';
 import { ProfilePage } from '../profile/profile';
-
+import { ToastController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-team',
@@ -12,7 +12,8 @@ import { ProfilePage } from '../profile/profile';
 })
 export class TeamPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase,public projectProvider : ProjectProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private fdb: AngularFireDatabase,public projectProvider : ProjectProvider,
+  public toastCtrl: ToastController) {
   }
 
     noTeam :boolean = false;
@@ -25,9 +26,9 @@ export class TeamPage {
     }
 
 
-  chatWithMember(profile){
-
-  console.log("chat")
+  chatWithMember(){
+  this.presentToast();
+  console.log("chat");
 /*     create chat with user */
   }
 
@@ -71,5 +72,24 @@ export class TeamPage {
 
 
   }
+
+
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Unavailable for now  \n Work still in progress',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    toast.present();
+  }
+
+
+
+
+
+
 
 }
