@@ -1,6 +1,7 @@
 import { BookmarkPage } from './../bookmark/bookmark';
 import { FilterItemsPage } from './../filter-items/filter-items';
 import { BrowseProjectsPage } from './../browse-projects/browse-projects';
+import { TabsPage } from './../tabs/tabs';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Content } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
@@ -38,14 +39,14 @@ export class HomePage {
     this.navCtrl.push(FilterItemsPage);
   }
 
-  // open favorites page 
+  // open favorites page
   openFavorites(){
     this.navCtrl.push(BookmarkPage)
   }
 
   // navigate to project form page
   browse(category){
-    this.navCtrl.setRoot(BrowseProjectsPage);
+    this.navCtrl.setRoot(TabsPage);
   }
 
   // show/hide search bar
@@ -54,7 +55,7 @@ export class HomePage {
     this.content.scrollToTop();
   }
 
-  // to implement project search 
+  // to implement project search
   search(term) {
     let search_term = term;
 //    this.keyboard.close();

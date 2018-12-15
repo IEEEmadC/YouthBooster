@@ -26,7 +26,7 @@ export class FilterItemsPage {
          }
 
 
-                      public   sortByKey(array, key) {
+          public   sortByKey(array, key) {
                 return array.sort(function (a, b) {
                  var x,y;
                  var parts1,parts2,atime,btime;
@@ -55,7 +55,7 @@ export class FilterItemsPage {
                     return ((x > y) ? -1 : ((x < y) ? 0 : 1));
                 });
 
-
+      }
 
 
 

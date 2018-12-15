@@ -29,11 +29,11 @@ export class AuthService {
 
 	getEmail() {
 		return this.user && this.user.email;
-		
+
 	}
 
 	getUID() {
-		return this.user && this.user.uid
+		return this.user && this.user.uid;
 	}
 
 	signOut(): Promise<void> {
