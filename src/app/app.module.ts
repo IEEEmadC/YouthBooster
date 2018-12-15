@@ -25,8 +25,8 @@ import { AuthService } from '../services/auth.service';
 import { EmailService } from '../services/email.service';
 import { SignupPage } from '../pages/signup/signup';
 import { AngularFireAuth } from '@angular/fire/auth';
-
-
+import { OAuthModule } from '../pages/oauth/oauth.module';
+import { Config } from '../config';
 export const firebaseConfig = {
 
   apiKey: "AIzaSyBDdaWIh6iS5SNbdtT1iXFtQ-DLFV4625E",
@@ -62,6 +62,7 @@ export const firebaseConfig = {
     HttpModule,
     NgxErrorsModule,
     BrowserAnimationsModule,
+    OAuthModule,
     IonicModule.forRoot(MyApp),
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig)
@@ -86,7 +87,8 @@ export const firebaseConfig = {
     ProjectProvider,
     AngularFireAuth,
 		AuthService,
-    EmailService
+    EmailService,
+    Config
 
   ]
 })

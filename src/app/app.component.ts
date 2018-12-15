@@ -11,8 +11,7 @@ import {ArchivePage} from "../pages/archive/archive";
 import { ProjectProvider } from '../providers/project/project';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../services/auth.service';
-
-
+ import { OAuthProvidersListPage } from '../pages/oauth/list/oauth-providers.list.page';
 @Component({
   templateUrl: 'app.html'
 })
@@ -49,7 +48,7 @@ export class MyApp {
                 console.log(user);
                 this.rootPage = TabsPage;
               } else {
-                this.rootPage = LoginPage;
+                this.rootPage = OAuthProvidersListPage;
               }
             },
             () => {
