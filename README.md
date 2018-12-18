@@ -25,7 +25,7 @@ We later plan to add many more categories in order to accept as many innovative 
 -----------------------
 -----------------------
 
-[Youtube Video](https://www.youtube.com/watch?v=0Zx5XLh8jKM)
+[Youtube Video](https://youtu.be/Wz6uyvDZPEo)
 
 -----------------------
 -----------------------
